@@ -8,3 +8,6 @@ Route::get('/welcome', function () {
 Route::get('/', function () {
     return view('public.home');
 });
+Route::get('/registration', function () {
+    return view('public.registration');
+});

@@ -68,3 +68,10 @@ body {
 .faq[open] summary::after {
     transform: rotate(180deg);
 }
+
+.step-number {
+    background-color: #e2e8f0;
+}
+.active {
+    background-color: #2dd4bf;
+}

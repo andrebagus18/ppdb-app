@@ -12,12 +12,12 @@
         <span class="text-black mt-4">
             SMK Negeri 45 Merdeka merupakan sekolah yang berkomitmen memberikan pendidikan berkualitas, membentuk karakter yang unggul, serta mengembangkan potensi akademik dan non-akademik peserta didik. Melalui sistem PPDB Online, proses pendaftaran dapat dilakukan dengan mudah, cepat, dan transparan dari mana saja.
         </span>
-        <button
-            type="submit"
+        <a
+            href="{{ route('registration') }}"
             class="inline-block mt-6 rounded-lg bg-teal-500 hover:bg-teal-600 cursor-pointer px-6 py-3 text-white w-[15em]"
         >
             Daftar Sekarang
-        </button>
+        </a>
     </div>
     <div class="flex justif y-center">
         <img src="{{ asset('images/image 9.png') }}" alt="logo" class="w-[25em] h-[20em]">
