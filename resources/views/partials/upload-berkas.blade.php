@@ -37,7 +37,7 @@
             type="file"
             class="form-input w-full rounded-xl border border-slate-300 p-3 cursor-pointer">
         <p class="mt-2 text-sm text-slate-500">
-            Upload berkas atau sertifikat pendukung sesuai jalur yang dipilih (Zonasi, Prestasi, Afirmasi, atau Perpindahan Orang Tua).
+            Upload berkas atau sertifikat pendukung sesuai jalur yang dipilih (Reguler, Zonasi, Prestasi, atau Afirmasi).
         </p>
          <div class="mt-5 flex justify-between">
         <button

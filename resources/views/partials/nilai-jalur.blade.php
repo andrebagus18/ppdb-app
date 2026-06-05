@@ -9,10 +9,10 @@
                 Pilihan Jalur
             </label>
             <select id="jalur" name="jalur" class="form-input w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="reguler">Jalur Reguler</option>
                 <option value="zonasi">Jalur Zonasi</option>
                 <option value="prestasi">Jalur Prestasi</option>
                 <option value="afirmasi">Jalur Afirmasi</option>
-                <option value="pindah">Jalur Perpindahan Orang Tua</option>
             </select>
         </div>
         <!-- Nilai -->

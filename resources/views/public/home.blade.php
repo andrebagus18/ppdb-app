@@ -33,6 +33,15 @@
     <div class="grid md:grid-cols-2 gap-8">
         <div class="bg-white p-6 rounded-xl shadow">
             <div class="flex justify-between mb-4">
+            <h3 class="font-semibold text-xl">Jalur Reguler 💡</h3>
+            <span class="w-auto bg-teal-700 text-white text-md rounded-full py-1 px-3">Kuota: 5/50</span>
+            </div>
+            <p class="mt-2 text-slate-600">
+                Peserta didik diterima berdasarkan nilai melalui sistem seleksi umum, seperti tes ujian saringan masuk (tertulis/berbasis komputer), seleksi nilai rapor.
+            </p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+            <div class="flex justify-between mb-4">
             <h3 class="font-semibold text-xl">Jalur Zonasi 🗺️</h3>
             <span class="w-auto bg-teal-700 text-white text-md rounded-full py-1 px-3">Kuota: 5/50</span>
             </div>
@@ -56,15 +65,6 @@
             </div>
             <p class="mt-2 text-slate-600">
                 Dikhususkan bagi peserta didik dari keluarga kurang mampu atau penerima program bantuan pemerintah sesuai persyaratan yang ditetapkan.
-            </p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow">
-            <div class="flex justify-between mb-4">
-            <h3 class="font-semibold text-xl">Jalur Perpindahan Tugas ➡️</h3>
-            <span class="w-auto bg-teal-700 text-white text-md rounded-full py-1 px-3">Kuota: 5/30</span>
-            </div>
-            <p class="mt-2 text-slate-600">
-                Diperuntukkan bagi calon peserta didik yang mengikuti perpindahan tugas orang tua atau wali yang dibuktikan dengan surat keterangan resmi.
             </p>
         </div>
     </div>

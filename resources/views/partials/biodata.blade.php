@@ -6,9 +6,9 @@
         <div class="grid gap-5 md:grid-cols-2">
             <div>
                 <label class="mb-2 block text-sm font-medium">
-                    NISN
+                    NIK/NISN
                 </label>
-                <input type="text" id="nisn" name="nisn" class="form-input w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="nik" name="nik" class="form-input w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
                 <label class="mb-2 block text-sm font-medium">

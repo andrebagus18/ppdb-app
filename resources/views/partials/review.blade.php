@@ -8,7 +8,7 @@
         <div class="grid gap-4 md:grid-cols-2">
             <div>
                 <p class="text-sm text-slate-500">NISN</p>
-                <p id="review_nisn" class="font-medium text-slate-800">-</p>
+                <p id="review_nik" class="font-medium text-slate-800">-</p>
             </div>
             <div>
                 <p class="text-sm text-slate-500">Nama Lengkap</p>
