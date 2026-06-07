@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('jenis_document');
             $table->string('claudinary_url');
             $table->string('claudinary_public_id');
-            $table->string('status_verifikasi', [
+            $table->enum('status_verifikasi', [
                 'pending',
                 'verified',
                 'rejected'

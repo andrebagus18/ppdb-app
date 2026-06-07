@@ -33,7 +33,7 @@
         <h3 class="mt-8 mb-4 text-lg font-semibold">
             Upload Berkas Jalur
         </h3>
-        <input id="jalur-file" name="jalur-file"
+        <input id="surat_jalur" name="surat_jalur"
             type="file"
             class="form-input w-full rounded-xl border border-slate-300 p-3 cursor-pointer">
         <p class="mt-2 text-sm text-slate-500">

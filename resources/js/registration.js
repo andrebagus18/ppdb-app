@@ -46,6 +46,7 @@ prevBtn.forEach((button) => {
     button.addEventListener("click", prevStep);
 });
 function nextStep() {
+    // const currentForm = formStep[currentStep - 1];
     if (currentStep < formStep.length) {
         if (!validated()) {
             showAlert("error", "❌ Data Harus Dilengkap Semua!");
@@ -86,12 +87,12 @@ function validated(stepElement) {
     const inputs = currentForm.querySelectorAll("input, select, textarea");
     const dataWali = document.querySelectorAll(".data-wali");
     inputs.forEach((input) => {
+        if (input.classList.contains("data-wali")) {
+            return;
+        }
         if (!input.value.trim()) {
             input.classList.add("border-red-500", "ring-2", "ring-red-500");
             valid = false;
-        }
-        if (dataWali.value == "" || "-") {
-            valid = true;
         }
     });
     return valid;
@@ -142,6 +143,7 @@ function showAlert(type, message) {
     }, 3000);
 }
 
+// hapus error input
 document.querySelectorAll(".form-input").forEach((input) => {
     input.addEventListener("input", () => {
         input.classList.remove("border-red-500", "ring-2", "ring-red-100");

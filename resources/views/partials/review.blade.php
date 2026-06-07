@@ -1,4 +1,4 @@
-<form class="space-y-8">
+<form method="POST" action="{{ route('student.store') }}" enctype="multipart/form-data" class="space-y-8">
 <div x-show="currentStep === 5" class="form-step space-y-6">
     <!-- Biodata -->
     <div class="rounded-2xl border border-slate-200 bg-white p-6">
@@ -159,7 +159,7 @@
             </li>
             <li class="flex items-center gap-3">
                 <span class="text-green-600">✓</span>
-                <span id="review_jalur-file">Berkas Jalur</span>
+                <span id="review_surat_jalur">Berkas Jalur</span>
             </li>
         </ul>
     </div>
@@ -205,7 +205,6 @@
             </button>
             <button
                 type="submit"
-                
                 class="rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700 cursor-pointer"
             >
                 Kirim ->

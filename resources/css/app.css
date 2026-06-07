@@ -75,3 +75,16 @@ body {
 .active {
     background-color: #2dd4bf;
 }
+#loginPanel,
+#registerPanel {
+    transition: all 0.7s ease-in-out;
+}
+
+#registerPanel {
+    opacity: 0;
+    transform: translateX(50px);
+}
+th,
+td {
+    border-bottom: solid 1px teal;
+}

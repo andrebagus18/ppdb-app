@@ -12,8 +12,23 @@
             <a href="#faq" class="nav-link font-medium hover:text-primary">FAQ</a>
         </div>
         <div class="flex gap-4">
-            <button class="p-1 px-4 rounded-xl border-2 border-teal-600 cursor-pointer hover:bg-teal-600/70 hover:border-teal-600/70 transition">Login</button>
-            <button class="p-1 px-4 rounded-xl bg-teal-600 cursor-pointer hover:bg-teal-500 transition">Register</button>
+            @auth
+            <div class="flex gap-3 items-center">
+                <a href="{{ route('dashboard') }}"
+                class="p-1 px-4 rounded-xl border-2 border-green-600 cursor-pointer hover:bg-green-600/70 hover:border-green-600/70 transition">
+                    Dashboard ➜
+                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-2 py-1 bg-red-600 hover:bg-red-700 hover:text-white rounded-lg transition cursor-pointer">➜]</button>
+                </form>
+            </div>
+            @else
+                <a href="{{ route('auth') }}"
+                class="p-1 px-4 rounded-xl border-2 border-teal-600 cursor-pointer hover:bg-teal-600/70 hover:border-teal-600/70 transition">
+                    Masuk Untuk Mendaftar ➜
+                </a>
+            @endauth
         </div>
-    </div>
+    </div>  
 </nav>
