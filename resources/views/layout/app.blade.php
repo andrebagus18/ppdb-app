@@ -13,5 +13,6 @@
         @yield('content')
     </main>
     @include('components.footer')
+    <script src="https://unpkg.com/lucide@latest"></script>
 </body>
 </html>

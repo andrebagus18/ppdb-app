@@ -10,8 +10,8 @@ Route::get('/welcome', function () {
 Route::get('/ppdb', function () {
     return view('public.home');
 });
-Route::get('/auth', [AuthController::class, 'showLogin'])->name('auth');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/auth', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -29,7 +29,7 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
         return view('public.home');
     })->name('ppdb');
     Route::get('/dashboard', function () {
-        return view('public.dashboard');
+        return view('public.registration');
     })->name('dashboard');
 });
 Route::middleware(['auth'])->group(function () {

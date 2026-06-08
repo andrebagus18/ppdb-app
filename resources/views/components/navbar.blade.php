@@ -14,20 +14,15 @@
         <div class="flex gap-4">
             @auth
             <div class="flex gap-3 items-center">
-                <a href="{{ route('dashboard') }}"
-                class="p-1 px-4 rounded-xl border-2 border-green-600 cursor-pointer hover:bg-green-600/70 hover:border-green-600/70 transition">
-                    Dashboard ➜
-                </a>
-                <form action="{{ route('logout') }}" method="POST">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="px-2 py-1 bg-red-600 hover:bg-red-700 hover:text-white rounded-lg transition cursor-pointer">➜]</button>
+                    <button type="submit"
+                        class="flex gap-2 text-lg px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-lg cursor-pointer">
+                        <i data-lucide="log-out"></i>
+                        <span>Logout</span>
+                    </button>
                 </form>
             </div>
-            @else
-                <a href="{{ route('auth') }}"
-                class="p-1 px-4 rounded-xl border-2 border-teal-600 cursor-pointer hover:bg-teal-600/70 hover:border-teal-600/70 transition">
-                    Masuk Untuk Mendaftar ➜
-                </a>
             @endauth
         </div>
     </div>  

@@ -1,7 +1,8 @@
 // form biodata
 let currentStep = 1;
-const steps = document.querySelectorAll(".step-number");
-const formStep = document.querySelectorAll(".form-step");
+const modal = document.querySelector("#modal");
+const preview = document.querySelector("#preview");
+const close = document.querySelector("#close");
 const inputs = document.querySelectorAll("input, select, textarea");
 // const biodataForm = document.getElementById("biodataForm");
 // let data = JSON.parse(localStorage.getItem("data")) || [];
@@ -37,66 +38,73 @@ const inputs = document.querySelectorAll("input, select, textarea");
 //         saveToLocalStorage();
 //     });
 
-const nextBtn = document.querySelectorAll(".btn-next");
-nextBtn.forEach((button) => {
-    button.addEventListener("click", nextStep);
-});
-const prevBtn = document.querySelectorAll(".btn-prev");
-prevBtn.forEach((button) => {
-    button.addEventListener("click", prevStep);
-});
-function nextStep() {
-    // const currentForm = formStep[currentStep - 1];
-    if (currentStep < formStep.length) {
-        if (!validated()) {
-            showAlert("error", "❌ Data Harus Dilengkap Semua!");
-            document.getElementById("alertBox").scrollIntoView({
-                top: 0,
-                behavior: "smooth",
-                block: "center",
-            });
-            return;
-        }
-        currentStep++;
-        updateUI();
-    }
-    if (currentStep == 5) {
-        reviewData();
-    }
-}
-function prevStep() {
-    if (currentStep > 1) {
-        currentStep--;
-        updateUI();
-    }
-}
-function updateUI() {
-    steps.forEach((step, index) => {
-        step.classList.toggle("active", index + 1 === currentStep);
-    });
-    formStep.forEach((form, index) => {
-        form.style.display = index + 1 === currentStep ? "block" : "none";
-    });
-}
-updateUI();
+// const nextBtn = document.querySelectorAll(".btn-next");
+// nextBtn.forEach((button) => {
+//     button.addEventListener("click", nextStep);
+// });
+// const prevBtn = document.querySelectorAll(".btn-prev");
+// prevBtn.forEach((button) => {
+//     button.addEventListener("click", prevStep);
+// });
+// function nextStep() {
+//     // const currentForm = formStep[currentStep - 1];
+//     if (currentStep < formStep.length) {
+//         if (!validated()) {
+//             showAlert("error", "❌ Data Harus Dilengkap Semua!");
+//             document.getElementById("alertBox").scrollIntoView({
+//                 top: 0,
+//                 behavior: "smooth",
+//                 block: "center",
+//             });
+//             return;
+//         }
+//         currentStep++;
+//         updateUI();
+//     }
+//     if (currentStep == 5) {
+//         reviewData();
+//     }
+// }
+// function prevStep() {
+//     if (currentStep > 1) {
+//         currentStep--;
+//         updateUI();
+//     }
+// }
+// function updateUI() {
+//     steps.forEach((step, index) => {
+//         step.classList.toggle("active", index + 1 === currentStep);
+//     });
+//     formStep.forEach((form, index) => {
+//         form.style.display = index + 1 === currentStep ? "block" : "none";
+//     });
+// }
+// updateUI();
 
-function validated(stepElement) {
-    let valid = true;
+// function validated(stepElement) {
+//     let valid = true;
 
-    const currentForm = formStep[currentStep - 1];
-    const inputs = currentForm.querySelectorAll("input, select, textarea");
-    const dataWali = document.querySelectorAll(".data-wali");
-    inputs.forEach((input) => {
-        if (input.classList.contains("data-wali")) {
-            return;
-        }
-        if (!input.value.trim()) {
-            input.classList.add("border-red-500", "ring-2", "ring-red-500");
-            valid = false;
-        }
+//     const currentForm = formStep[currentStep - 1];
+//     const inputs = currentForm.querySelectorAll("input, select, textarea");
+//     const dataWali = document.querySelectorAll(".data-wali");
+//     inputs.forEach((input) => {
+//         if (input.classList.contains("data-wali")) {
+//             return;
+//         }
+//         if (!input.value.trim()) {
+//             input.classList.add("border-red-500", "ring-2", "ring-red-500");
+//             valid = false;
+//         }
+//     });
+//     return valid;
+// }
+function showTab(tabId) {
+    document.querySelectorAll("[data-tab]").forEach((section) => {
+        section.classList.add("hidden");
     });
-    return valid;
+    document.querySelector(`[data-tab="${tabId}"]`).classList.remove("hidden");
 }
+window.showTab = showTab;
 
 flatpickr("#tanggal_lahir", {
     dateFormat: "d-m-Y",
@@ -105,19 +113,24 @@ flatpickr("#tanggal_lahir", {
 });
 
 function reviewData() {
+    modal.classList.remove("hidden");
     const inputData = document.querySelectorAll("input, select, textarea");
     inputData.forEach((input) => {
         const reviewList = document.getElementById(`review_${input.id}`);
         if (reviewList) {
             reviewList.textContent = input.value || "-";
         }
-        if (input.type === "file") {
-            reviewList.textContent = input.files.length
-                ? input.files[0].name
-                : "-";
-        }
+    });
+    close.addEventListener("click", () => {
+        modal.classList.add("hidden");
     });
 }
+window.reviewData = reviewData;
+modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.classList.add("hidden");
+    }
+});
 
 function showAlert(type, message) {
     const alertBox = document.getElementById("alertBox");
@@ -148,6 +161,10 @@ document.querySelectorAll(".form-input").forEach((input) => {
     input.addEventListener("input", () => {
         input.classList.remove("border-red-500", "ring-2", "ring-red-100");
     });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    lucide.createIcons();
 });
 
 function saveToLocalStorage() {

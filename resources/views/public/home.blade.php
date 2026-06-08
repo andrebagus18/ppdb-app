@@ -1,5 +1,4 @@
 @extends('layout.app')
-@section('title', 'Home')
 @section('content')
 
 {{-- section home --}}
@@ -14,7 +13,7 @@
         </span>
         @auth
         <a
-            href="{{ route('registration') }}"
+            href="{{ route('dashboard') }}"
             class="inline-block mt-6 rounded-lg bg-teal-500 hover:bg-teal-600 cursor-pointer px-6 py-3 text-white w-[15em]"
         >
             Daftar Sekarang ➜
@@ -28,7 +27,7 @@
         </a>
         @endauth
     </div>
-    <div class="flex justif y-center">
+    <div class="flex justify-center">
         <img src="{{ asset('images/image 9.png') }}" alt="logo" class="w-[25em] h-[20em]">
     </div>
 </section>
