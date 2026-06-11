@@ -13,17 +13,16 @@ return new class extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->foreignId('jalur_pendaftaran_id')->constrained()->onDelete('cascade');
             $table->string('no_daftar')->unique();
             $table->enum('status', [
-                'menunggu_upload',
                 'menunggu_verifikasi',
                 'terverifikasi',
-                'selesai',
             ])
-                ->default('menunggu_upload');
+                ->default('menunggu_verifikasi');
             $table->enum('hasil_seleksi', [
+                'pending',
                 'diterima',
                 'tidak_diterima'
             ])->nullable();

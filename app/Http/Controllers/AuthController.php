@@ -34,7 +34,7 @@ class AuthController extends Controller
             if ($user->role === 'panitia') {
                 return redirect('/panitia');
             }
-            return redirect('/ppdb');
+            return redirect('/ppdb')->with('success', 'Registrasi berhasil.');
         }
         return back()->withErrors([
             'email' => 'Email atau password salah',

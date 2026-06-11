@@ -9,12 +9,13 @@ class Document extends Model
     protected $fillable = [
         'registration_id',
         'jenis_document',
-        'claudinary_url',
-        'claudinary_public_id',
+        'cloudinary_url',
+        'cloudinary_public_id',
         'catatan',
     ];
     public function registration()
     {
+        // tabel document memiliki relasi dengan tabel registration 
         return $this->belongsTo(Registration::class);
     }
 }

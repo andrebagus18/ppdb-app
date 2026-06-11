@@ -8,7 +8,7 @@ class Registration extends Model
 {
     protected $fillable = [
         'student_id',
-        'jalur_id',
+        'jalur_pendaftaran_id',
         'no_daftar',
         'status',
         'hasil_seleksi',
@@ -16,14 +16,17 @@ class Registration extends Model
     ];
     public function student()
     {
+        // tabel registration memiliki relasi dengan tabel student
         return $this->belongsTo(Student::class);
     }
     public function jalur()
     {
+        // tabel registration memiliki relasi dengan tabel jalur_pendaftaran
         return $this->belongsTo(JalurPendaftaran::class);
     }
-    public function document()
+    public function documents()
     {
+        // tabel registration memiliki relasi dengan tabel document
         return $this->hasMany(Document::class);
     }
 }

@@ -8,7 +8,7 @@ class Student extends Model
 {
     protected $fillable = [
         'user_id',
-        'nik',
+        'nik/nisn',
         'nama_lengkap',
         'tempat_lahir',
         'tanggal_lahir',
@@ -16,21 +16,24 @@ class Student extends Model
         'agama',
         'alamat',
         'no_hp',
-        'nama_ayah',
+        'pos',
+        'ayah',
         'kerja_ayah',
-        'nama_ibu',
+        'ibu',
         'kerja_ibu',
-        'nama_wali',
-        'kerja_wali',
+        'wali',
+        'hubungan_wali',
         'asal_sekolah',
         'nilai_rata_rata',
     ];
     public function user()
     {
+        // tabel student memiliki relasi dengan tabel user
         return $this->belongsTo(User::class);
     }
-    public function registrations()
+    public function registration()
     {
-        return $this->hasMany(Registration::class);
+        // tabel student memiliki relasi dengan tabel registration
+        return $this->hasOne(Registration::class);
     }
 }

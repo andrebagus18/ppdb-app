@@ -1,3 +1,4 @@
+{{-- {{ dd($student) }} --}}
 @extends('layout.dashboard-siswa')
 @section('content')
 

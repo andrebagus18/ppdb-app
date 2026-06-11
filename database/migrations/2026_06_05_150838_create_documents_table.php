@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('registration_id')->constrained()->onDelete('cascade');
             $table->string('jenis_document');
-            $table->string('claudinary_url');
-            $table->string('claudinary_public_id');
+            $table->string('cloudinary_url');
+            $table->string('cloudinary_public_id');
             $table->enum('status_verifikasi', [
                 'pending',
                 'verified',

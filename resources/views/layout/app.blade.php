@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Home | PPDB Online')</title>
       @vite(['resources/css/app.css', 'resources/js/registration.js'])
+      <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body class="bg-[#eeeded]">
     @include('components.navbar')
@@ -14,5 +16,7 @@
     </main>
     @include('components.footer')
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @include('partials.flash')
 </body>
 </html>
