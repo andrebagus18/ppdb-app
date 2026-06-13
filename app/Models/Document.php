@@ -11,6 +11,7 @@ class Document extends Model
         'jenis_document',
         'cloudinary_url',
         'cloudinary_public_id',
+        'status_verifikasi',
         'catatan',
     ];
     public function registration()

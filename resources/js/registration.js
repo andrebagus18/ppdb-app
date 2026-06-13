@@ -98,13 +98,14 @@ const inputs = document.querySelectorAll("input, select, textarea");
 //     });
 //     return valid;
 // }
-function showTab(tabId) {
-    document.querySelectorAll("[data-tab]").forEach((section) => {
-        section.classList.add("hidden");
+document.querySelectorAll("[data-target]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".content").forEach((content) => {
+            content.classList.add("hidden");
+        });
+        document.getElementById(btn.dataset.target).classList.remove("hidden");
     });
-    document.querySelector(`[data-tab="${tabId}"]`).classList.remove("hidden");
-}
-window.showTab = showTab;
+});
 
 flatpickr("#tanggal_lahir", {
     dateFormat: "d-m-Y",
@@ -132,29 +133,29 @@ modal.addEventListener("click", (e) => {
     }
 });
 
-function showAlert(type, message) {
-    const alertBox = document.getElementById("alertBox");
-    const alertMessage = document.getElementById("alertMessage");
+// function showAlert(type, message) {
+//     const alertBox = document.getElementById("alertBox");
+//     const alertMessage = document.getElementById("alertMessage");
 
-    alertBox.className =
-        "max-w-3xl mx-auto mt-4 flex h-15 items-center gap-3 rounded-xl border px-4";
+//     alertBox.className =
+//         "max-w-3xl mx-auto mt-4 flex h-15 items-center gap-3 rounded-xl border px-4";
 
-    if (type === "success") {
-        alertBox.classList.add("bg-green-50", "border-green-200");
-        alertMessage.classList.add("text-green-700");
-    }
+//     if (type === "success") {
+//         alertBox.classList.add("bg-green-50", "border-green-200");
+//         alertMessage.classList.add("text-green-700");
+//     }
 
-    if (type === "error") {
-        alertBox.classList.add("bg-red-50", "border-red-500");
-        alertMessage.classList.add("text-red-700");
-    }
-    alertMessage.textContent = message;
-    alertBox.classList.remove("hidden");
+//     if (type === "error") {
+//         alertBox.classList.add("bg-red-50", "border-red-500");
+//         alertMessage.classList.add("text-red-700");
+//     }
+//     alertMessage.textContent = message;
+//     alertBox.classList.remove("hidden");
 
-    setTimeout(() => {
-        alertBox.classList.add("hidden");
-    }, 3000);
-}
+//     setTimeout(() => {
+//         alertBox.classList.add("hidden");
+//     }, 3000);
+// }
 
 // hapus error input
 document.querySelectorAll(".form-input").forEach((input) => {

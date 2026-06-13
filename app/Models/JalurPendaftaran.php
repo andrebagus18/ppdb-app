@@ -11,8 +11,8 @@ class JalurPendaftaran extends Model
         'kuota',
         'deskripsi',
     ];
-    public function registrations()
+    public function registration()
     {
-        return $this->hasMany(Registration::class, 'jalur_id');
+        return $this->hasMany(Registration::class, 'jalur_pendaftaran_id');
     }
 }

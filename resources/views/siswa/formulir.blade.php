@@ -1,4 +1,4 @@
-<section data-tab="formulir" class="hidden w-full p-6 py-4">
+<section data-tab="formulir-content" class="w-full p-6 py-4">
     @if ($errors->any())
     <div>
         @foreach ($errors->all() as $error)
@@ -6,7 +6,7 @@
         @endforeach
     </div>
     @endif
-        <form action="{{ route('student.store') }}" method="POST" class="rounded-2xl border border-slate-200 bg-white shadow-sm p-6 py-2" id="biodataForm">
+        <form action="{{ route('siswa.registration.store') }}" method="POST" class="rounded-2xl border border-slate-200 bg-white shadow-sm p-6 py-2" id="biodataForm">
             @csrf
             <h3 class="mb-2 text-lg font-semibold">
             Formulir Data Diri

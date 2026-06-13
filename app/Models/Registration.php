@@ -22,7 +22,7 @@ class Registration extends Model
     public function jalur()
     {
         // tabel registration memiliki relasi dengan tabel jalur_pendaftaran
-        return $this->belongsTo(JalurPendaftaran::class);
+        return $this->belongsTo(JalurPendaftaran::class, 'jalur_pendaftaran_id');
     }
     public function documents()
     {

@@ -1,4 +1,4 @@
-<section data-tab="upload" class="hidden w-full p-6">
+<section data-tab="upload-berkas-content" class="w-full p-6">
     @if ($documents->isEmpty())
         <form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data" class="w-full p-6 rounded-xl border-slate-200 bg-white shadow-sm">
             @csrf
@@ -66,7 +66,7 @@
         </div>
     @foreach ($documents as $document )
         @if ($document->status_verifikasi === 'rejected') 
-        <form action="{{ route('documents.reupload') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('siswa.documents.reupload', $document) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <input type="file" name="file" required>

@@ -29,7 +29,7 @@ class StudentController extends Controller
             ->with('registration.documents')
             ->first();
         $documents = $student?->registration?->documents ?? collect();
-        return view('public.registration', compact(
+        return view('public.siswa', compact(
             'jalur',
             'student',
             'documents'
