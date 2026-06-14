@@ -35,7 +35,7 @@ Route::middleware(['auth', 'role:panitia'])->group(function () {
     Route::get('/panitia', function () {
         return view('public.panitia');
     })->name('panitia');
-    Route::get('/panitia', [PanitiaController::class, 'index'])->name('panitia.dashboard');
+    Route::get('/panitia', [PanitiaController::class, 'index'])->name('dashboard.panitia');
     Route::get('/panitia/registrations/{registration}', [RegistrationController::class, 'index'])->name('panitia.show');
     Route::put('/documents/{document}/approve', [PanitiaController::class, 'approve'])->name('panitia.approve');
     Route::put('/documents/{document}/reject', [PanitiaController::class, 'reject'])->name('panitia.reject');

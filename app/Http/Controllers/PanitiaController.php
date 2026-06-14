@@ -16,7 +16,13 @@ class PanitiaController extends Controller
             'jalur',
             'documents'
         ])->get();
-        return view('public.panitia', compact('registrations'));
+        $stats = [
+            'total' => Registration::count(),
+            'pending' => Registration::where('status', 'menunggu_verifikasi')->count(),
+            'verified' => Registration::where('status', 'verified')->count(),
+            'rejected' => Document::where('status_verifikasi', 'rejected')->count(),
+        ];
+        return view('public.panitia', compact('registrations', 'stats'));
     }
     public function updateStatus(Registration $registration)
     {
