@@ -10,13 +10,11 @@
     <div id="formulir-content" class="content hidden">
         @include('siswa.formulir')
     </div>
-    <div id="review-content" class="content hidden">
-        @include('siswa.review')
-    </div>
     <div id="upload-berkas-content" class="content hidden">
         @include('siswa.upload-berkas')
     </div>
     <div id="pengumuman-content" class="content hidden">
         @include('siswa.pengumuman')
     </div>
+    @include('siswa.review')
 @endsection

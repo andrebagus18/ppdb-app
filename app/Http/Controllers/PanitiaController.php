@@ -22,14 +22,28 @@ class PanitiaController extends Controller
             'verified' => Registration::where('status', 'verified')->count(),
             'rejected' => Document::where('status_verifikasi', 'rejected')->count(),
         ];
+
         return view('public.panitia', compact('registrations', 'stats'));
     }
     public function updateStatus(Registration $registration)
     {
         $verified = $registration->documents()->where('status_verifikasi', '!=', 'verified')->doesntExist();
-        if ($verified) {
+        if (!$verified) {
+            return;
+        }
+        $jalur = $registration->jalur;
+        $jumlahDiterima = Registration::where('jalur_pendaftaran_id', $jalur->id)
+            ->where('hasil_seleksi', 'diterima')
+            ->count();
+        if ($jumlahDiterima < $jalur->kuota) {
             $registration->update([
-                'status' => 'terverifikasi'
+                'status' => 'terverifikasi',
+                'hasil_seleksi' => 'diterima'
+            ]);
+        } else {
+            $registration->update([
+                'status' => 'terverifikasi',
+                'hasil_seleksi' => 'tidak_diterima'
             ]);
         }
     }

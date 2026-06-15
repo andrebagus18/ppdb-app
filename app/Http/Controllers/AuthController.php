@@ -34,7 +34,7 @@ class AuthController extends Controller
             if ($user->role === 'panitia') {
                 return redirect('/panitia');
             }
-            return redirect('/ppdb')->with('success', 'Registrasi berhasil.');
+            return redirect('/siswa/ppdb')->with('success', 'Registrasi berhasil.');
         }
         return back()->withErrors([
             'email' => 'Email atau password salah',
@@ -73,7 +73,7 @@ class AuthController extends Controller
             if (Auth::user()->role === 'panitia') {
                 return redirect('/panitia');
             }
-            return redirect('/ppdb');
+            return redirect('/siswa/ppdb');
         }
         return view('auth.page');
     }

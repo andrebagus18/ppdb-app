@@ -1,5 +1,4 @@
 // form biodata
-let currentStep = 1;
 const modal = document.querySelector("#modal");
 const preview = document.querySelector("#preview");
 const close = document.querySelector("#close");
@@ -10,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lucide.createIcons();
 });
 
+// fungsi tab aside
 document.querySelectorAll("[data-target]").forEach((btn) => {
     btn.addEventListener("click", () => {
         document.querySelectorAll(".content").forEach((content) => {
@@ -19,6 +19,7 @@ document.querySelectorAll("[data-target]").forEach((btn) => {
     });
 });
 
+// fungsi tanggal
 flatpickr("#tanggal_lahir", {
     dateFormat: "d-m-Y",
     altInput: true,
@@ -43,6 +44,7 @@ menus.forEach(menu => {
 
 function reviewData() {
     modal.classList.remove("hidden");
+    modal.classList.add('flex');
     const inputData = document.querySelectorAll("input, select, textarea");
     inputData.forEach((input) => {
         const reviewList = document.getElementById(`review_${input.id}`);
@@ -52,12 +54,14 @@ function reviewData() {
     });
     close.addEventListener("click", () => {
         modal.classList.add("hidden");
+        modal.classList.remove("flex");
     });
 }
 window.reviewData = reviewData;
 modal.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.classList.add("hidden");
+        modal.classList.remove("flex");
     }
 });
 
@@ -68,6 +72,4 @@ document.querySelectorAll(".form-input").forEach((input) => {
     });
 });
 
-function saveToLocalStorage() {
-    localStorage.setItem("data", JSON.stringify(data));
-}
+

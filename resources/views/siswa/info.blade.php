@@ -1,18 +1,3 @@
-@php
-    if ($documents->isEmpty()) {
-        $bg = 'bg-gray-500';
-        $title = 'Anda Belum Mengunggah Dokumen';
-    } elseif ($documents->contains('status_verifikasi', 'rejected')) {
-        $bg = 'bg-red-500';
-        $title = 'Berkas Anda Ditolak';
-    } elseif ($documents->every(fn($doc) => $doc->status_verifikasi === 'verified')) {
-        $bg = 'bg-green-500';
-        $title = 'Selamat! Berkas Anda Diterima';
-    } else {
-        $bg = 'bg-yellow-500';
-        $title = 'Berkas Anda Sedang Diverifikasi';
-    }
-@endphp
 <div class="p-6" data-tab="dashboard">
     <div class="py-8 flex gap-6">
         <div class="bg-white px-12 py-10 flex flex-col items-center">
@@ -24,17 +9,22 @@
         </div>
         <div class="flex flex-col gap-2 bg-white p-4 w-full ">
             <div class="grid grid-cols-2 gap-4">
-                <div class="{{ $bg }} p-4 rounded-lg flex flex-col gap-2 text-xl">
-                    <div class="flex text-white gap-2">
+                <div class="{{ $statusCard['bg'] }} p-4 rounded-lg flex flex-col gap-2 text-xl">
+                    <div class="flex items-center text-white gap-2">
                         <i data-lucide="badge-info"></i>Status
                     </div>
-                    <p class="text-md text-white">{{ $title }}</p>
+                    <p class="text-md font-bold text-white">{{ $statusCard['title'] }}</p>
                 </div>
-                <div class="bg-blue-500 p-4 rounded-lg flex flex-col gap-2 text-xl">
-                    <div class="flex text-white gap-2">
+                <div class="bg-blue-500 p-4 rounded-lg flex flex-col text-xl">
+                    <div class="flex items-center text-white gap-2 mb-1">
                         <i data-lucide="notebook-text"></i>Catatan
                     </div>
-                    <p class="text-md text-white">{{ $document?->catatan ?? 'Belum Ada Catatan' }}</p>
+                    @if ($catatanReject)
+                        <p class="text-md text-white font-bold">Jumlah Dokumen Ditolak: {{ $catatanReject->count() }}
+                        </p>
+                    @else
+                        <p class="text-md text-white">Belum Ada Catatan</p>
+                    @endif
                 </div>
             </div>
             <div class="{{ $student ? 'bg-green-500' : 'bg-yellow-500' }} rounded-lg p-2 mt-2">

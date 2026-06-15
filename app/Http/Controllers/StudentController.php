@@ -12,28 +12,51 @@ use Illuminate\Support\Facades\DB;
 class StudentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function index()
     {
         $jalur = JalurPendaftaran::all();
         $student = Student::where('user_id', Auth::id())
             ->with('registration.documents')
             ->first();
         $documents = $student?->registration?->documents ?? collect();
+        $catatanReject = $documents->where('status_verifikasi', 'rejected');
+        $statusCard = $this->getStatus($documents);
+        $registration = $student?->registration;
+        $hasilSeleksi = $registration?->hasil_seleksi;
+        $jalurs = JalurPendaftaran::withCount('registration')->get();
+
         return view('public.siswa', compact(
             'jalur',
             'student',
-            'documents'
+            'documents',
+            'catatanReject',
+            'statusCard',
+            'hasilSeleksi',
+            'jalurs'
         ));
+    }
+
+    public function home()
+    {
+        $reguler = $this->kuotaJalur('Reguler');
+        $prestasi = $this->kuotaJalur('Prestasi');
+        $zonasi = $this->kuotaJalur('Zonasi');
+        $afirmasi = $this->kuotaJalur('Afirmasi');
+        return view('public.home', compact(
+            'reguler',
+            'prestasi',
+            'zonasi',
+            'afirmasi'
+        ));
+    }
+
+    public function kuotaJalur($namaJalur)
+    {
+        return
+            JalurPendaftaran::where('nama', $namaJalur)
+            ->withCount('registration')->first();
     }
 
     /**
@@ -61,7 +84,6 @@ class StudentController extends Controller
             'nilai_rata_rata' => ['required', 'numeric'],
             'jalur_id' => ['required', 'exists:jalur_pendaftarans,id'],
         ]);
-
         DB::transaction(function () use ($request) {
             $student = Student::create([
                 'user_id' => Auth::id(),
@@ -83,6 +105,11 @@ class StudentController extends Controller
                 'asal_sekolah' => $request->asal_sekolah,
                 'nilai_rata_rata' => $request->nilai_rata_rata,
             ]);
+            $jalur = JalurPendaftaran::findOrfail($request->jalur_pendaftaran_id);
+            $sisa = $jalur->kuota - $jalur->registration()->count();
+            if ($sisa <= 0) {
+                return back()->with('error', 'Kuota Jalur Pendaftaran Penuh.');
+            }
             Registration::create([
                 'student_id' => $student->id,
                 'jalur_pendaftaran_id' => $request->jalur_id,
@@ -92,6 +119,32 @@ class StudentController extends Controller
             ]);
         });
         return redirect('/dashboard')->with('success', 'Pendaftaran berhasil');
+    }
+
+    public function getStatus($documents)
+    {
+        if ($documents->isEmpty()) {
+            return [
+                'bg' => 'bg-gray-500',
+                'title' => 'Anda Belum Mengunggah Dokumen'
+            ];
+        }
+        if ($documents->contains('status_verifikasi', 'rejected')) {
+            return [
+                'bg' => 'bg-red-500',
+                'title' => 'Berkas Anda Ditolak'
+            ];
+        }
+        if ($documents->every(fn($doc) => $doc->status_verifikasi === 'verified')) {
+            return [
+                'bg' => 'bg-green-500',
+                'title' => 'Selamat! Berkas Anda Diterima'
+            ];
+        }
+        return [
+            'bg' => 'bg-yellow-500',
+            'title' => 'Berkas Anda Sedang Diverifikasi'
+        ];
     }
 
     /**
