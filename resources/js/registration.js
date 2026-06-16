@@ -12,10 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // fungsi tab aside
 document.querySelectorAll("[data-target]").forEach((btn) => {
     btn.addEventListener("click", () => {
+        document.getElementById('navbar-title').textContent = btn.textContent.trim();
         document.querySelectorAll(".content").forEach((content) => {
             content.classList.add("hidden");
         });
-        document.getElementById(btn.dataset.target).classList.remove("hidden");
+        document.getElementById(btn.dataset.target)?.classList.remove("hidden");
     });
 });
 

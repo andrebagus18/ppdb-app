@@ -13,7 +13,7 @@
                 PPDB Online, proses pendaftaran dapat dilakukan dengan mudah, cepat, dan transparan dari mana saja.
             </span>
             @auth
-                <a href="{{ route('siswa.dashboard.siswa') }}"
+                <a href="{{ route('siswa.dashboard') }}"
                     class="inline-block mt-6 rounded-lg bg-teal-500 hover:bg-teal-600 cursor-pointer px-6 py-3 text-white w-[15em]">
                     Daftar Sekarang ➜
                 </a>

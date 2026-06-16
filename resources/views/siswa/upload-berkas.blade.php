@@ -1,58 +1,84 @@
-<section data-tab="upload-berkas-content" class="w-full p-6">
+<section data-tab="upload-berkas-content" class="w-full p-8 pt-6">
     @if ($documents->isEmpty())
-        <form action="{{ route('siswa.documents.store') }}" method="POST" enctype="multipart/form-data"
-            class="w-full p-6 rounded-xl border-slate-200 bg-white shadow-sm">
-            @csrf
-            <h3 class="mt-4 mb-2 text-lg font-semibold">
-                Upload Berkas
-            </h3>
-            <div class="grid gap-4 grid-cols-2">
-                <div>
-                    <label class="mb-1 block text-md font-medium">
-                        Pass Foto
-                    </label>
-                    <input id="foto" name="foto" type="file"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+        <div class="w-full p-6 rounded-xl border-slate-200 bg-white shadow-sm h-120 overflow-y-auto scrollbar-hide">
+            <form action="{{ route('siswa.documents.store') }}" method="POST" enctype="multipart/form-data" class="">
+                @csrf
+                <div class="grid gap-2 grid-cols-1">
+                    <div class="flex items-center justify-between p-2">
+                        <div>
+                            <label class="mb-2 block text-lg font-medium">
+                                Pass Foto 4x6 <span class="text-red-500">*</span>
+                            </label>
+                            <input id="foto" name="foto" type="file"
+                                class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                            <button class="text-sm italic text-blue-500">Lihat file unggahan</button>
+                        </div>
+                        <div class="max-w-80 flex flex-col gap-2">
+                            <span
+                                class="rounded-xl text-sm px-2 py-1 italic {{ $statusCard['bg'] }}">{{ $statusCard['title'] }}</span>
+                            <p class="text-sm italic text-red-500"></p>
+                        </div>
+                    </div>
+
+
+                    <div class="flex items-center justify-between p-2">
+                        <div>
+                            <label class="mb-2 block text-lg font-medium">
+                                Kartu Keluarga (KK) <span class="text-red-500">*</span>
+                            </label>
+                            <input id="kk" name="kk" type="file"
+                                class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                        </div>
+                        <span
+                            class="rounded-xl text-sm px-2 py-1 italic {{ $statusCard['bg'] }}">{{ $statusCard['title'] }}</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2">
+                        <div>
+                            <label class="mb-2 block text-lg font-medium">
+                                Akta Kelahiran <span class="text-red-500">*</span>
+                            </label>
+                            <input id="akta" name="akta" type="file"
+                                class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                        </div>
+                        <span
+                            class="rounded-xl text-sm px-2 py-1 italic {{ $statusCard['bg'] }}">{{ $statusCard['title'] }}</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2">
+                        <div>
+                            <label class="mb-2 block text-lg font-medium">
+                                Ijazah Terakhir <span class="text-red-500">*</span>
+                            </label>
+                            <input id="ijazah" name="ijazah" type="file"
+                                class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                        </div>
+                        <span
+                            class="rounded-xl text-sm px-2 py-1 italic {{ $statusCard['bg'] }}">{{ $statusCard['title'] }}</span>
+                    </div>
                 </div>
-                <div>
-                    <label class="mb-1 block text-md font-medium">
-                        Kartu Keluarga
-                    </label>
-                    <input id="kk" name="kk" type="file"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                <!-- Berkas Jalur -->
+                <div class="flex items-center justify-between p-2">
+                    <div class="relative mt-3">
+                        <h3 class="mt-4 mb-2 text-lg font-semibold">
+                            Upload Berkas Jalur Pendaftaran <span class="text-red-500">*</span>
+                        </h3>
+                        <input id="surat_jalur" name="surat_jalur" type="file"
+                            class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 cursor-pointer">
+                    </div>
+                    <span
+                        class="rounded-xl text-sm px-2 py-1 italic {{ $statusCard['bg'] }}">{{ $statusCard['title'] }}</span>
                 </div>
-                <div>
-                    <label class="mb-1 block text-md font-medium">
-                        Akta Kelahiran
-                    </label>
-                    <input id="akta" name="akta" type="file"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                <p class="mt-2 text-sm text-slate-400">
+                    Upload berkas atau sertifikat pendukung sesuai jalur yang dipilih (Reguler, Zonasi, Prestasi, atau
+                    Afirmasi).
+                </p>
+                <div class="mt-3 flex justify-end">
+                    <button type="submit"
+                        class="btn-next rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700 cursor-pointer">
+                        Kirim
+                    </button>
                 </div>
-                <div>
-                    <label class="mb-1 block text-md font-medium">
-                        Ijazah Terakhir
-                    </label>
-                    <input id="ijazah" name="ijazah" type="file"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
-                </div>
-            </div>
-            <!-- Berkas Jalur -->
-            <h3 class="mt-4 mb-2 text-lg font-semibold">
-                Upload Berkas Jalur Pendaftaran
-            </h3>
-            <input id="surat_jalur" name="surat_jalur" type="file"
-                class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 cursor-pointer">
-            <p class="mt-2 text-sm text-slate-400">
-                Upload berkas atau sertifikat pendukung sesuai jalur yang dipilih (Reguler, Zonasi, Prestasi, atau
-                Afirmasi).
-            </p>
-            <div class="mt-3 flex justify-end">
-                <button type="submit"
-                    class="btn-next rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700 cursor-pointer">
-                    Kirim
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>
     @else
         <div class="px-10">
             <div class="bg-white flex flex-col gap-4 border border-slate-300 rounded-xl p-4">

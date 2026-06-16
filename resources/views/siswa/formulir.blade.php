@@ -1,10 +1,7 @@
 <section data-tab="formulir-content" class="w-full p-6 py-4">
     <form action="{{ route('siswa.registration.store') }}" method="POST"
-        class="rounded-2xl border border-slate-200 bg-white shadow-sm p-6 py-2" id="biodataForm">
+        class="rounded-2xl border border-slate-200 bg-white shadow-sm p-6 py-4" id="biodataForm">
         @csrf
-        <h3 class="mb-2 text-lg font-semibold">
-            Formulir Data Diri
-        </h3>
         <div class="grid gap-2 grid-cols-3">
             <div>
                 <label class="mb-1 block text-md font-medium">

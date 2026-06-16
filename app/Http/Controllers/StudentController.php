@@ -24,6 +24,7 @@ class StudentController extends Controller
         $catatanReject = $documents->where('status_verifikasi', 'rejected');
         $statusCard = $this->getStatus($documents);
         $registration = $student?->registration;
+        $status = $this->statusSiswa($registration);
         $hasilSeleksi = $registration?->hasil_seleksi;
         $jalurs = JalurPendaftaran::withCount('registration')->get();
 
@@ -34,7 +35,8 @@ class StudentController extends Controller
             'catatanReject',
             'statusCard',
             'hasilSeleksi',
-            'jalurs'
+            'jalurs',
+            'status'
         ));
     }
 
@@ -59,9 +61,6 @@ class StudentController extends Controller
             ->withCount('registration')->first();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -125,7 +124,7 @@ class StudentController extends Controller
     {
         if ($documents->isEmpty()) {
             return [
-                'bg' => 'bg-gray-500',
+                'bg' => 'bg-gray-500 text-white',
                 'title' => 'Anda Belum Mengunggah Dokumen'
             ];
         }
@@ -147,35 +146,21 @@ class StudentController extends Controller
         ];
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function statusSiswa($registration)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return match ($registration?->hasil_seleksi) {
+            'diterima' => [
+                'bg' => 'bg-green-500 text-green-800',
+                'title' => 'Diterima'
+            ],
+            'tidak_diterima' => [
+                'bg' => 'bg-red-500 text-red-800',
+                'title' => 'Ditolak'
+            ],
+            default => [
+                'bg' => 'bg-yellow-500 text-yellow-800',
+                'title' => 'Pending'
+            ]
+        };
     }
 }

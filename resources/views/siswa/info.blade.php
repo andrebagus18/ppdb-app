@@ -1,54 +1,64 @@
 <div class="p-6" data-tab="dashboard">
-    <div class="py-8 flex gap-6">
-        <div class="bg-white px-12 py-10 flex flex-col items-center">
-            <div class="w-40 h-40 rounded-full border-8 border-teal-600 bg-white overflow-hidden mb-2">
+    <div class="bg-white rounded-lg p-6 flex flex-col shadow-lg">
+        <span class="text-xl text-black capitalize">Halo, {{ Auth::user()->name }} 👋</span>
+        <span class="text-md font-medium text-slate-400">Selamat Datang di Dashboard PPDB SMKN 45 Merdeka tahun ajaran
+            2026/2027</span>
+    </div>
+    <div class="py-4 flex gap-4">
+        {{-- profile --}}
+        <div class="w-xl bg-white p-4 flex flex-col items-center">
+            <div class="w-40 h-40 flex items-center rounded-full border-8 border-blue-200 bg-white overflow-hidden mb-2">
                 <img src="{{ asset('/images/profile.png') }}" alt="profile">
             </div>
-            <p class="text-md text-slate-400">{{ $student?->registration?->no_daftar ?? '-' }}</p>
-            <p class="font-bold text-black text-xl uppercase">{{ Auth::user()->name }}</p>
-        </div>
-        <div class="flex flex-col gap-2 bg-white p-4 w-full ">
-            <div class="grid grid-cols-2 gap-4">
-                <div class="{{ $statusCard['bg'] }} p-4 rounded-lg flex flex-col gap-2 text-xl">
-                    <div class="flex items-center text-white gap-2">
-                        <i data-lucide="badge-info"></i>Status
-                    </div>
-                    <p class="text-md font-bold text-white">{{ $statusCard['title'] }}</p>
+            <div class="w-full">
+                <div class="flex items-center justify-between p-2">
+                    <span class="text-lg font-medium text-slate-400">Nama :</span>
+                    <p class="font-bold text-black text-lg uppercase">{{ Auth::user()->name }}</p>
                 </div>
-                <div class="bg-blue-500 p-4 rounded-lg flex flex-col text-xl">
-                    <div class="flex items-center text-white gap-2 mb-1">
-                        <i data-lucide="notebook-text"></i>Catatan
-                    </div>
-                    @if ($catatanReject)
-                        <p class="text-md text-white font-bold">Jumlah Dokumen Ditolak: {{ $catatanReject->count() }}
-                        </p>
-                    @else
-                        <p class="text-md text-white">Belum Ada Catatan</p>
-                    @endif
+                <div class="flex items-center justify-between p-2">
+                    <span class="text-lg font-medium text-slate-400">No Pendaftaran :</span>
+                    <p class="text-lg text-black font-bold">{{ $student?->registration?->no_daftar ?? '-' }}</p>
+                </div>
+                <div class="flex items-center justify-between p-2">
+                    <span class="text-lg font-medium text-slate-400">Jalur Pendaftaran :</span>
+                    <p class="text-lg text-black font-bold">{{ $student?->registration?->jalur->name ?? '-' }}</p>
+                </div>
+                <div class="flex items-center justify-between p-2">
+                    <span class="text-lg font-medium text-slate-400">Status :</span>
+                    <p class="text-sm italic font-medium rounded-md px-4 py-1 {{ $status['bg'] }}">
+                        {{ $status['title'] ?? '-' }}</p>
                 </div>
             </div>
-            <div class="{{ $student ? 'bg-green-500' : 'bg-yellow-500' }} rounded-lg p-2 mt-2">
+        </div>
+        <div class="max-w-2xl w-full flex flex-col gap-2 bg-white p-4">
+            <div class="{{ $student ? 'bg-green-500' : 'bg-yellow-500' }} rounded-lg p-2">
                 <div class="flex flex-col items-center justify-center">
                     <p class="text-white text-2xl font-medium">
                         {{ $student ? 'Selamat! Anda Sudah Terdaftar. 🎉' : 'Anda Belum Mendaftar!' }}</p>
                 </div>
             </div>
-            <table class="w-full flex gap-4 border border-slate-300 p-4 mt-2 rounded-lg">
-                <thead>
-                    <tr class="flex flex-col text-left gap-4">
-                        <th>Nama</th>
-                        <th>NIK/NISN</th>
-                        <th>No. Pendaftaran</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="flex flex-col gap-4">
-                        <td class="uppercase font-medium">{{ $student?->nama_lengkap ?? '-' }}</td>
-                        <td>{{ $student?->{'nik/nisn'} ?? '-' }}</td>
-                        <td>{{ $student?->registration?->no_daftar ?? '-' }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            {{-- card document --}}
+            <div class="bg-white rounded-xl mt-2 shadow-lg grid grid-cols-2 gap-4">
+                <div class="w-full border border-slate-200 rounded-lg p-6 shadow-md">
+                    <span class="text-xl text-slate-400 mr-4">Dokumen</span>
+                    <p class="text-slate-500 font-bold text-5xl mt-4">{{ $documents->count() }}</p>
+                </div>
+                <div class="w-full border border-slate-200 rounded-lg p-6 shadow-md">
+                    <span class="text-xl text-slate-400 mr-4">Pending</span>
+                    <p class="text-slate-500 font-bold text-5xl mt-4">
+                        {{ $documents->where('status_verifikasi', 'pending')->count() }}</p>
+                </div>
+                <div class="w-full border border-slate-200 rounded-lg p-6 shadow-md">
+                    <span class="text-xl text-slate-400 mr-4">Diterima</span>
+                    <p class="text-slate-500 font-bold text-5xl mt-4">
+                        {{ $documents->where('status_verifikasi', 'verified')->count() }}</p>
+                </div>
+                <div class="w-full border border-slate-200 rounded-lg p-6 shadow-md">
+                    <span class="text-xl text-slate-400 mr-4">Ditolak</span>
+                    <p class="text-slate-500 font-bold text-5xl mt-4">
+                        {{ $documents->where('status_verifikasi', 'rejected')->count() }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

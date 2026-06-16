@@ -11,9 +11,9 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 // home page ppdb
-Route::get('/ppdb', function () {
-    return view('public.home');
-});
+// Route::get('/ppdb', function () {
+//     return view('public.home');
+// });
 
 // route untuk menampilkan form login dan register
 Route::get('/auth', [AuthController::class, 'showLogin'])->name('login');
@@ -45,21 +45,12 @@ Route::middleware(['auth', 'role:panitia'])->group(function () {
 Route::prefix('siswa')->middleware(['auth', 'role:siswa'])->name('siswa.')->group(function () {
     // route ketika siswa login ke homepage ppdb
     Route::get('/ppdb', [StudentController::class, 'home'])->name('ppdb');
-    // route menuju dashboard siswa
-    Route::get('/dashboard', function () {
-        return view('public.siswa');
-    })->name('dashboard');
     // route untuk menampilkan dashboard siswa
-    Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard.siswa');
+    Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard');
     // route action form biodata siswa
     Route::post('/registration', [StudentController::class, 'store'])->name('registration.store');
     // route action upload dokumen baru siswa
     Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
     // route action reupload dokumen jika ditolak
     Route::put('/documents/{document}', [DocumentController::class, 'update'])->name('documents.reupload');
-    // route view
-    // Route::view('/info', 'siswa.info', [StudentController::class, 'create'])->name('info');
-    // Route::view('/formulir', 'siswa.formulir')->name('formulir');
-    // Route::view('/upload-document', 'siswa.upload-document')->name('upload-document');
-    // Route::view('/pengumuman', 'siswa.pengumuman')->name('pengumuman');
 });
