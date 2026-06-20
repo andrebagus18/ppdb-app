@@ -21,11 +21,11 @@
                 </div>
                 <div class="flex items-center justify-between p-2">
                     <span class="text-lg font-medium text-slate-400">Jalur Pendaftaran :</span>
-                    <p class="text-lg text-black font-bold">{{ $student?->registration?->jalur->name ?? '-' }}</p>
+                    <p class="text-lg text-black font-bold">{{ $student?->registration?->jalur->nama ?? '-' }}</p>
                 </div>
                 <div class="flex items-center justify-between p-2">
                     <span class="text-lg font-medium text-slate-400">Status :</span>
-                    <p class="text-sm italic font-medium rounded-md px-4 py-1 {{ $status['bg'] }}">
+                    <p class="text-md italic font-bold rounded-md px-4 py-1 {{ $status['bg'] }}">
                         {{ $status['title'] ?? '-' }}</p>
                 </div>
             </div>

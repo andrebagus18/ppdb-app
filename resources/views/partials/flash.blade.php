@@ -8,8 +8,9 @@
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
-            background: '#dcfce7',
+            background: '#f0fdf4',
             color: '#166534',
+            iconColor: '#22c55e',
             showClass: {
                 popup: 'animate__animated animate__slideInRight'
             },
@@ -28,8 +29,9 @@
             title: '{{ session('error') }}',
             showConfirmButton: false,
             timer: 3000,
-            background: '#fee2e2',
+            background: '#fef2f2',
             color: '#991b1b',
+            iconColor: '#ef4444',
             showClass: {
                 popup: 'animate__animated animate__slideInRight'
             },
@@ -48,7 +50,7 @@
             title: 'Lengkapi semua data!',
             showConfirmButton: false,
             timer: 3000,
-            background: '#fee2e2',
+            background: '#FECACA',
             color: '#991b1b',
             showClass: {
                 popup: 'animate__animated animate__slideInRight'

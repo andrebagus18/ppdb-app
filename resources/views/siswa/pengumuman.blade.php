@@ -8,11 +8,11 @@
         <div class="p-5 text-center bg-white shadow rounded-xl">
             <h4 class="text-black text-2xl font-bold">📢 PENGUMUMAN TERBARU</h4>
             <div class="p-4">
-                <p class="bg-teal-500/40 rounded-md text-black font-bold py-4">HASIL SELEKSI PPDB 2027 TELAH DIUMUMKAN
+                <p class="bg-blue-500/40 rounded-md text-black font-bold py-4">HASIL SELEKSI PPDB 2027 TELAH DIUMUMKAN
                 </p>
-                @if ($hasilSeleksi === 'diterima')
-                    <div class="bg-green-500 text-white text-xl p-4 rounded-lg">
-                        🎉Selamat! Anda Diterima🎉
+                @if ($hasilStatus === 'terverifikasi')
+                    <div class="bg-green-200 text-green-800 text-xl p-4 rounded-lg mt-4">
+                        🎉Selamat! Berkas Anda Terverifikasi🎉<br>Silahkan pantau terus <b class="text-black">Dashboard</b> Anda untuk mengetahui hasil seleksi oleh Admin.
                     </div>
                 @else
                     <p class="my-4 text-black font-medium">Silakan cek status kelulusan melalui <span

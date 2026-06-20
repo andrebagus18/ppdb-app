@@ -1,4 +1,3 @@
-{{-- {{ dd($documents) }} --}}
 @extends('layout.dashboard-siswa')
 @section('content')
     <div class="bg-blue-500 font-bold text-white text-xl w-full p-6 h-15 flex items-center justify-between">

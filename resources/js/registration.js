@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // fungsi tab aside
 document.querySelectorAll("[data-target]").forEach((btn) => {
     btn.addEventListener("click", () => {
-        document.getElementById('navbar-title').textContent = btn.textContent.trim();
+        document.getElementById("navbar-title").textContent =
+            btn.textContent.trim();
         document.querySelectorAll(".content").forEach((content) => {
             content.classList.add("hidden");
         });
@@ -28,24 +29,18 @@ flatpickr("#tanggal_lahir", {
 });
 
 // active link
-menus.forEach(menu => {
+menus.forEach((menu) => {
     menu.addEventListener("click", () => {
-        menus.forEach(item => {
-            item.classList.remove(
-                "bg-blue-500",
-                "text-white"
-            );
+        menus.forEach((item) => {
+            item.classList.remove("bg-blue-500", "text-white");
         });
-        menu.classList.add(
-            "bg-blue-500",
-            "text-white"
-        );
+        menu.classList.add("bg-blue-500", "text-white");
     });
 });
 
 function reviewData() {
     modal.classList.remove("hidden");
-    modal.classList.add('flex');
+    modal.classList.add("flex");
     const inputData = document.querySelectorAll("input, select, textarea");
     inputData.forEach((input) => {
         const reviewList = document.getElementById(`review_${input.id}`);
@@ -72,5 +67,3 @@ document.querySelectorAll(".form-input").forEach((input) => {
         input.classList.remove("border-red-500", "ring-2", "ring-red-100");
     });
 });
-
-

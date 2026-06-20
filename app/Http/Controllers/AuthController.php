@@ -29,10 +29,10 @@ class AuthController extends Controller
         if (Auth::login($user)) {
             $request->session()->regenerate();
             if ($user->role === 'admin') {
-                return redirect('/admin');
+                return redirect('/admin/dashboard');
             }
             if ($user->role === 'panitia') {
-                return redirect('/panitia');
+                return redirect('/panitia/dashboard');
             }
             return redirect('/siswa/ppdb')->with('success', 'Registrasi berhasil.');
         }
@@ -68,10 +68,10 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role === 'admin') {
-                return redirect('/admin');
+                return redirect('/admin/dashboard');
             }
             if (Auth::user()->role === 'panitia') {
-                return redirect('/panitia');
+                return redirect('/panitia/dashboard');
             }
             return redirect('/siswa/ppdb');
         }

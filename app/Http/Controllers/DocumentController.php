@@ -18,7 +18,11 @@ class DocumentController extends Controller
             'ijazah' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'surat_jalur' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
-        $registration = Auth::user()->student->registration;
+        $registration = Auth::user()?->student?->registration;
+        if (!$registration) {
+            return back()
+                ->with('error', ' Silahkan Lengkapi formulir pendaftaran dulu.');
+        }
         $cloudinary = new Cloudinary([
             'cloud' => [
                 'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
@@ -82,6 +86,6 @@ class DocumentController extends Controller
             'status_verifikasi' => 'pending',
             'catatan' => null,
         ]);
-        return redirect('/dashboard')->with('success', 'Dokumen berhasil di upload Ulang.');
+        return redirect('/siswa/dashboard')->with('success', 'Dokumen berhasil di upload Ulang.');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JalurPendaftaran;
 use App\Models\Registration;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +23,10 @@ class StudentController extends Controller
             ->first();
         $documents = $student?->registration?->documents ?? collect();
         $catatanReject = $documents->where('status_verifikasi', 'rejected');
-        $statusCard = $this->getStatus($documents);
+        $statusCard = getStatus($documents);
         $registration = $student?->registration;
-        $status = $this->statusSiswa($registration);
-        $hasilSeleksi = $registration?->hasil_seleksi;
+        $status = statusSiswa($registration);
+        $hasilStatus = $registration?->status;
         $jalurs = JalurPendaftaran::withCount('registration')->get();
 
         return view('public.siswa', compact(
@@ -34,7 +35,7 @@ class StudentController extends Controller
             'documents',
             'catatanReject',
             'statusCard',
-            'hasilSeleksi',
+            'hasilStatus',
             'jalurs',
             'status'
         ));
@@ -83,13 +84,14 @@ class StudentController extends Controller
             'nilai_rata_rata' => ['required', 'numeric'],
             'jalur_id' => ['required', 'exists:jalur_pendaftarans,id'],
         ]);
-        DB::transaction(function () use ($request) {
+        $tanggalLahir = Carbon::createFromFormat('d-m-Y', $request->tanggal_lahir)->format('Y-m-d');
+        DB::transaction(function () use ($request, $tanggalLahir) {
             $student = Student::create([
                 'user_id' => Auth::id(),
                 'nik/nisn' => $request->nik,
                 'nama_lengkap' => $request->nama_lengkap,
                 'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
+                'tanggal_lahir' => $tanggalLahir,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
@@ -104,7 +106,7 @@ class StudentController extends Controller
                 'asal_sekolah' => $request->asal_sekolah,
                 'nilai_rata_rata' => $request->nilai_rata_rata,
             ]);
-            $jalur = JalurPendaftaran::findOrfail($request->jalur_pendaftaran_id);
+            $jalur = JalurPendaftaran::findOrfail($request->jalur_id);
             $sisa = $jalur->kuota - $jalur->registration()->count();
             if ($sisa <= 0) {
                 return back()->with('error', 'Kuota Jalur Pendaftaran Penuh.');
@@ -117,50 +119,6 @@ class StudentController extends Controller
                 'hasil_seleksi' => 'pending',
             ]);
         });
-        return redirect('/dashboard')->with('success', 'Pendaftaran berhasil');
-    }
-
-    public function getStatus($documents)
-    {
-        if ($documents->isEmpty()) {
-            return [
-                'bg' => 'bg-gray-500 text-white',
-                'title' => 'Anda Belum Mengunggah Dokumen'
-            ];
-        }
-        if ($documents->contains('status_verifikasi', 'rejected')) {
-            return [
-                'bg' => 'bg-red-500',
-                'title' => 'Berkas Anda Ditolak'
-            ];
-        }
-        if ($documents->every(fn($doc) => $doc->status_verifikasi === 'verified')) {
-            return [
-                'bg' => 'bg-green-500',
-                'title' => 'Selamat! Berkas Anda Diterima'
-            ];
-        }
-        return [
-            'bg' => 'bg-yellow-500',
-            'title' => 'Berkas Anda Sedang Diverifikasi'
-        ];
-    }
-
-    public function statusSiswa($registration)
-    {
-        return match ($registration?->hasil_seleksi) {
-            'diterima' => [
-                'bg' => 'bg-green-500 text-green-800',
-                'title' => 'Diterima'
-            ],
-            'tidak_diterima' => [
-                'bg' => 'bg-red-500 text-red-800',
-                'title' => 'Ditolak'
-            ],
-            default => [
-                'bg' => 'bg-yellow-500 text-yellow-800',
-                'title' => 'Pending'
-            ]
-        };
+        return redirect('/siswa/dashboard')->with('success', 'Pendaftaran berhasil');
     }
 }

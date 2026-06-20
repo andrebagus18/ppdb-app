@@ -39,7 +39,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit"
-                    class="w-full flex gap-3 text-lg px-4 py-2 hover:bg-blue-500 hover:text-white text-slate-300 rounded cursor-pointer">
+                    class="w-full flex gap-3 text-lg p-2 hover:bg-blue-500 hover:text-white text-slate-300 rounded cursor-pointer">
                     <i data-lucide="log-out"></i>
                     <span>Logout</span>
                 </button>
@@ -58,33 +58,88 @@
                 <p class="font-bold text-white text-xl uppercase">{{ Auth::user()->name }}</p>
             </div>
             <nav class="space-y-1 pt-4">
-                <a href="#dashboard" data-target="dashboard-content"
-                    class="menu-link cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-emerald-500">
+                <a href="{{ route('panitia.dashboard') }}"
+                    class="{{ request()->routeIs('dashboard') ? 'bg-emerald-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-emerald-500">
                     <i data-lucide="chart-no-axes-combined"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#pendaftaran" data-target="pendaftaran-content"
-                    class="menu-link cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-emerald-500">
+                <a href="{{ route('panitia.registrations') }}"
+                    class="{{ request()->routeIs('registrations') ? 'bg-emerald-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-emerald-500">
                     <i data-lucide="form"></i>
-                    <span>Daftar Pendaftar</span>
+                    <span>Daftar Pendaftaran</span>
                 </a>
-                <a href="#verifikasi" data-target="verifikasi-content"
-                    class="menu-link cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-emerald-500">
+                <a href="{{ route('panitia.verifikasi') }}"
+                    class="{{ request()->routeIs('verifikasi') ? 'bg-emerald-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-emerald-500">
                     <i data-lucide="upload"></i>
-                    <span>Verifikasi</span>
+                    <span>Verifikasi Dokumen</span>
                 </a>
             </nav>
         </div>
         <div class="space-y-1 mb-4">
             <a href="{{ route('siswa.ppdb') }}"
-                class="menu-link cursor-pointer flex gap-3 p-2 text-slate-300 text-lg rounded hover:text-white hover:bg-blue-500">
+                class="menu-link cursor-pointer flex gap-3 p-2 text-slate-300 text-lg rounded hover:text-white hover:bg-emerald-500">
                 <i data-lucide="home"></i>
                 <span>Halaman Utama</span>
             </a>
-            <form method="POST" action="{{ route('logout') }}" class="mt-4">
+            <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit"
-                    class="w-full flex gap-3 text-lg px-4 py-2 hover:bg-blue-500 hover:text-white text-slate-300 rounded cursor-pointer">
+                    class="w-full flex gap-3 text-lg p-2 hover:bg-emerald-500 hover:text-white text-slate-300 rounded cursor-pointer">
+                    <i data-lucide="log-out"></i>
+                    <span>Logout</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    {{-- admin aside --}}
+@elseif (auth()->user()->role === 'admin')
+    <aside class="w-64 bg-slate-900 p-4 flex flex-col justify-between">
+        <div>
+            <div class="w-full p-4 flex flex-col items-center border-b-2 border-slate-300">
+                <div class="w-20 h-20 rounded-full bg-white overflow-hidden mb-2">
+                    <img src="{{ asset('/images/logo.png') }}" alt="logo">
+                </div>
+                <p class="font-bold text-white text-xl uppercase">{{ Auth::user()->name }}</p>
+            </div>
+            <nav class="space-y-1 pt-4">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="{{ request()->routeIs('dashboard') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-blue-100">
+                    <i data-lucide="chart-no-axes-combined"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ route('admin.seleksi') }}"
+                    class="{{ request()->routeIs('registrations') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
+                    <i data-lucide="square-mouse-pointer"></i>
+                    <span>Proses Seleksi</span>
+                </a>
+                <a href="{{ route('admin.pengumuman') }}"
+                    class="{{ request()->routeIs('verifikasi') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
+                    <i data-lucide="info"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="{{ route('admin.manajemen') }}"
+                    class="{{ request()->routeIs('verifikasi') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
+                    <i data-lucide="user-cog"></i>
+                    <span>Manajemen Panitia</span>
+                </a>
+                <a href="{{ route('admin.laporan') }}"
+                    class="{{ request()->routeIs('verifikasi') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
+                    <i data-lucide="folder-up"></i>
+                    <span>Laporan</span>
+                </a>
+            </nav>
+        </div>
+        <div class="space-y-1 mb-4">
+            <a href="{{ route('siswa.ppdb') }}"
+                class="menu-link cursor-pointer flex gap-3 p-2 text-slate-300 text-lg rounded hover:text-white hover:bg-emerald-500">
+                <i data-lucide="home"></i>
+                <span>Halaman Utama</span>
+            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                    class="w-full flex gap-3 text-lg p-2 hover:bg-emerald-500 hover:text-white text-slate-300 rounded cursor-pointer">
                     <i data-lucide="log-out"></i>
                     <span>Logout</span>
                 </button>
