@@ -109,22 +109,22 @@
                     <span>Dashboard</span>
                 </a>
                 <a href="{{ route('admin.seleksi') }}"
-                    class="{{ request()->routeIs('registrations') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
+                    class="{{ request()->routeIs('seleksi') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
                     <i data-lucide="square-mouse-pointer"></i>
                     <span>Proses Seleksi</span>
                 </a>
-                <a href="{{ route('admin.pengumuman') }}"
-                    class="{{ request()->routeIs('verifikasi') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
+                <a href="{{ route('admin.announcement') }}"
+                    class="{{ request()->routeIs('announcement') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
                     <i data-lucide="info"></i>
                     <span>Pengumuman</span>
                 </a>
                 <a href="{{ route('admin.manajemen') }}"
-                    class="{{ request()->routeIs('verifikasi') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
+                    class="{{ request()->routeIs('manajemen') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
                     <i data-lucide="user-cog"></i>
                     <span>Manajemen Panitia</span>
                 </a>
                 <a href="{{ route('admin.laporan') }}"
-                    class="{{ request()->routeIs('verifikasi') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
+                    class="{{ request()->routeIs('laporan') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-200 text-lg rounded hover:text-black hover:bg-slate-100/50">
                     <i data-lucide="folder-up"></i>
                     <span>Laporan</span>
                 </a>

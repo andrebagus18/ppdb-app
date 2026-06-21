@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ManajemenController;
 use App\Http\Controllers\PanitiaController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,14 +26,25 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// route 3 role untuk admin, panitia, dan siswa
+// route admin dan admin login
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
     // route ketika admin login ke dashboard admin
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/seleksi', [AdminController::class, 'seleksi'])->name('seleksi');
-    Route::get('/pengumuman', [AdminController::class, 'pengumuman'])->name('pengumuman');
-    Route::get('/manajemen', [AdminController::class, 'manajemen'])->name('manajemen');
-    Route::get('/laporan', [AdminController::class, 'laporan'])->name('laporan');
+    Route::get('/seleksi', [SeleksiController::class, 'seleksi'])->name('seleksi');
+    // CRUD Pengumuman
+    Route::get('/announcement', [AnnouncementsController::class, 'index'])->name('announcement');
+    Route::post('/announcement/create', [AnnouncementsController::class, 'create'])->name('announcement.create');
+    Route::put('/announcement/{announcement}/update', [AnnouncementsController::class, 'update'])->name('announcement.update');
+    Route::delete('/announcement/{announcement}/destroy', [AnnouncementsController::class, 'destroy'])->name('announcement.destroy');
+    Route::post('/announcement/{announcement}/publish', [AnnouncementsController::class, 'publish'])->name('announcement.publish');
+    // CRUD new panitia
+    Route::get('/manajemen', [ManajemenController::class, 'index'])->name('manajemen');
+    Route::post('/manajemen/create', [ManajemenController::class, 'create'])->name('manajemen.create');
+    Route::put('/manajement/{manajemen}/update', [ManajemenController::class, 'update'])->name('manajemen.update');
+    Route::delete('/manajemen/{user}/destroy', [ManajemenController::class, 'destroy'])->name('manajemen.destroy');
+    // laporan
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+    Route::get('/laporan/export', [LaporanController::class, 'export'])->name('laporan.export');
 });
 
 // route panitia dan panitia login

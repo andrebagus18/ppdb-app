@@ -84,10 +84,6 @@ body {
     opacity: 0;
     transform: translateX(50px);
 }
-th,
-td {
-    border-bottom: solid 1px teal;
-}
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }

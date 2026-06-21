@@ -29,7 +29,7 @@
 
 
         <!-- PREVIEW TABLE -->
-        <div class="bg-white rounded-xl p-2 flex flex-col gap-2  overflow-y-auto scrollbar-hide h-80">
+        <div class="bg-white rounded-xl p-2 flex flex-col gap-2 overflow-y-auto scrollbar-hide h-80">
             {{-- reguler --}}
             <div class="flex flex-col gap-1 p-4 border border-slate-200 rounded-xl">
                 <div class="flex items-center justify-between p-2">

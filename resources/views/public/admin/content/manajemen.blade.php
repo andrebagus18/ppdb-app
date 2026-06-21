@@ -1,14 +1,13 @@
 <section id="panitia" class="p-6">
     <div class="p-2 pt-0">
-        <h1 class="text-2xl font-bold">Manajemen Panitia</h1>
-        <div class="flex justify-end">
-            <button class="bg-emerald-600 px-4 py-2 rounded mb-4">
+        <div class="flex justify-start">
+            <button onclick="modalAdd()" class="bg-emerald-600 hover:bg-emerald-700 hover:text-white px-4 py-2 rounded-lg mb-3 cursor-pointer">
                 Tambah Panitia
             </button>
         </div>
-        <div class="bg-white rounded-xl p-4">
-            <table class="w-full text-sm">
-                <thead>
+        <div class="bg-white rounded-xl p-4 overflow-y-auto scrollbar-hide h-100">
+            <table class="w-full text-md">
+                <thead class="sticky top-0 z-10">
                     <tr class="text-gray-500 border-b border-slate-700">
                         <th class="text-left p-2">No.</th>
                         <th class="text-left p-2">Nama</th>
@@ -18,25 +17,133 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b border-slate-200">
-                        <td class="p-2">1</td>
-                        <td class="p-2">Andi</td>
-                        <td class="p-2">panitia002</td>
-                        <td class="p-2">15-01-2024</td>
+                    @forelse ($panitias as $panitia)
+                        <tr class="border-b border-slate-200">
+                        <td class="p-2">{{ $loop->iteration }}</td>
+                        <td class="p-2">{{ $panitia->name }}</td>
+                        <td class="p-2">{{ $panitia->email }}</td>
+                        <td class="p-2">{{ $panitia->created_at->format('d M Y H:i') }}</td>
                         <td class="p-2 flex gap-1 justify-end">
-                            <button
-                                class="bg-green-500 hover:bg-green-600 rounded-xl px-2 py-1 flex items-center gap-2 cursor-pointer">
+                            <button data-id="{{ $panitia->id }}" data-name="{{ $panitia->name }}" data-email="{{ $panitia->email }}"
+                                class="editUser bg-green-500 hover:bg-green-600 rounded-lg px-2 py-1 flex items-center gap-2 cursor-pointer">
                                 <i data-lucide="square-pen" class="w-4 h-4"></i>
                                 Edit</button>
-                            <button
-                                class="bg-red-500 hover:bg-red-600 rounded-xl px-2 py-1 flex items-center gap-2 cursor-pointer">
-                                <i data-lucide="trash" class="w-4 h-4"></i>
-                                Delete
-                            </button>
+                                <form action="{{ route('admin.manajemen.destroy', $panitia->id) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                    <button type="submit" id="delete"
+                                        class="bg-red-500 hover:bg-red-600 rounded-lg px-2 py-1 flex items-center gap-2 cursor-pointer">
+                                        <i data-lucide="trash" class="w-4 h-4"></i>
+                                        Delete
+                                    </button>
+                                </form>
                         </td>
                     </tr>
+                    @empty
+                        <tr>
+                                <td colspan="6" class="p-6 text-center text-slate-500">
+                                    Belum ada data panitia
+                                </td>
+                            </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
     </div>
 </section>
+
+
+{{-- modal add user --}}
+<div id="addUser" class="hidden fixed inset-0 bg-black/50 z-50 items-center justify-center">
+    <div class="bg-white w-150 rounded-xl p-4 m-5 relative">
+        <h2 class="text-xl font-bold mb-2">Tambah Pengumuman</h2>
+        <button type="button" class="closeAddUser absolute top-3 right-3 text-red-500 cursor-pointer">
+            <i data-lucide="x"></i>
+        </button>
+        <form action="{{ route('admin.manajemen.create') }}" method="POST" autocomplete="off">
+            @csrf
+            <input type="hidden" name="role" value="panitia">
+            <div class="flex flex-col gap-4">
+                <div>
+                    <label class="mb-1 block text-md font-medium">
+                        Nama Lengkap
+                    </label>
+                    <input type="text" name="name"
+                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="mb-1 block text-md font-medium">
+                        Email
+                    </label>
+                    <input type="email" name="email" placeholder="Masukkan email" autocomplete="off"
+                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="mb-1 block text-md font-medium">
+                        Password
+                    </label>
+                    <div class="relative">
+                                    <input id="password" type="password" name="password"
+                                        class="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Minimal 8 karakter">
+                                    <button type="button"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer"
+                                        onclick="togglePassword('password', this)">
+                                        🔓
+                                    </button>
+                                </div>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button"
+                        class="closeAddUser bg-yellow-500 hover:bg-yellow-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Batal</button>
+                    <button type="submit" id="simpan"
+                        class="bg-blue-500 hover:bg-blue-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Simpan</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{-- modal edit --}}
+<div id="modalEditUser" class="hidden fixed inset-0 bg-black/50 z-50 items-center justify-center">
+    <div class="bg-white w-150 rounded-xl p-4 m-5 relative">
+        <h2 class="text-xl font-bold mb-4">Edit Pengumuman</h2>
+        <button type="button" class="closeEditUser absolute top-3 right-3 text-red-500 cursor-pointer">
+            <i data-lucide="x"></i>
+        </button>
+        <form id="editFormUser" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="flex flex-col gap-4">
+                <div>
+                    <label class="mb-1 block text-md font-medium text-slate-400">
+                        Nama Lengkap
+                    </label>
+                    <input type="text" id="editName" name="editName"
+                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="mb-1 block text-md font-medium text-slate-400">
+                        Email
+                    </label>
+                    <input type="text" id="editEmail" name="editEmail"
+                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="mb-1 block text-md font-medium text-slate-400">
+                        Password Baru
+                    </label>
+                    <input type="text" id="password" name="password" placeholder="Kosongkan jika tidak diubah"
+                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button"
+                        class="closeEditUser bg-yellow-500 hover:bg-yellow-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Batal</button>
+                    <button type="submit" id="update"
+                        class="bg-blue-500 hover:bg-blue-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

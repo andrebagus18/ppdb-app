@@ -48,7 +48,7 @@
                         <canvas id="grafik"></canvas>
                         @push('scripts')
                             <script>
-                                new Chart(document.getElementById('dailyChart'), {
+                                new Chart(document.getElementById('grafik'), {
                                     type: 'line',
                                     data: {
                                         labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum'],

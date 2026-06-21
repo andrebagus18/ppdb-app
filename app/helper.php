@@ -95,3 +95,20 @@ if (!function_exists('statusColor')) {
         };
     }
 }
+if (!function_exists('statusPengumuman')) {
+    function statusPengumuman($announcement)
+    {
+        return match ((bool) $announcement?->is_published) {
+
+            true => [
+                'bg' => 'bg-green-100 text-green-800',
+                'title' => 'Published'
+            ],
+
+            false => [
+                'bg' => 'bg-yellow-100 text-yellow-800',
+                'title' => 'Draft'
+            ]
+        };
+    }
+}

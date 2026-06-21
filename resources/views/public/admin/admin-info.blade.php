@@ -15,10 +15,4 @@
     <div id="dashboard-content" class="content">
         @include('public.admin.content.info')
     </div>
-    <div id="dashboard-content" class="content">
-        @include('public.admin.content.manajemen')
-    </div>
-    <div id="dashboard-content" class="content">
-        @include('public.admin.content.laporan')
-    </div>
 @endsection
