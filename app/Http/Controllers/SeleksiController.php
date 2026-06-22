@@ -3,39 +3,87 @@
 namespace App\Http\Controllers;
 
 use App\Models\JalurPendaftaran;
+use App\Models\Registration;
 use Illuminate\Http\Request;
 
 class SeleksiController extends Controller
 {
-    public function seleksi()
+    public function index()
     {
-        $jalurs = JalurPendaftaran::withCount([
+        session(['seleksiRun' => false]);
+        $jalurs = JalurPendaftaran::with([
+            'registration' => function ($query) {
+                $query->where('status', 'terverifikasi')->with('student');
+            }
+        ])->withCount([
             'registration' => function ($query) {
                 $query->where('status', 'terverifikasi');
             }
         ])->get();
-        $reguler = $jalurs->firstWhere('nama', 'Reguler');
-        $prestasi = $jalurs->firstWhere('nama', 'Prestasi');
-        $zonasi = $jalurs->firstWhere('nama', 'Zonasi');
-        $afirmasi = $jalurs->firstWhere('nama', 'Afirmasi');
-
-        // foreach ($results as $jalur => $data) {
-        //     $kuota = JalurPendaftaran::where('kuota', $kuota)->first()->jumlah;
-
-        //     $accepted = $data->take($kuota);
-
-        //     foreach ($data as $i => $row) {
-        //         $row->status = $i < $kuota ? 'accepted' : 'not_accepted';
-        //         $row->save();
-        //     }
-        // }
+        $registrations = Registration::with([
+            'student',
+            'jalur',
+            'documents'
+        ])->get();
 
         return view('public.admin.admin-seleksi', compact(
             'jalurs',
-            'reguler',
-            'prestasi',
-            'zonasi',
-            'afirmasi'
+            'registrations',
         ));
+    }
+
+    public function seleksi()
+    {
+        session(['seleksiRun' => true]);
+        $jalurs = JalurPendaftaran::with([
+            'registration' => function ($query) {
+                $query->where('status', 'terverifikasi')->with('student');
+            }
+        ])->get();
+        foreach ($jalurs as $jalur) {
+            $jalur->setRelation('registration', $jalur->registration->sortByDesc(fn($r) => $r->student->nilai_rata_rata));
+        }
+
+        return view('public.admin.admin-seleksi', compact('jalurs'))->with('success', 'Seleksi berhasil dijalankan!');
+    }
+
+    public function publishSeleksi()
+    {
+        $jalurs = JalurPendaftaran::all();
+
+        foreach ($jalurs as $jalur) {
+
+            $registrations = Registration::where(
+                'jalur_id',
+                $jalur->id
+            )
+                ->where('status', 'terverifikasi')
+                ->orderByDesc('nilai_rata_rata')
+                ->get();
+
+            foreach ($registrations as $index => $registration) {
+
+                $registration->hasil_seleksi =
+                    $index < $jalur->kuota
+                    ? 'diterima'
+                    : 'tidak_diterima';
+
+                $registration->save();
+            }
+        }
+
+        session()->forget('seleksiRun');
+
+        return redirect('/admin/seleksi')->with(
+            'success',
+            'Hasil seleksi berhasil dipublikasikan.'
+        );
+    }
+
+    public function batalSeleksi()
+    {
+        session()->forget('seleksiRuns');
+
+        return redirect('/admin/seleksi')->with('success', 'Seleksi dibatalkan!');
     }
 }

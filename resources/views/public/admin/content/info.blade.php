@@ -51,10 +51,10 @@
                                 new Chart(document.getElementById('grafik'), {
                                     type: 'line',
                                     data: {
-                                        labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum'],
+                                        labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
                                         datasets: [{
-                                            label: 'Pendaftaran',
-                                            data: [10, 20, 15, 30, 25]
+                                            // label: 'Pendaftaran',
+                                            data: [10, 20, 15, 30, 25, 45, 50]
                                         }]
                                     }
                                 });
@@ -64,17 +64,17 @@
                 </div>
 
                 {{-- Pendaftaran Terbaru --}}
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 overflow-hidden">
                     <div class="flex items-center justify-between mb-4 border-b border-slate-300">
                         <h2 class="text-lg font-semibold text-slate-800">
                             Terbaru
                         </h2>
-                        <a href="{{ route('panitia.registrations') }}"
+                        <a href="{{ route('admin.seleksi') }}"
                             class="text-sm text-emerald-600 hover:text-emerald-700">
                             Lihat Semua
                         </a>
                     </div>
-                    <div class="space-y-4 overflow-y-auto scrollbar-hide ">
+                    <div class="space-y-4 overflow-y-auto scrollbar-hide h-70">
                         @foreach ($latestRegistrations as $registration)
                             <div class="flex items-start justify-between border-b border-slate-100">
                                 <div>

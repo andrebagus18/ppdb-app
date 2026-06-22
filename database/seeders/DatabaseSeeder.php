@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Database\Seeders\JalurPendaftaranSeeder;
+use Database\Seeders\PpdbSeeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -17,20 +18,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call([
+            JalurPendaftaranSeeder::class,
+            PpdbSeeders::class
+        ]);
 
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin',
-        ]);
-        User::create([
-            'name' => 'Panitia PPDB',
-            'email' => 'panitia@gmail.com',
-            'password' => Hash::make('panitia123'),
-            'role' => 'panitia',
-        ]);
-        $this->call(JalurPendaftaranSeeder::class);
+        // User::create([
+        //     'name' => 'Administrator',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => Hash::make('admin123'),
+        //     'role' => 'admin',
+        // ]);
+        // User::create([
+        //     'name' => 'Panitia PPDB',
+        //     'email' => 'panitia@gmail.com',
+        //     'password' => Hash::make('panitia123'),
+        //     'role' => 'panitia',
+        // ]);
+        // $this->call(JalurPendaftaranSeeder::class);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ReportExport;
 use App\Models\JalurPendaftaran;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
@@ -30,5 +32,21 @@ class LaporanController extends Controller
             'registrations',
             'totalJalur'
         ));
+    }
+
+    public function export(Request $request)
+    {
+        $jalurId = $request->jalur_id;
+        if ($jalurId) {
+            $jalur = JalurPendaftaran::find($jalurId);
+            $jalurName = $jalur ? str_replace(' ', '_', $jalur->nama) : 'Jalur_Pilihan';
+            $namaFile = 'Jalur_' . $jalurName . '.xlsx';
+        } else {
+            $namaFile = 'Semua_Jalur.xlsx';
+        }
+        return Excel::download(
+            new ReportExport($jalurId),
+            $namaFile
+        );
     }
 }

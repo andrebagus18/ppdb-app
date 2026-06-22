@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-// home page ppdb
-// Route::get('/ppdb', function () {
-//     return view('public.home');
-// });
 
 // route untuk menampilkan form login dan register
 Route::get('/auth', [AuthController::class, 'showLogin'])->name('login');
@@ -30,7 +26,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
     // route ketika admin login ke dashboard admin
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/seleksi', [SeleksiController::class, 'seleksi'])->name('seleksi');
+    // seleksi dan publish
+    Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi.index');
+    Route::get('/seleksi/jalankan-seleksi', [SeleksiController::class, 'seleksi'])->name('seleksi');
+    Route::get('/seleksi/publish-seleksi', [SeleksiController::class, 'publishSeleksi'])->name('publish-seleksi');
+    Route::get('/seleksi/batal-seleksi', [SeleksiController::class, 'batalSeleksi'])->name('batal-seleksi');
     // CRUD Pengumuman
     Route::get('/announcement', [AnnouncementsController::class, 'index'])->name('announcement');
     Route::post('/announcement/create', [AnnouncementsController::class, 'create'])->name('announcement.create');

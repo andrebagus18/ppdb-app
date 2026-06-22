@@ -8,18 +8,19 @@
                 </div>
                     <div class="flex">
                         <form action="{{ route('admin.laporan.export') }}" method="GET" class="flex gap-3">
-                        <button type="submit" class="bg-blue-600 px-4 py-2 rounded cursor-pointer">
-                            Export Excel
-                        </button>
-                        <select id="jalur_id" name="jalur_id"
-                            class="rounded-lg border border-slate-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-100">
-                            <option value="">Semua Jalur</option>
-                            @foreach ($jalurs as $jalur)
-                            <option value="{{ $jalur->id }}" @selected(request('jalur_id') == $jalur->id)>
-                                {{ $jalur->nama }}
-                            </option>
-                            @endforeach
-                        </select>
+                            @csrf
+                            <button type="submit" class="bg-blue-600 px-4 py-2 rounded cursor-pointer">
+                                Export Excel
+                            </button>
+                            <select id="jalur_id" name="jalur_id"
+                                class="rounded-lg border border-slate-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-100">
+                                <option value="">Semua Jalur</option>
+                                @foreach ($jalurs as $jalur)
+                                <option value="{{ $jalur->id }}" @selected(request('jalur_id') == $jalur->id)>
+                                    {{ $jalur->nama }}
+                                </option>
+                                @endforeach
+                            </select>
                         </form>
                     </div>
             </div>

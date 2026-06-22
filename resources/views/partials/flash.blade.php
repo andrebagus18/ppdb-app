@@ -16,6 +16,9 @@
             },
             hideClass: {
                 popup: 'animate__animated animate__slideOutRight'
+            },
+            customClass: {
+                popup: 'swal-success'
             }
         });
     </script>
@@ -29,14 +32,16 @@
             title: '{{ session('error') }}',
             showConfirmButton: false,
             timer: 3000,
-            background: '#fef2f2',
-            color: '#991b1b',
+            timerProgressBar: true,
             iconColor: '#ef4444',
             showClass: {
                 popup: 'animate__animated animate__slideInRight'
             },
             hideClass: {
                 popup: 'animate__animated animate__slideOutRight'
+            },
+            customClass: {
+                popup: 'swal-error'
             }
         });
     </script>
@@ -47,7 +52,7 @@
             toast: true,
             position: 'top-end',
             icon: 'error',
-            title: 'Lengkapi semua data!',
+            title: '{{ $errors->first() }}',
             showConfirmButton: false,
             timer: 3000,
             background: '#FECACA',
@@ -61,3 +66,4 @@
         });
     </script>
 @endif
+
