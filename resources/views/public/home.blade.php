@@ -41,7 +41,7 @@
                 <div class="flex justify-between mb-4">
                     <h3 class="font-semibold text-xl">Jalur Reguler 💡</h3>
                     <span class="w-auto bg-teal-700 text-white text-md rounded-full py-1 px-3">Kuota:
-                        {{ $reguler->registration_count }}/{{ $reguler->kuota }}</span>
+                        {{ $reguler->kuota }}/{{ $reguler->registration_count }}</span>
                 </div>
                 <p class="mt-2 text-slate-600">
                     Peserta didik diterima berdasarkan nilai melalui sistem seleksi umum, seperti tes ujian saringan masuk
@@ -52,7 +52,7 @@
                 <div class="flex justify-between mb-4">
                     <h3 class="font-semibold text-xl">Jalur Zonasi 🗺️</h3>
                     <span class="w-auto bg-teal-700 text-white text-md rounded-full py-1 px-3">Kuota:
-                        {{ $prestasi->registration_count }}/{{ $prestasi->kuota }}</span>
+                        {{ $zonasi->kuota }}/{{ $zonasi->registration_count }}</span>
                 </div>
                 <p class="mt-2 text-slate-600">
                     Peserta didik diterima berdasarkan jarak tempat tinggal ke sekolah sesuai ketentuan wilayah yang
@@ -63,7 +63,7 @@
                 <div class="flex justify-between mb-4">
                     <h3 class="font-semibold text-xl">Jalur Prestasi 🎓</h3>
                     <span class="w-auto bg-teal-700 text-white text-md rounded-full py-1 px-3">Kuota:
-                        {{ $zonasi->registration_count }}/{{ $zonasi->kuota }}</span>
+                        {{ $prestasi->kuota }}/{{ $prestasi->registration_count }}</span>
                 </div>
                 <p class="mt-2 text-slate-600">
                     Diperuntukkan bagi calon peserta didik yang memiliki prestasi akademik maupun non-akademik yang
@@ -74,7 +74,7 @@
                 <div class="flex justify-between mb-4">
                     <h3 class="font-semibold text-xl">Jalur Afirmasi ✨</h3>
                     <span class="w-auto bg-teal-700 text-white text-md rounded-full py-1 px-3">Kuota:
-                        {{ $afirmasi->registration_count }}/{{ $afirmasi->kuota }}</span>
+                        {{ $afirmasi->kuota }}/{{ $afirmasi->registration_count }}</span>
                 </div>
                 <p class="mt-2 text-slate-600">
                     Dikhususkan bagi peserta didik dari keluarga kurang mampu atau penerima program bantuan pemerintah

@@ -1,6 +1,7 @@
 @extends('layout.dashboard-admin')
 @section('content')
-    <div class="bg-emerald-500 font-bold text-white text-xl w-full p-6 h-15 flex items-center justify-between">
+    <div
+        class="bg-sky-900/30 border-b-2 border-b-sky-700 font-bold text-white text-xl w-full p-6 h-15 flex items-center justify-between backdrop-blur-2xl">
         <h2 id="navbar-title" class="text-white text-2xl">Dashboard</h2>
         <div class="flex items-center justify-center gap-2">
             <div class="flex flex-col items-end">

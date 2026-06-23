@@ -1,4 +1,4 @@
-<div class="p-6" data-tab="pendaftar-content">
+<div class="p-6 pt-2" data-tab="pendaftar-content">
     {{-- SEARCH & FILTER --}}
     <div>
         <form method="GET" action="" class="flex gap-3 mb-2 p-3 rounded-lg bg-white">
@@ -26,11 +26,8 @@
         </form>
     </div>
 
-    <div id="table-container" class="bg-white rounded-xl shadow-sm border border-slate-400 h-90 p-4">
+    <div id="table-container" class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-300">
         @include('partials.table-pendaftaran')
-    </div>
-    <div class="mt-1.5 paginator-class">
-        {{ $registrations->links() }}
     </div>
 </div>
 

@@ -12,10 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function openModalSiswa(id) {
     const data = registrations.find((reg) => reg.id === id);
     if (!data) return;
-    document.getElementById("nama").innerText = "Andre";
-    console.log(data.student?.nama_lengkap);
-    document.getElementById("nama").style.backgroundColor = "red";
-    document.getElementById("nik").innerText =
+    document.getElementById("nama").innerText = data.student?.nama_lengkap;
+    document.getElsementById("nik").innerText =
         data.student?.["nik/nisn"] ?? "-";
     document.getElementById("tempat").innerText =
         data.student?.tempat_lahir +
@@ -134,9 +132,11 @@ function formatDate(dateString) {
 const searchInput = document.getElementById("search");
 const statusFilter = document.getElementById("status");
 const jalurFilter = document.getElementById("jalur_id");
+let controller = null;
 
-function fetchData(pushState = true) {
+function fetchData(url = null, pushState = true) {
     const search = searchInput.value;
+    console.log(searchInput.value);
     const status = statusFilter.value;
     const jalur = jalurFilter.value;
 
@@ -145,12 +145,19 @@ function fetchData(pushState = true) {
     if (status) params.append("status", status);
     if (jalur) params.append("jalur_id", jalur);
 
-    const queryString = params.toString();
-    const url = queryString
+    if (!url) {
+        const queryString = params.toString();
+        url = queryString
         ? `/panitia/registrations?${queryString}`
         : `/panitia/registrations`;
-    console.log(url);
+    }
+    if (controller) {
+        controller.abort();
+    }
+    controller = new AbortController();
+
     fetch(url, {
+        signal: controller.signal,
         headers: {
             "X-Requested-With": "XMLHttpRequest",
         },
@@ -158,9 +165,13 @@ function fetchData(pushState = true) {
         .then((res) => res.text())
         .then((html) => {
             document.getElementById("table-container").innerHTML = html;
-            if (pushState) window.history.pushState({}, "", url);
+            if (pushState) history.pushState({}, "", url);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            if (error.name != 'AbortError') {
+                console.log(error);
+            }
+        });
 }
 let timeout;
 
@@ -187,8 +198,17 @@ if (jalurFilter) {
 }
 document.addEventListener("DOMContentLoaded", () => {
     const url = new URL(window.location.href);
-    if (searchInput) searchInput.value = url.searchParams.get("searh") || "";
+    if (searchInput) searchInput.value = url.searchParams.get("search") || "";
     if (statusFilter) statusFilter.value = url.searchParams.get("status") || "";
     if (jalurFilter) jalurFilter.value = url.searchParams.get("jalur_id") || "";
-    fetchData(false);
+    fetchData(null, false);
 });
+
+// ajax pagination
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('.pagination a');
+    if (!link) return;
+    e.preventDefault();
+    fetchData(link.href);
+})
+

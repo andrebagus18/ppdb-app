@@ -90,7 +90,7 @@ class PanitiaController extends Controller
         $status = getStatus($documents);
         $latestRegistrations = Registration::with(['student', 'jalur'])
             ->latest()
-            ->take(5)
+            ->take(10)
             ->get();
         $stats = [
             'total' => Registration::count(),
@@ -114,7 +114,7 @@ class PanitiaController extends Controller
     {
         $documents = $student?->registration?->documents ?? collect();
 
-        $query = Registration::with(['student', 'jalur', 'documents']);
+        $query = Registration::query()->with(['student', 'jalur', 'documents']);
 
         if ($request->search) {
             $search = $request->search;

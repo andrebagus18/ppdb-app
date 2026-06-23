@@ -29,12 +29,11 @@
                 </div>
             </div>
             {{-- GRAFIK DAN RECENT --}}
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-2 h-80">
-                <div
-                    class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 overflow-y-auto scrollbar-hide ">
-                    <div class="flex items-center justify-between mb-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-2 h-110">
+                <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex items-center justify-between">
                         <h2 class="text-lg font-semibold text-slate-800">
-                            Statistik Pendaftaran
+                            Statistik Status Siswa
                         </h2>
                     </div>
                     <div class="h-[350px] flex items-center justify-center text-slate-400">
@@ -54,7 +53,7 @@
                                         data: [
                                             {{ $stats['total'] }},
                                             {{ $stats['pending'] }},
-                                            {{ $stats['verified'] }},
+                                            {{ $stats['terverifikasi'] }},
                                             {{ $stats['rejected'] }},
                                         ],
                                         borderColor: "#10b981",
@@ -76,6 +75,9 @@
                                                 title: {
                                                     display: true,
                                                 },
+                                                legend: {
+                                                    display: false,
+                                                }
                                             },
                                             scales: {
                                                 y: {
@@ -95,7 +97,7 @@
 
                 {{-- Pendaftaran Terbaru --}}
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
-                    <div class="flex items-center justify-between mb-4 border-b border-slate-300">
+                    <div class="flex items-center justify-between mb-3 border-b border-slate-300">
                         <h2 class="text-lg font-semibold text-slate-800">
                             Terbaru
                         </h2>
@@ -104,9 +106,9 @@
                             Lihat Semua
                         </a>
                     </div>
-                    <div class="space-y-4 overflow-y-auto scrollbar-hide ">
+                    <div class="space-y-2 overflow-y-auto scrollbar-hide h-90">
                         @foreach ($latestRegistrations as $registration)
-                            <div class="flex items-start justify-between border-b border-slate-100">
+                            <div class="flex items-start justify-between border-b border-slate-300 hover:bg-slate-100">
                                 <div>
                                     <div class="w-35 h-8 overflow-x-auto scrollbar-hide whitespace-nowrap">
                                         <h3 class="font-medium text-slate-800 capitalize">

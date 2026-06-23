@@ -1,48 +1,50 @@
 <div class="p-6" id="verifikasi-content">
-    <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-y-auto scrollbar-hide h-115 p-4">
-        <table class="w-full text-md text-left">
-            <thead class="bg-slate-50 text-slate-600 sticky top-0 z-10">
-                <tr>
-                    <th class="p-4">No</th>
-                    <th class="p-4">Nomor Pendaftaran</th>
-                    <th class="p-4">Nama</th>
-                    <th class="p-4">Status</th>
-                    <th class="p-4">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($registrations as $registration)
-                    <tr class="border-t">
-                        <td class="p-4">
-                            {{ $loop->iteration }}
-                        </td>
-                        <td class="p-4 font-medium text-slate-700">
-                            {{ $registration->no_daftar }}
-                        </td>
-                        <td class="p-4 uppercase">
-                            {{ $registration->student->nama_lengkap ?? '-' }}
-                        </td>
-                        <td class="p-4">
-                            <span class="p-3 rounded-lg text-sm font-medium {{ statusSiswa($registration)['bg'] }}">
-                                {{ statusSiswa($registration)['title'] }}
-                            </span>
-                        </td>
-                        <td class="p-4">
-                            <button onclick="openModalDoc({{ $registration->id }})"
-                                class="p-2 px-4 bg-blue-500 hover:bg-blue-600 text-white text-md-center rounded-lg cursor-pointer">
-                                Verifikasi Dokumen
-                            </button>
-                        </td>
-                    </tr>
-                @empty
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-y-auto scrollbar-hide h-120">
+        <div class="px-4 py-2">
+            <table class="w-full text-md text-left">
+                <thead class="bg-slate-200 text-slate-600 sticky top-0 z-10">
                     <tr>
-                        <td colspan="6" class="p-6 text-center text-slate-500">
-                            Belum ada data pendaftar
-                        </td>
+                        <th class="p-4">No</th>
+                        <th class="p-4">Nomor Pendaftaran</th>
+                        <th class="p-4">Nama</th>
+                        <th class="p-4">Status</th>
+                        <th class="p-4">Aksi</th>
                     </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse ($registrations as $registration)
+                        <tr class="border-t hover:bg-slate-100">
+                            <td class="p-4">
+                                {{ $loop->iteration }}
+                            </td>
+                            <td class="p-4 font-medium text-slate-700">
+                                {{ $registration->no_daftar }}
+                            </td>
+                            <td class="p-4 uppercase">
+                                {{ $registration->student->nama_lengkap ?? '-' }}
+                            </td>
+                            <td class="p-4">
+                                <span class="p-3 rounded-lg text-sm font-medium {{ statusSiswa($registration)['bg'] }}">
+                                    {{ statusSiswa($registration)['title'] }}
+                                </span>
+                            </td>
+                            <td class="p-4">
+                                <button onclick="openModalDoc({{ $registration->id }})"
+                                    class="p-2 px-4 bg-blue-500 hover:bg-blue-600 text-white text-md-center rounded-lg cursor-pointer">
+                                    Verifikasi Dokumen
+                                </button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="p-6 text-center text-slate-500">
+                                Belum ada data pendaftar
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

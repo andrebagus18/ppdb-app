@@ -10,20 +10,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 
-<body class="bg-[#eeeded] flex min-h-dvh">
+<body class="flex min-h-dvh">
     @include('components.aside')
     {{-- <button onclick="testAlert()" class="px-4 py-2 bg-blue-500 text-white">
     Test Alert
 </button> --}}
 
 
-    <main class="flex-1 bg-gray-300/70">
+    <main class="flex-1 bg-slate-800">
         @yield('content')
     </main>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-{{-- <script>
+    {{-- <script>
 function testAlert() {
     Swal.fire({
             toast: true,

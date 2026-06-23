@@ -121,23 +121,3 @@ body {
     background: #c52222;
 }
 
-/* 1. Sembunyikan teks info "Showing X to X of X results" yang bikin penuh */
-.paginator-class p.text-sm {
-    display: flex ;
-    gap: 4px
-}
-
-/* 2. Atur wadah utama tombol angka agar rapi di kanan/tengah */
-.paginator-class nav {
-    width: auto !important;
-    box-shadow: none !important;
-}
-
-/* 3. Menghilangkan pembungkus flex bawaan Laravel yang memenuhi layar */
-.paginator-class nav > div:first-child {
-    display: none !important; /* Menyembunyikan versi mobile bawaan Laravel */
-}
-
-.paginator-class nav > div:last-child {
-    display: flex !important; /* Menampilkan versi desktop saja */
-}

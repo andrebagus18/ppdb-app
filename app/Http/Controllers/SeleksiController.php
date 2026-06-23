@@ -53,13 +53,13 @@ class SeleksiController extends Controller
 
         foreach ($jalurs as $jalur) {
 
-            $registrations = Registration::where(
-                'jalur_id',
-                $jalur->id
-            )
-                ->where('status', 'terverifikasi')
-                ->orderByDesc('nilai_rata_rata')
+            $registrations = Registration::join('students', 'registrations.student_id', '=', 'students.id')
+                ->where('registrations.jalur_pendaftaran_id', $jalur->id)
+                ->where('registrations.status', 'terverifikasi')
+                ->orderByDesc('students.nilai_rata_rata')
+                // ->select('registrations.*')
                 ->get();
+
 
             foreach ($registrations as $index => $registration) {
 

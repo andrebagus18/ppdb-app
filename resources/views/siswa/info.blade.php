@@ -1,5 +1,11 @@
 <div class="p-6" data-tab="dashboard">
-    <div class="bg-white rounded-lg p-6 flex flex-col shadow-lg">
+    <div class="bg-white rounded-lg p-6 flex flex-col shadow-lg relative">
+        <div class="{{ $student ? 'bg-green-500' : 'bg-yellow-500' }} rounded-lg p-2 absolute top-2 right-2">
+            <div class="flex flex-col items-center justify-center">
+                <p class="text-white text-lg font-medium">
+                    {{ $student ? 'Anda Sudah Terdaftar!' : 'Anda Belum Mendaftar!' }}</p>
+            </div>
+        </div>
         <span class="text-xl text-black capitalize">Halo, {{ Auth::user()->name }} 👋</span>
         <span class="text-md font-medium text-slate-400">Selamat Datang di Dashboard PPDB SMKN 45 Merdeka tahun ajaran
             2026/2027</span>
@@ -7,7 +13,8 @@
     <div class="py-4 flex gap-4">
         {{-- profile --}}
         <div class="w-xl bg-white p-4 flex flex-col items-center">
-            <div class="w-40 h-40 flex items-center rounded-full border-8 border-blue-200 bg-white overflow-hidden mb-2">
+            <div
+                class="w-35 h-35 flex items-center rounded-full border-8 border-blue-200 bg-white overflow-hidden mb-2">
                 <img src="{{ asset('/images/profile.png') }}" alt="profile">
             </div>
             <div class="w-full">
@@ -31,12 +38,11 @@
             </div>
         </div>
         <div class="max-w-2xl w-full flex flex-col gap-2 bg-white p-4">
-            <div class="{{ $student ? 'bg-green-500' : 'bg-yellow-500' }} rounded-lg p-2">
-                <div class="flex flex-col items-center justify-center">
-                    <p class="text-white text-2xl font-medium">
-                        {{ $student ? 'Selamat! Anda Sudah Terdaftar. 🎉' : 'Anda Belum Mendaftar!' }}</p>
+            @if ($student)
+                <div class="bg-[rgba(54,236,121,0.3)] rounded-lg p-2 text-center border border-green-500">
+                    <span class="text-green-800 text-xl font-bold">🎉 Selamat! Anda Diterima</span>
                 </div>
-            </div>
+            @endif
             {{-- card document --}}
             <div class="bg-white rounded-xl mt-2 shadow-lg grid grid-cols-2 gap-4">
                 <div class="w-full border border-slate-200 rounded-lg p-6 shadow-md">
