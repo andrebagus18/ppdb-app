@@ -16,12 +16,16 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-// route untuk menampilkan form login dan register
-Route::get('/auth', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// route login register
+Route::prefix('auth')->middleware(['guest'])->name('auth.')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('process-login');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+});
 
+Route::prefix('auth')->middleware(['auth'])->name('auth.')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 // route admin dan admin login
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
     // route ketika admin login ke dashboard admin
@@ -49,11 +53,6 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 
 // route panitia dan panitia login
 Route::prefix('panitia')->middleware(['auth', 'role:panitia'])->name('panitia.')->group(function () {
-    // route ketika panitia login ke dashboard panitia
-    // Route::get('/panitia', function () {
-    //     return view('public.panitia');
-    // })->name('panitia');
-    // Route::get('/dashboard', [PanitiaController::class, 'index'])->name('index');
     Route::get('/dashboard', [PanitiaController::class, 'dashboard'])->name('dashboard');
     Route::get('/registrations', [PanitiaController::class, 'registrations'])->name('registrations');
     Route::get('/verifikasi', [PanitiaController::class, 'verifikasi'])->name('verifikasi');
@@ -63,11 +62,12 @@ Route::prefix('panitia')->middleware(['auth', 'role:panitia'])->name('panitia.')
 
 
 // route siswa dan siswa login
-Route::prefix('siswa')->middleware(['auth', 'role:siswa'])->name('siswa.')->group(function () {
+Route::prefix('siswa')->middleware(['auth', 'role:siswa,admin'])->name('siswa.')->group(function () {
     // route ketika siswa login ke homepage ppdb
     Route::get('/ppdb', [StudentController::class, 'home'])->name('ppdb');
     // route untuk menampilkan dashboard siswa
     Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard');
+    Route::get('/formulir', [StudentController::class, 'formulir'])->name('formulir');
     // route action form biodata siswa
     Route::post('/registration', [StudentController::class, 'store'])->name('registration.store');
     // route action upload dokumen baru siswa

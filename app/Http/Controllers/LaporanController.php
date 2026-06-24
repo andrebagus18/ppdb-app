@@ -19,7 +19,7 @@ class LaporanController extends Controller
             }
         ])->get();
         $statsDiterima = Registration::where('hasil_seleksi', 'diterima')->count();
-        $statsDitolak = Registration::where('hasil_seleksi', 'ditolak')->count();
+        $statsDitolak = Registration::where('hasil_seleksi', 'tidak_diterima')->count();
         $query = Registration::with('student', 'jalur');
         if ($request->jalur_id) {
             $query->where('jalue_pendaftaran_id', $request->jalur_id);

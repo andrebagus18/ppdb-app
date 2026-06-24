@@ -17,29 +17,27 @@ class AuthController extends Controller
         ]);
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            return redirect('/auth')->withErrors([
+            return back()->withErrors([
                 'email' => 'Email belum terdaftar',
-            ]);
+            ])->withInput();
         }
         if (!Hash::check($request->password, $user->password)) {
-            return redirect('/auth')->withErrors([
+            return back()->withErrors([
                 'password' => 'Password salah',
-            ]);
+            ])->withInput();
         }
-        if (Auth::login($user)) {
-            $request->session()->regenerate();
-            if ($user->role === 'admin') {
-                return redirect('/admin/dashboard');
-            }
-            if ($user->role === 'panitia') {
-                return redirect('/panitia/dashboard');
-            }
-            return redirect('/siswa/ppdb')->with('success', 'Registrasi berhasil.');
+        Auth::login($user);
+        $request->session()->regenerate();
+        if ($user->role === 'admin') {
+            return redirect('/admin/dashboard')->with('success', 'Selamat datang, Admin!');
         }
-        return back()->withErrors([
-            'email' => 'Email atau password salah',
-        ]);
+        if ($user->role === 'panitia') {
+            return redirect('/panitia/dashboard')->with('success', 'Selamat datang, Panitia!');
+        }
+
+        return redirect('/siswa/ppdb')->with('success', 'Login berhasil.');
     }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -47,22 +45,21 @@ class AuthController extends Controller
             'email' => ['required', 'email',  'unique:users'],
             'password' => ['required', 'min:8'],
         ]);
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'siswa',
         ]);
-        Auth::login($user);
-        $request->session()->regenerate();
-        return redirect('/auth')->with('success', 'Registrasi berhasil, silakan login');
+
+        return redirect('/auth/login')->with('success', 'Berhasil, silahkan login!');
     }
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/auth');
+        return redirect('/auth/login');
     }
     public function showLogin()
     {

@@ -1,6 +1,6 @@
 <div class="p-6" id="verifikasi-content">
-    <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-y-auto scrollbar-hide h-120">
-        <div class="px-4 py-2">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
+        <div class="overflow-y-auto scrollbar-hide h-120">
             <table class="w-full text-md text-left">
                 <thead class="bg-slate-200 text-slate-600 sticky top-0 z-10">
                     <tr>
@@ -74,7 +74,7 @@
                         <div
                             class=" bg-white rounded-xl shadow-sm border border-slate-200 h-100 overflow-y-auto scrollbar-hide">
                             <table class="w-full text-md text-left">
-                                <thead class="bg-slate-50 text-slate-600 sticky top-0 z-10">
+                                <thead class="bg-slate-200 text-slate-600 sticky top-0 z-10">
                                     <tr class="border-b">
                                         <th class="p-4 pb-2">Nama</th>
                                         <th class="p-4 pb-2">Status</th>

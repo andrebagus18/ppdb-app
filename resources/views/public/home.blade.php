@@ -18,7 +18,7 @@
                     Daftar Sekarang ➜
                 </a>
             @else
-                <a href="{{ route('auth') }}"
+                <a href="{{ route('auth.register') }}"
                     class="inline-block mt-6 rounded-lg bg-teal-500 hover:bg-teal-600 cursor-pointer px-6 py-3 text-white w-[15em]">
                     Daftar Sekarang ➜
                 </a>
@@ -214,11 +214,18 @@
             <div class="p-5 text-center bg-white shadow rounded-xl">
                 <h4 class="text-black text-2xl font-bold">📢 PENGUMUMAN TERBARU</h4>
                 <div class="p-4">
-                    <p class="bg-teal-500/40 rounded-md text-black font-bold py-4">HASIL SELEKSI PPDB 2027 TELAH DIUMUMKAN
+                    <p class="bg-teal-500/40 rounded-md text-black font-bold py-4">PENGUMUMAN PPDB 2026/2027 SMKN 45
+                        MERDEKA
                     </p>
-                    <p class="my-4 text-black font-medium">Silakan cek status kelulusan melalui <span
+                    <p class="mt-4 text-black font-medium">Silakan cek status kelulusan melalui <span
                             class="font-bold text-black">Dashboard</span> menu untuk mengetahui hasil seleksi.</p>
                 </div>
+                @if ($pengumuman)
+                    <div class="bg-green-200 text-green-800 p-4 rounded-lg mt-2 text-center">
+                        <p class="font-bold text-xl"> {{ $pengumuman->judul }}</p>
+                        <p class="font-medium text-md"> {{ $pengumuman->isi }}</p>
+                    </div>
+                @endif
             </div>
         </div>
     </section>

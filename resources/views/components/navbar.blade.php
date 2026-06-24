@@ -14,11 +14,18 @@
         <div class="flex gap-4">
             @auth
                 <div class="flex gap-3 items-center">
-                    <a href="{{ route('siswa.dashboard') }}"
-                        class="cursor-pointer p-2 text-slate-600 text-lg rounded-lg hover:text-black hover:ring-2 hover:ring-teal-600">
-                        <span>Dashboard</span>
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
+                    @if (auth()->user()->role === 'admin')
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="cursor-pointer p-2 text-slate-600 text-lg rounded-lg hover:text-black hover:ring-2 hover:ring-teal-600">
+                            <span>Dashboard</span>
+                        </a>
+                    @else
+                        <a href="{{ route('siswa.dashboard') }}"
+                            class="cursor-pointer p-2 text-slate-600 text-lg rounded-lg hover:text-black hover:ring-2 hover:ring-teal-600">
+                            <span>Dashboard</span>
+                        </a>
+                    @endif
+                    <form method="POST" action="{{ route('auth.logout') }}">
                         @csrf
                         <button type="submit"
                             class="flex gap-2 text-lg px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-lg cursor-pointer">

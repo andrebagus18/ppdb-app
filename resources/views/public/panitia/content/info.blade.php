@@ -41,55 +41,81 @@
                         <canvas id="grafik"></canvas>
                         @push('scripts')
                             <script>
-                                const data = {
-                                    labels: [
-                                        "Total",
-                                        "Menunggu Verifikasi",
-                                        "Terverifikasi",
-                                        "Dokumen Ditolak",
-                                    ],
-                                    datasets: [{
-                                        label: "Jumlah",
-                                        data: [
-                                            {{ $stats['total'] }},
-                                            {{ $stats['pending'] }},
-                                            {{ $stats['terverifikasi'] }},
-                                            {{ $stats['rejected'] }},
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    const canvasElement = document.getElementById("grafik");
+                                    if (!canvasElement) return;
+                                    const chartCtx = canvasElement.getContext("2d");
+
+                                    // WARNA GRADASI
+                                    const gradient = chartCtx.createLinearGradient(0, 0, 0, 300);
+                                    gradient.addColorStop(0, "rgba(16, 185, 129, 0.4)");
+                                    gradient.addColorStop(1, "rgba(16, 185, 129, 0.0)");
+                                    const data = {
+                                        labels: [
+                                            "Total",
+                                            "Menunggu Verifikasi",
+                                            "Terverifikasi",
+                                            "Dokumen Ditolak",
                                         ],
-                                        borderColor: "#10b981",
-                                        backgroundColor: "rgba(16, 185, 129, 0.2)",
-                                        borderWidth: 2,
-                                    }],
-                                };
+                                        datasets: [{
+                                            data: [
+                                                {{ $stats['total'] }},
+                                                {{ $stats['pending'] }},
+                                                {{ $stats['terverifikasi'] }},
+                                                {{ $stats['rejected'] }},
+                                            ],
+                                            borderColor: "#10b981",
+                                            borderWidth: 3,
+                                            fill: true,
+                                            backgroundColor: gradient,
+                                            pointBackgroundColor: "#ffffff",
+                                            pointBorderColor: "#10b981",
+                                            pointBorderWidth: 3,
+                                            pointRadius: 6,
+                                            pointHoverRadius: 8,
+                                            tension: 0.35
+                                        }],
+                                    };
 
-                                const canvasElement = document.getElementById("grafik");
-
-                                if (canvasElement) {
-                                    new Chart(canvasElement, {
-                                        type: "bar",
+                                    new Chart(chartCtx, {
+                                        type: "line",
                                         data: data,
                                         options: {
                                             responsive: true,
                                             maintainAspectRatio: false,
                                             plugins: {
-                                                title: {
-                                                    display: true,
-                                                },
                                                 legend: {
+                                                    display: false,
+                                                },
+                                                title: {
                                                     display: false,
                                                 }
                                             },
                                             scales: {
                                                 y: {
                                                     beginAtZero: true,
+                                                    min: 0,
+                                                    max: 210,
                                                     ticks: {
-                                                        stepSize: 1
+                                                        stepSize: 1,
+                                                        color: "#94a3b8"
+                                                    },
+                                                    grid: {
+                                                        color: "#f1f5f9"
+                                                    }
+                                                },
+                                                x: {
+                                                    ticks: {
+                                                        color: "#94a3b8"
+                                                    },
+                                                    grid: {
+                                                        display: true
                                                     }
                                                 }
                                             }
                                         },
                                     });
-                                }
+                                });
                             </script>
                         @endpush
                     </div>

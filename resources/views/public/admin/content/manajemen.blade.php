@@ -1,14 +1,15 @@
 <section id="panitia" class="p-6">
-    <div class="p-2 pt-0">
-        <div class="flex justify-start">
-            <button onclick="modalAdd()" class="bg-emerald-600 hover:bg-emerald-700 hover:text-white px-4 py-2 rounded-lg mb-3 cursor-pointer">
-                Tambah Panitia
-            </button>
+    <div class="p-4 rounded-xl border-2 border-blue-500/40">
+        <div class="flex justify-end">
+            <button onclick="openAdd()"
+                class="flex gap-3 items-center bg-green-900/30 hover:bg-green-900/20 text-green-500 text-md px-4 py-2 rounded-lg cursor-pointer">
+                <i data-lucide="circle-plus" class="w-4 h-4"></i>
+                Tambah Panitia</button>
         </div>
-        <div class="bg-white rounded-xl p-4 overflow-y-auto scrollbar-hide h-100">
+        <div class="rounded-xl p-4 overflow-y-auto scrollbar-hide h-100">
             <table class="w-full text-md">
                 <thead class="sticky top-0 z-10">
-                    <tr class="text-gray-500 border-b border-slate-700">
+                    <tr class="text-white border-b-2 border-slate-400">
                         <th class="text-left p-2">No.</th>
                         <th class="text-left p-2">Nama</th>
                         <th class="text-left p-2">Email</th>
@@ -18,34 +19,33 @@
                 </thead>
                 <tbody>
                     @forelse ($panitias as $panitia)
-                        <tr class="border-b border-slate-200">
-                        <td class="p-2">{{ $loop->iteration }}</td>
-                        <td class="p-2">{{ $panitia->name }}</td>
-                        <td class="p-2">{{ $panitia->email }}</td>
-                        <td class="p-2">{{ $panitia->created_at->format('d M Y H:i') }}</td>
-                        <td class="p-2 flex gap-1 justify-end">
-                            <button data-id="{{ $panitia->id }}" data-name="{{ $panitia->name }}" data-email="{{ $panitia->email }}"
-                                class="editUser bg-green-500 hover:bg-green-600 rounded-lg px-2 py-1 flex items-center gap-2 cursor-pointer">
-                                <i data-lucide="square-pen" class="w-4 h-4"></i>
-                                Edit</button>
-                                <form action="{{ route('admin.manajemen.destroy', $panitia->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                    <button type="submit" id="delete"
-                                        class="bg-red-500 hover:bg-red-600 rounded-lg px-2 py-1 flex items-center gap-2 cursor-pointer">
+                        <tr class="border-b border-slate-400 text-slate-300">
+                            <td class="p-2">{{ $loop->iteration }}</td>
+                            <td class="p-2">{{ $panitia->name }}</td>
+                            <td class="p-2">{{ $panitia->email }}</td>
+                            <td class="p-2">{{ $panitia->created_at->format('d M Y H:i') }}</td>
+                            <td class="p-2 flex gap-2 justify-end">
+                                <button data-id="{{ $panitia->id }}" data-name="{{ $panitia->name }}"
+                                    data-email="{{ $panitia->email }}" title="edit"
+                                    class="editUser bg-green-900/40 hover:bg-green-900/20 border border-green-500 rounded-md p-2 flex items-center gap-2 cursor-pointer">
+                                    <i data-lucide="square-pen" class="w-4 h-4"></i>
+                                </button>
+                                <form action="{{ route('admin.manajemen.destroy', $panitia->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" id="delete" title="delete"
+                                        class="bg-red-900/40 hover:bg-red-900/20 rounded-md p-2 border border-red-500 flex items-center gap-2 cursor-pointer">
                                         <i data-lucide="trash" class="w-4 h-4"></i>
-                                        Delete
                                     </button>
                                 </form>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     @empty
                         <tr>
-                                <td colspan="6" class="p-6 text-center text-slate-500">
-                                    Belum ada data panitia
-                                </td>
-                            </tr>
+                            <td colspan="6" class="p-6 text-center text-slate-500">
+                                Belum ada data panitia
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
@@ -84,15 +84,15 @@
                         Password
                     </label>
                     <div class="relative">
-                                    <input id="password" type="password" name="password"
-                                        class="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="Minimal 8 karakter">
-                                    <button type="button"
-                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer"
-                                        onclick="togglePassword('password', this)">
-                                        🔓
-                                    </button>
-                                </div>
+                        <input id="password" type="password" name="password"
+                            class="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Minimal 8 karakter">
+                        <button type="button"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer"
+                            onclick="togglePassword('password', this)">
+                            🔓
+                        </button>
+                    </div>
                 </div>
                 <div class="flex justify-end gap-3">
                     <button type="button"

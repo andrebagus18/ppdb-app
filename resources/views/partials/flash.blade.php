@@ -48,22 +48,23 @@
 @endif
 @if ($errors->any())
     <script>
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: '{{ $errors->first() }}',
-            showConfirmButton: false,
-            timer: 3000,
-            background: '#FECACA',
-            color: '#991b1b',
-            showClass: {
-                popup: 'animate__animated animate__slideInRight'
-            },
-            hideClass: {
-                popup: 'animate__animated animate__slideOutRight'
-            }
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: '{{ $errors->first() }}',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#FECACA',
+                color: '#991b1b',
+                showClass: {
+                    popup: 'animate__animated animate__slideInRight'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__slideOutRight'
+                }
+            });
         });
     </script>
 @endif
-

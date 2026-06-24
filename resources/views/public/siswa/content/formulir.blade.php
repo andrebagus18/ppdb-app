@@ -92,11 +92,8 @@
                 <select id="jalur_id" name="jalur_id"
                     class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @foreach ($jalurs as $jalur)
-                        <option value="{{ $jalur->id }}" @selected(old('jalur_id') == $jalur->id) @disabled($jalur->registrations_count >= $jalur->kuota)>
-                            {{ $jalur->nama }} ({{ $jalur->registration_count }}/{{ $jalur->kuota }})
-                            @if ($jalur->registration_count >= $jalur->kuota)
-                                - Penuh
-                            @endif
+                        <option value="{{ $jalur->id }}" @selected(old('jalur_id') == $jalur->id)>
+                            {{ $jalur->nama }}
                         </option>
                     @endforeach
                 </select>

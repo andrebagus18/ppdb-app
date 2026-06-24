@@ -17,7 +17,7 @@
 </button> --}}
 
 
-    <main class="flex-1 bg-slate-800">
+    <main class="flex-1 bg-slate-950">
         @yield('content')
     </main>
     <script src="https://unpkg.com/lucide@latest"></script>

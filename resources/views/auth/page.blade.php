@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Login | Register')</title>
     @vite(['resources/css/app.css', 'resources/js/auth.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 
 <body class="bg-[#eeeded]">
@@ -39,6 +40,16 @@
             </div>
 
             <!-- BODY -->
+            {{-- @if (session('success'))
+                <div class="bg-green-100 text-green-800 p-3 rounded-lg mb-4 text-sm font-medium">
+                    {{ session('success') }}
+                </div>
+            @else
+                <div class="bg-red-100 text-red-800 p-3 rounded-lg mb-4 text-sm font-medium">
+                    {{ session('error') }}
+                </div>
+            @endif --}}
+
             <div id="formContainer" class="overflow-hidden transition-all duration-500">
                 <div id="formWrapper" class="flex w-[200%] items-start transition-all duration-500 ease-in-out">
                     <!-- LOGIN -->
@@ -49,14 +60,14 @@
                         <p class="mb-6 text-center text-slate-500">
                             Silakan login untuk melanjutkan
                         </p>
-                        <form action="/login" method="POST">
+                        <form action="/auth/login" method="POST">
                             @csrf
                             <input type="hiden" name="form_type" value="login">
                             <div class="mb-4">
                                 <label class="mb-2 block font-medium">
                                     📧 Email
                                 </label>
-                                <input type="email" name="email"
+                                <input type="email" name="email" value="{{ old('email') }}"
                                     class="w-full rounded-xl border border-slate-300 px-4 py-3"
                                     placeholder="Masukkan email">
                             </div>
@@ -94,7 +105,7 @@
                         <p class="mb-6 text-center text-slate-500">
                             Buat akun untuk memulai pendaftaran
                         </p>
-                        <form action="/register" method="POST">
+                        <form action="/auth/register" method="POST">
                             @csrf
                             <input type="hiden" name="form_type" value="register">
                             <div class="mb-4">
@@ -147,6 +158,8 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @include('partials.flash')
 </body>
 
 </html>

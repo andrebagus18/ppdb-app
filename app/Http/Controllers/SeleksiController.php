@@ -43,8 +43,7 @@ class SeleksiController extends Controller
         foreach ($jalurs as $jalur) {
             $jalur->setRelation('registration', $jalur->registration->sortByDesc(fn($r) => $r->student->nilai_rata_rata));
         }
-
-        return view('public.admin.admin-seleksi', compact('jalurs'))->with('success', 'Seleksi berhasil dijalankan!');
+        return view('public.admin.admin-seleksi', compact('jalurs'));
     }
 
     public function publishSeleksi()
@@ -52,28 +51,22 @@ class SeleksiController extends Controller
         $jalurs = JalurPendaftaran::all();
 
         foreach ($jalurs as $jalur) {
-
             $registrations = Registration::join('students', 'registrations.student_id', '=', 'students.id')
                 ->where('registrations.jalur_pendaftaran_id', $jalur->id)
                 ->where('registrations.status', 'terverifikasi')
                 ->orderByDesc('students.nilai_rata_rata')
-                // ->select('registrations.*')
                 ->get();
 
-
             foreach ($registrations as $index => $registration) {
-
                 $registration->hasil_seleksi =
                     $index < $jalur->kuota
                     ? 'diterima'
                     : 'tidak_diterima';
-
                 $registration->save();
             }
         }
 
         session()->forget('seleksiRun');
-
         return redirect('/admin/seleksi')->with(
             'success',
             'Hasil seleksi berhasil dipublikasikan.'
@@ -83,7 +76,6 @@ class SeleksiController extends Controller
     public function batalSeleksi()
     {
         session()->forget('seleksiRuns');
-
         return redirect('/admin/seleksi')->with('success', 'Seleksi dibatalkan!');
     }
 }

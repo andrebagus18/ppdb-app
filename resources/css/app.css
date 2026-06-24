@@ -99,8 +99,9 @@ body {
     scrollbar-width: none;
 }
 .swal-success {
-    background: rgba(54, 236, 121, 0.3) !important;
-    color: #016630  !important;
+    width: auto;
+    background: rgba(54, 236, 121, 0.4) !important;
+    color: #002913  !important;
     border: 2px solid rgb(54, 236, 121) !important;
     border-radius: 16px !important;
     box-shadow: 0 10px 25px rgba(16, 0, 0, 0.15) !important;
@@ -110,8 +111,9 @@ body {
     background: #22c55e;
 }
 .swal-error {
-    background: rgba(235, 48, 48, 0.4) !important;
-    color: #ff0011 !important;
+    width: auto;
+    background: rgba(235, 48, 48, 0.2) !important;
+    color: #340000 !important;
     border: 2px solid rgb(236, 54, 54) !important;
     border-radius: 16px !important;
     box-shadow: 0 10px 25px rgba(16, 0, 0, 0.2) !important;

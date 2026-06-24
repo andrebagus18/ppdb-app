@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use App\Models\JalurPendaftaran;
 use App\Models\Registration;
 use App\Models\Student;
@@ -28,8 +29,9 @@ class StudentController extends Controller
         $status = statusSiswa($registration);
         $hasilStatus = $registration?->status;
         $jalurs = JalurPendaftaran::withCount('registration')->get();
+        $pengumuman = Announcement::where('is_published', true)->latest('published_at')->first();
 
-        return view('public.siswa', compact(
+        return view('public.siswa.siswa-info', compact(
             'jalur',
             'student',
             'documents',
@@ -37,7 +39,8 @@ class StudentController extends Controller
             'statusCard',
             'hasilStatus',
             'jalurs',
-            'status'
+            'status',
+            'pengumuman'
         ));
     }
 
@@ -47,11 +50,13 @@ class StudentController extends Controller
         $prestasi = $this->kuotaJalur('Prestasi');
         $zonasi = $this->kuotaJalur('Zonasi');
         $afirmasi = $this->kuotaJalur('Afirmasi');
+        $pengumuman = Announcement::where('is_published', true)->latest('published_at')->first();
         return view('public.home', compact(
             'reguler',
             'prestasi',
             'zonasi',
-            'afirmasi'
+            'afirmasi',
+            'pengumuman'
         ));
     }
 
@@ -106,19 +111,21 @@ class StudentController extends Controller
                 'asal_sekolah' => $request->asal_sekolah,
                 'nilai_rata_rata' => $request->nilai_rata_rata,
             ]);
-            $jalur = JalurPendaftaran::findOrfail($request->jalur_id);
-            $sisa = $jalur->kuota - $jalur->registration()->count();
-            if ($sisa <= 0) {
-                return back()->with('error', 'Kuota Jalur Pendaftaran Penuh.');
-            }
             Registration::create([
                 'student_id' => $student->id,
                 'jalur_pendaftaran_id' => $request->jalur_id,
-                'no_daftar' => 'PPDB' . '-' . date('Ymd') . str_pad($student->id, 3, '0', STR_PAD_LEFT),
+                'no_daftar' => 'PPDB' . '-' . date('Y') . str_pad($student->id, 3, '0', STR_PAD_LEFT),
                 'status' => 'menunggu_verifikasi',
                 'hasil_seleksi' => 'pending',
             ]);
         });
         return redirect('/siswa/dashboard')->with('success', 'Pendaftaran berhasil');
+    }
+
+    public function formulir()
+    {
+        $registration = Registration::all();
+
+        return view('public.siswa.siswa-formulir', compact('registration'));
     }
 }

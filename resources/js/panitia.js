@@ -13,7 +13,7 @@ function openModalSiswa(id) {
     const data = registrations.find((reg) => reg.id === id);
     if (!data) return;
     document.getElementById("nama").innerText = data.student?.nama_lengkap;
-    document.getElsementById("nik").innerText =
+    document.getElementById("nik").innerText =
         data.student?.["nik/nisn"] ?? "-";
     document.getElementById("tempat").innerText =
         data.student?.tempat_lahir +
@@ -60,6 +60,7 @@ function openModalDoc(id) {
     document.getElementById("name").innerText =
         data.student?.nama_lengkap ?? "-";
     document.getElementById("nod").innerText = data.no_daftar ?? "-";
+    const isVerified = data.status === 'terverifikasi';
     let html = "";
     data.documents.forEach((doc) => {
         html += `<tr class="border-t">
@@ -73,12 +74,12 @@ function openModalDoc(id) {
                                             ${doc.catatan}
                                         </td>
                                         <td class="p-4">
-                                            <div class="flex gap-2 justify-between">
+                                            <div class="flex gap-2 justify-end">
                                                 <a href="${doc.cloudinary_url}" target="_blank"
                                                     class="bg-blue-600 hover:bg-blue-700 text-sm text-center text-white px-8 py-2 rounded-lg cursor-pointer">
                                                     View
                                                 </a>
-                                                <form method="POST" action="/panitia/documents/${doc.id}/approve">
+                                                <form method="POST" action="/panitia/documents/${doc.id}/approve" class="${isVerified ? 'hidden' : ''}">
                                                     <input type="hidden" name="_token" value="${window.csrf}">
                                                     <input type="hidden" name="_method" value="PUT">
                                                     <button
@@ -86,7 +87,7 @@ function openModalDoc(id) {
                                                         Approve
                                                     </button>
                                                 </form>
-                                                <form method="POST" action="/panitia/documents/${doc.id}/reject">
+                                                <form method="POST" action="/panitia/documents/${doc.id}/reject" class="${isVerified ? 'hidden' : ''}">
                                                     <input type="hidden" name="_token" value="${window.csrf}">
                                                     <input type="hidden" name="_method" value="PUT">
                                                     <button
@@ -135,8 +136,11 @@ const jalurFilter = document.getElementById("jalur_id");
 let controller = null;
 
 function fetchData(url = null, pushState = true) {
+     if (!searchInput) {
+        console.warn("Input pencarian tidak ditemukan di halaman ini. Fungsi fetchData dihentikan.");
+        return; 
+    }
     const search = searchInput.value;
-    console.log(searchInput.value);
     const status = statusFilter.value;
     const jalur = jalurFilter.value;
 
