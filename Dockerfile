@@ -17,11 +17,6 @@ RUN apt-get update && apt-get install -y \
     redis \
     opcache
 
-# Install Node.js 22
-COPY --from=node:22 /usr/local/bin /usr/local/bin
-COPY --from=node:22 /usr/local/lib/node_modules /usr/local/lib/node_modules
-RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
-    && ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
 
 # Copy composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
