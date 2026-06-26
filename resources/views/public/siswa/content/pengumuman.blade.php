@@ -12,7 +12,7 @@
                 </p>
                 @if ($hasilStatus === 'terverifikasi')
                     <div class="bg-green-200 text-green-800 text-xl p-4 rounded-lg mt-4">
-                        🎉Selamat! Berkas Anda Terverifikasi🎉<br>Silahkan pantau terus <b
+                        <b>🎉Selamat! Berkas Anda Terverifikasi🎉</b><br>Silahkan pantau terus <b
                             class="text-black">Dashboard</b> Anda untuk mengetahui pengumuman dan hasil seleksi oleh
                         Admin.
                     </div>

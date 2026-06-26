@@ -29,8 +29,8 @@
                                 </span>
                             </td>
                             <td class="p-4">
-                                <button onclick="openModalDoc({{ $registration->id }})"
-                                    class="p-2 px-4 bg-blue-500 hover:bg-blue-600 text-white text-md-center rounded-lg cursor-pointer">
+                                <button onclick="openModalDoc({{ $registration->id }})" @disabled($registration->status === 'terverifikasi')
+                                    class="p-2 px-4 bg-blue-500 hover:bg-blue-600 text-white text-md-center rounded-lg cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">
                                     Verifikasi Dokumen
                                 </button>
                             </td>

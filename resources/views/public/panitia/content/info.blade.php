@@ -1,6 +1,10 @@
 <div class="p-6" data-tab="dashboard">
-    <div class="p-2 pt-0 flex gap-6">
-        <div class="flex flex-col gap-2 bg-white p-4 pb-2 w-full">
+    <div class="bg-white rounded-xl p-6 flex flex-col shadow-lg mb-4">
+        <span class="text-xl text-black capitalize font-semibold">Welcome back, {{ Auth::user()->name }} 👋</span>
+        <span class="text-md font-medium text-slate-500">Pantau dan Verifikasi calon siswa baru SMKN 45 Merdeka</span>
+    </div>
+    <div class="flex gap-6">
+        <div class="flex flex-col gap-2 rounded-xl bg-white p-4 pb-2 w-full">
             {{-- CARD  --}}
             <div class="grid grid-cols-4 gap-4">
                 <div class="bg-blue-500 p-4 rounded-lg flex flex-col gap-2 text-lg shadow-lg">

@@ -13,36 +13,36 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function index()
-    {
-        $jalur = JalurPendaftaran::all();
-        $student = Student::where('user_id', Auth::id())
-            ->with('registration.documents')
-            ->first();
-        $documents = $student?->registration?->documents ?? collect();
-        $catatanReject = $documents->where('status_verifikasi', 'rejected');
-        $statusCard = getStatus($documents);
-        $registration = $student?->registration;
-        $status = statusSiswa($registration);
-        $hasilStatus = $registration?->status;
-        $jalurs = JalurPendaftaran::withCount('registration')->get();
-        $pengumuman = Announcement::where('is_published', true)->latest('published_at')->first();
+    // /**
+    //  * Show the form for creating a new resource.
+    //  */
+    // public function index()
+    // {
+    //     $jalur = JalurPendaftaran::all();
+    //     $student = Student::where('user_id', Auth::id())
+    //         ->with('registration.documents')
+    //         ->first();
+    //     $documents = $student?->registration?->documents ?? collect();
+    //     $catatanReject = $documents->where('status_verifikasi', 'rejected');
+    //     $statusCard = getStatus($documents);
+    //     $registration = $student?->registration;
+    //     $status = statusSiswa($registration);
+    //     $hasilStatus = $registration?->status;
+    //     $jalurs = JalurPendaftaran::withCount('registration')->get();
+    //     $pengumuman = Announcement::where('is_published', true)->latest('published_at')->first();
 
-        return view('public.siswa.siswa-info', compact(
-            'jalur',
-            'student',
-            'documents',
-            'catatanReject',
-            'statusCard',
-            'hasilStatus',
-            'jalurs',
-            'status',
-            'pengumuman'
-        ));
-    }
+    //     return view('public.siswa.siswa-info', compact(
+    //         'jalur',
+    //         'student',
+    //         'documents',
+    //         'catatanReject',
+    //         'statusCard',
+    //         'hasilStatus',
+    //         'jalurs',
+    //         'status',
+    //         'pengumuman'
+    //     ));
+    // }
 
     public function home()
     {
@@ -122,10 +122,103 @@ class StudentController extends Controller
         return redirect('/siswa/dashboard')->with('success', 'Pendaftaran berhasil');
     }
 
+    private function StudentData()
+    {
+        return Student::where('user_id', Auth::id())
+            ->with('registration.documents')
+            ->first();
+    }
+
+    public function dashboard()
+    {
+        $student = $this->StudentData();
+        $registration = $student?->registration;
+        $documents = $registration?->documents ?? collect();
+        $step = 1;
+        $process = [
+            'desc' => 'Lanjutkan lengkapi formulir pendaftaran!'
+        ];
+        if ($registration) {
+            $step = 2;
+            $process = [
+                'desc' => 'Lanjutkan upload dokumen Anda!'
+            ];
+        }
+        if ($registration && $documents->isNotEmpty()) {
+            $step = 3;
+            $process = [
+                'desc' => 'Dokumen sedang di verifikasi oleh Panitia!'
+            ];
+        }
+        if ($registration && $registration->status === 'terverifikasi') {
+            $step = 4;
+            $process = [
+                'desc' => 'Terverifikasi, Hasil akhir sedang di seleksi oleh Admin'
+            ];
+        }
+        if ($registration && in_array($registration->hasil_seleksi, ['diterima', 'tidak_diterima'])) {
+            $step = 5;
+        }
+        $statusCard = getStatus($documents);
+        $status = statusSiswa($student?->registration);
+        $photo = $documents->where('jenis_document', 'foto')->first();
+
+        return view('public.siswa.siswa-info', compact(
+            'student',
+            'statusCard',
+            'status',
+            'documents',
+            'step',
+            'registration',
+            'process',
+            'photo'
+        ));
+    }
+
     public function formulir()
     {
-        $registration = Registration::all();
+        $student = $this->StudentData();
+        $jalur = JalurPendaftaran::all();
+        $jalurs = JalurPendaftaran::withCount('registration')->get();
 
-        return view('public.siswa.siswa-formulir', compact('registration'));
+        return view('public.siswa.siswa-formulir', compact(
+            'student',
+            'jalur',
+            'jalurs'
+        ));
+    }
+
+    public function document()
+    {
+        $student = $this->StudentData();
+        $documents = $student?->registration?->documents ?? collect();
+        $statusCard = getStatus($documents);
+        $catatanReject = $documents->where(
+            'status_verifikasi',
+            'rejected'
+        );
+
+        return view('public.siswa.siswa-upload', compact(
+            'documents',
+            'catatanReject',
+            'statusCard'
+        ));
+    }
+
+    public function pengumuman()
+    {
+        $student = $this->StudentData();
+        $registration = $student?->registration;
+        $hasilStatus = $registration?->status;
+        $pengumuman = Announcement::where(
+            'is_published',
+            true
+        )->latest('published_at')
+            ->first();
+
+        return view('public.siswa.siswa-pengumuman', compact(
+            'hasilStatus',
+            'pengumuman'
+        ));
     }
 }

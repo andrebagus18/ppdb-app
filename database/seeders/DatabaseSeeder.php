@@ -18,23 +18,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            JalurPendaftaranSeeder::class,
-            PpdbSeeders::class
+        User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin123'),
+            'role' => 'admin',
         ]);
-
-        // User::create([
-        //     'name' => 'Administrator',
-        //     'email' => 'admin@gmail.com',
-        //     'password' => Hash::make('admin123'),
-        //     'role' => 'admin',
-        // ]);
-        // User::create([
-        //     'name' => 'Panitia PPDB',
-        //     'email' => 'panitia@gmail.com',
-        //     'password' => Hash::make('panitia123'),
-        //     'role' => 'panitia',
-        // ]);
-        // $this->call(JalurPendaftaranSeeder::class);
+        User::create([
+            'name' => 'Panitia PPDB',
+            'email' => 'panitia@gmail.com',
+            'password' => Hash::make('panitia123'),
+            'role' => 'panitia',
+        ]);
+        $this->call(JalurPendaftaranSeeder::class);
     }
 }

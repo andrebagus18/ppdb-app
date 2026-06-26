@@ -22,13 +22,13 @@ Route::prefix('auth')->middleware(['guest'])->name('auth.')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('process-login');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
-
 Route::prefix('auth')->middleware(['auth'])->name('auth.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
 // route admin dan admin login
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
-    // route ketika admin login ke dashboard admin
+    // dashboard admin
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     // seleksi dan publish
     Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi.index');
@@ -53,25 +53,30 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 
 // route panitia dan panitia login
 Route::prefix('panitia')->middleware(['auth', 'role:panitia'])->name('panitia.')->group(function () {
+    // dashboard
     Route::get('/dashboard', [PanitiaController::class, 'dashboard'])->name('dashboard');
+    // registration
     Route::get('/registrations', [PanitiaController::class, 'registrations'])->name('registrations');
+    // verifikasi
     Route::get('/verifikasi', [PanitiaController::class, 'verifikasi'])->name('verifikasi');
     Route::put('/documents/{document}/approve', [PanitiaController::class, 'approve'])->name('panitia.approve');
     Route::put('/documents/{document}/reject', [PanitiaController::class, 'reject'])->name('panitia.reject');
 });
 
-
 // route siswa dan siswa login
 Route::prefix('siswa')->middleware(['auth', 'role:siswa,admin'])->name('siswa.')->group(function () {
     // route ketika siswa login ke homepage ppdb
     Route::get('/ppdb', [StudentController::class, 'home'])->name('ppdb');
-    // route untuk menampilkan dashboard siswa
-    Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard');
+    // route dashboard siswa
+    Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
+    // route form biodata siswa
     Route::get('/formulir', [StudentController::class, 'formulir'])->name('formulir');
-    // route action form biodata siswa
     Route::post('/registration', [StudentController::class, 'store'])->name('registration.store');
-    // route action upload dokumen baru siswa
+    // route upload dokumen siswa
+    Route::get('/document', [StudentController::class, 'document'])->name('document');
     Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
     // route action reupload dokumen jika ditolak
     Route::put('/documents/{document}', [DocumentController::class, 'update'])->name('documents.reupload');
+    // route pengumuman
+    Route::get('/pengumuman', [StudentController::class, 'pengumuman'])->name('pengumuman');
 });

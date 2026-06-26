@@ -21,13 +21,13 @@
                     <i data-lucide="form"></i>
                     <span>Data Formulir</span>
                 </a>
-                <a href="{{ route('siswa.documents.store') }}" data-target="upload-berkas-content"
-                    class="{{ request()->routeIs('siswa.documents.store') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-600">
+                <a href="{{ route('siswa.document') }}" data-target="upload-berkas-content"
+                    class="{{ request()->routeIs('siswa.document') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-600">
                     <i data-lucide="upload"></i>
                     <span>Upload Dokumen</span>
                 </a>
-                <a href="#pengumuman" data-target="pengumuman-content"
-                    class="{{ request()->routeIs('siswa.documents.store') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-600">
+                <a href="{{ route('siswa.pengumuman') }}" data-target="pengumuman-content"
+                    class="{{ request()->routeIs('siswa.pengumuman') ? 'bg-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-600">
                     <i data-lucide="info"></i>
                     <span>Pengumuman</span>
                 </a>
@@ -79,11 +79,6 @@
             </nav>
         </div>
         <div class="space-y-1 mb-4">
-            <a href="{{ route('siswa.ppdb') }}"
-                class="cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-emerald-500">
-                <i data-lucide="home"></i>
-                <span>Halaman Utama</span>
-            </a>
             <form method="POST" action="{{ route('auth.logout') }}">
                 @csrf
                 <button type="submit"

@@ -41,6 +41,7 @@
             @foreach ($documentLabel as $jenis => $label)
                 @php
                     $document = $documents->firstWhere('jenis_document', $jenis);
+                    $statusDocument = statusDocument($document);
                 @endphp
                 @if ($document->status_verifikasi === 'rejected')
                     <form action="{{ route('siswa.documents.reupload', $document) }}" method="POST"
@@ -60,7 +61,7 @@
                                 </div>
                                 <div class="max-w-80 gap-2">
                                     <span
-                                        class="rounded-xl text-sm px-2 py-1 italic {{ $statusCard['bg'] }}">{{ $statusCard['title'] }}</span>
+                                        class="rounded-xl text-sm px-2 py-1 italic {{ $statusDocument['bg'] }}">{{ $statusDocument['title'] }}</span>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +88,7 @@
                             </div>
                             <div class="max-w-80 gap-2">
                                 <span
-                                    class="rounded-xl text-sm px-2 py-1 italic {{ $statusCard['bg'] }}">{{ $statusCard['title'] }}</span>
+                                    class="rounded-xl text-sm px-2 py-1 italic {{ $statusDocument['bg'] }}">{{ $statusDocument['title'] }}</span>
                             </div>
                         </div>
                     </div>
@@ -108,7 +109,7 @@
                             </div>
                             <div class="max-w-80 gap-2">
                                 <span
-                                    class="rounded-xl text-sm px-2 py-1 italic {{ $statusCard['bg'] }}">{{ $statusCard['title'] }}</span>
+                                    class="rounded-xl text-sm px-2 py-1 italic {{ $statusDocument['bg'] }}">{{ $statusDocument['title'] }}</span>
                             </div>
                         </div>
                     </div>

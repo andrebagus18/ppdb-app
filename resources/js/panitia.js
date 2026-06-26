@@ -60,9 +60,11 @@ function openModalDoc(id) {
     document.getElementById("name").innerText =
         data.student?.nama_lengkap ?? "-";
     document.getElementById("nod").innerText = data.no_daftar ?? "-";
-    const isVerified = data.status === 'terverifikasi';
+    const isVerified = data.documents.jenis_document === "verified";
     let html = "";
+
     data.documents.forEach((doc) => {
+        const isVerified = doc.status_verifikasi === "verified";
         html += `<tr class="border-t">
                                         <td class="p-4" id="jenis">
                                             ${doc.jenis_document}
@@ -75,31 +77,41 @@ function openModalDoc(id) {
                                         </td>
                                         <td class="p-4">
                                             <div class="flex gap-2 justify-end">
-                                                <a href="${doc.cloudinary_url}" target="_blank"
-                                                    class="bg-blue-600 hover:bg-blue-700 text-sm text-center text-white px-8 py-2 rounded-lg cursor-pointer">
-                                                    View
+                                                <a href="${doc.cloudinary_url}"
+                                                target="_blank"
+                                                class="bg-blue-600 hover:bg-blue-700 text-sm text-white px-8 py-2 rounded-lg">
+                                                View
                                                 </a>
-                                                <form method="POST" action="/panitia/documents/${doc.id}/approve" class="${isVerified ? 'hidden' : ''}">
-                                                    <input type="hidden" name="_token" value="${window.csrf}">
-                                                    <input type="hidden" name="_method" value="PUT">
-                                                    <button
-                                                        class="bg-green-600 hover:bg-green-700 text-sm text-center text-white px-6 py-2 rounded-lg cursor-pointer">
-                                                        Approve
-                                                    </button>
-                                                </form>
-                                                <form method="POST" action="/panitia/documents/${doc.id}/reject" class="${isVerified ? 'hidden' : ''}">
-                                                    <input type="hidden" name="_token" value="${window.csrf}">
-                                                    <input type="hidden" name="_method" value="PUT">
-                                                    <button
-                                                        class="bg-red-500 hover:bg-red-600 text-sm text-white px-6 py-2 mb-1 rounded-lg cursor-pointer">
-                                                        Reject
-                                                    </button>
-                                                    <input name="catatan" placeholder="Alasan Ditolak"
+                                                ${
+                                                    !isVerified
+                                                        ? `
+                                                    <form method="POST" action="/panitia/documents/${doc.id}/approve">
+                                                        <input type="hidden" name="_token" value="${window.csrf}">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
+                                                            Approve
+                                                        </button>
+                                                    </form>
+                                                    <form method="POST" action="/panitia/documents/${doc.id}/reject">
+                                                        <input type="hidden" name="_token" value="${window.csrf}">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <button class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">
+                                                            Reject
+                                                        </button>
+                                                        <input name="catatan" placeholder="Alasan Ditolak"
                                                         class="border rounded-lg text-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                </form>
+                                                    </form>
+                                                `
+                                                        : `
+                                                    <span class="px-4 py-2 bg-green-100 text-green-700 rounded-lg">
+                                                        Sudah Diverifikasi
+                                                    </span>
+                                                `
+                                                }
                                             </div>
                                         </td>
-                                    </tr>`;
+                                    </tr>
+    `;
     });
     document.getElementById("contentBody").innerHTML = html;
 
@@ -136,9 +148,11 @@ const jalurFilter = document.getElementById("jalur_id");
 let controller = null;
 
 function fetchData(url = null, pushState = true) {
-     if (!searchInput) {
-        console.warn("Input pencarian tidak ditemukan di halaman ini. Fungsi fetchData dihentikan.");
-        return; 
+    if (!searchInput) {
+        console.warn(
+            "Input pencarian tidak ditemukan di halaman ini. Fungsi fetchData dihentikan.",
+        );
+        return;
     }
     const search = searchInput.value;
     const status = statusFilter.value;
@@ -152,8 +166,8 @@ function fetchData(url = null, pushState = true) {
     if (!url) {
         const queryString = params.toString();
         url = queryString
-        ? `/panitia/registrations?${queryString}`
-        : `/panitia/registrations`;
+            ? `/panitia/registrations?${queryString}`
+            : `/panitia/registrations`;
     }
     if (controller) {
         controller.abort();
@@ -172,7 +186,7 @@ function fetchData(url = null, pushState = true) {
             if (pushState) history.pushState({}, "", url);
         })
         .catch((error) => {
-            if (error.name != 'AbortError') {
+            if (error.name != "AbortError") {
                 console.log(error);
             }
         });
@@ -209,10 +223,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ajax pagination
-document.addEventListener('click', (e) => {
-    const link = e.target.closest('.pagination a');
+document.addEventListener("click", (e) => {
+    const link = e.target.closest(".pagination a");
     if (!link) return;
     e.preventDefault();
     fetchData(link.href);
-})
-
+});

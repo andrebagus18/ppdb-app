@@ -1,4 +1,4 @@
-<div class="h-90 overflow-y-auto scrollbar-hide">
+<div class="h-100 overflow-y-auto scrollbar-hide">
     <table class="w-full text-md text-left bg-white">
         <thead class="bg-slate-200 text-slate-600 sticky top-0 z-10">
             <tr>
@@ -47,6 +47,6 @@
         </tbody>
     </table>
 </div>
-<div class="mt-1.5 paginator-class pagination px-4">
+<div class="mt-2 paginator-class pagination px-4">
     {{ $registrations->links() }}
 </div>

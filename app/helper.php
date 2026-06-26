@@ -56,17 +56,17 @@ if (!function_exists('statusSiswa')) {
         return match ($registration?->status) {
 
             'terverifikasi' => [
-                'bg' => 'bg-green-900/30 text-green-500',
+                'bg' => 'bg-green-100 text-green-800',
                 'title' => 'Terverifikasi'
             ],
 
             'menunggu_verifikasi' => [
-                'bg' => 'bg-amber-900/30 text-amber-500',
+                'bg' => 'bg-amber-100 text-amber-800',
                 'title' => 'Menunggu Verifikasi'
             ],
 
             default => [
-                'bg' => 'bg-yellow-900/30 text-yellow-500',
+                'bg' => 'bg-yellow-100 text-yellow-800',
                 'title' => 'Pending'
             ]
         };
@@ -108,6 +108,26 @@ if (!function_exists('statusPengumuman')) {
             false => [
                 'bg' => 'bg-amber-900/30 text-amber-500',
                 'title' => 'Draft'
+            ]
+        };
+    }
+}
+
+if (!function_exists('statusDocument')) {
+    function statusDocument($document)
+    {
+        return match ($document->status_verifikasi) {
+            'verified' => [
+                'bg' => 'bg-green-500',
+                'title' => 'Diterima'
+            ],
+            'rejected' => [
+                'bg' => 'bg-red-500',
+                'title' => 'Ditolak'
+            ],
+            default => [
+                'bg' => 'bg-yellow-500',
+                'title' => 'Menunggu Verifikasi'
             ]
         };
     }

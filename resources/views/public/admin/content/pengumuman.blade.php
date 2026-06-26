@@ -83,8 +83,8 @@
 
 {{-- modal add --}}
 <div id="addPublish" class="hidden fixed inset-0 bg-black/50 z-50 items-center justify-center">
-    <div class="bg-white w-150 rounded-xl p-4 m-5 relative">
-        <h2 class="text-xl font-bold mb-2">Tambah Pengumuman</h2>
+    <div class="bg-slate-600/10 backdrop-blur-lg border border-slate-700 w-150 rounded-xl p-4 m-5 relative">
+        <h2 class="text-xl font-bold mb-2 text-white">Tambah Pengumuman</h2>
         <button type="button" class="closePublish absolute top-3 right-3 text-red-500 cursor-pointer">
             <i data-lucide="x"></i>
         </button>
@@ -92,25 +92,25 @@
             @csrf
             <div class="flex flex-col gap-4">
                 <div>
-                    <label class="mb-1 block text-md font-medium">
+                    <label class="mb-1 block text-md font-medium text-slate-300">
                         Judul
                     </label>
                     <input type="text" id="judul" name="judul"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="form-input w-full rounded-lg border text-slate-300 border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700">
                 </div>
                 <div>
-                    <label class="mb-1 block text-md font-medium">
+                    <label class="mb-1 block text-md font-medium text-slate-300">
                         Isi Pengumuman
                     </label>
                     <textarea type="text" id="isi" name="isi"
-                        class="h-30 w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="h-30 w-full rounded-lg border text-slate-300 border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700">
                 </textarea>
                 </div>
                 <div class="flex justify-end gap-3">
                     <button type="button"
-                        class="closePublish bg-yellow-500 hover:bg-yellow-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Batal</button>
+                        class="closePublish bg-amber-900/30 hover:bg-amber-900/40 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-amber-500">Batal</button>
                     <button type="submit" id="simpan"
-                        class="bg-blue-500 hover:bg-blue-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Simpan</button>
+                        class="bg-blue-900/30 hover:bg-blue-900/40 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-blue-500">Simpan</button>
                 </div>
             </div>
         </form>
@@ -119,39 +119,39 @@
 
 {{-- modal detail --}}
 <div id="modalDetail" class="hidden fixed inset-0 bg-black/50 z-50 items-center justify-center">
-    <div class="bg-white w-150 rounded-xl p-4 m-5 relative">
-        <h2 class="text-xl font-bold mb-2">Detail Pengumuman</h2>
+    <div class="bg-slate-600/10 backdrop-blur-lg border border-slate-700 w-150 rounded-xl p-4 m-5 relative">
+        <h2 class="text-xl font-bold mb-2 text-white">Detail Pengumuman</h2>
         <button type="button" class="closeDetail absolute top-3 right-3 text-red-500 cursor-pointer">
             <i data-lucide="x"></i>
         </button>
         <div class="flex flex-col gap-4">
             <div>
-                <label class="mb-1 block text-md text-slate-400">
+                <label class="mb-1 block text-md text-slate-300">
                     Judul
                 </label>
-                <p class="tetx-black text-lg font-medium" id="detailJudul"></p>
+                <p class="text-white text-lg font-medium" id="detailJudul"></p>
             </div>
             <div>
-                <label class="mb-1 block text-md text-slate-400">
+                <label class="mb-1 block text-md text-slate-300">
                     Isi
                 </label>
-                <p class="tetx-black text-lg font-medium" id="detailIsi"></p>
+                <p class="text-white text-lg font-medium" id="detailIsi"></p>
             </div>
             <div>
-                <label class="mb-1 block text-md text-slate-400">
+                <label class="mb-1 block text-md text-slate-300">
                     Status
                 </label>
-                <p class="tetx-black text-lg font-medium" id="detailStatus"></p>
+                <p class="text-white text-lg font-medium" id="detailStatus"></p>
             </div>
             <div>
-                <label class="mb-1 block text-md text-slate-400">
+                <label class="mb-1 block text-md text-slate-300">
                     Publikasi
                 </label>
-                <p class="tetx-black text-lg font-medium" id="detailPublished"></p>
+                <p class="text-white text-lg font-medium" id="detailPublished"></p>
             </div>
             <div class="flex justify-end gap-3">
                 <button
-                    class="closeDetail bg-yellow-500 hover:bg-yellow-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Batal</button>
+                    class="closeDetail bg-amber-900/40 hover:bg-amber-900/30 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-amber-500">Batal</button>
             </div>
         </div>
     </div>
@@ -159,37 +159,37 @@
 
 {{-- modal edit --}}
 <div id="modalEdit" class="hidden fixed inset-0 bg-black/50 z-50 items-center justify-center">
-    <div class="bg-white w-150 rounded-xl p-4 m-5 relative">
-        <h2 class="text-xl font-bold mb-2">Edit Pengumuman/h2>
-            <button type="button" class="closeEdit absolute top-3 right-3 text-red-500 cursor-pointer">
-                <i data-lucide="x"></i>
-            </button>
-            <form id="editForm" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="flex flex-col gap-4">
-                    <div>
-                        <label class="mb-1 block text-md font-medium">
-                            Judul
-                        </label>
-                        <input type="text" id="editJudul" name="editJudul"
-                            class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="mb-1 block text-md font-medium">
-                            Isi Pengumuman
-                        </label>
-                        <textarea type="text" id="editIsi" name="editIsi"
-                            class="h-30 w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </textarea>
-                    </div>
-                    <div class="flex justify-end gap-3">
-                        <button type="button"
-                            class="closeEdit bg-yellow-500 hover:bg-yellow-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Batal</button>
-                        <button type="submit" id="update"
-                            class="bg-blue-500 hover:bg-blue-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Update</button>
-                    </div>
+    <div class="bg-slate-600/10 backdrop-blur-lg border border-slate-700 w-150 rounded-xl p-4 m-5 relative">
+        <h2 class="text-xl font-bold mb-2 text-white">Edit Pengumuman</h2>
+        <button type="button" class="closeEdit absolute top-3 right-3 text-red-500 cursor-pointer">
+            <i data-lucide="x"></i>
+        </button>
+        <form id="editForm" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="flex flex-col gap-4">
+                <div>
+                    <label class="mb-1 block text-md font-medium text-slate-300">
+                        Judul
+                    </label>
+                    <input type="text" id="editJudul" name="editJudul"
+                        class="form-input w-full rounded-lg border text-slate-300 border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700">
                 </div>
-            </form>
+                <div>
+                    <label class="mb-1 block text-md font-medium text-slate-300">
+                        Isi Pengumuman
+                    </label>
+                    <textarea type="text" id="editIsi" name="editIsi"
+                        class="h-30 w-full rounded-lg border text-slate-300 border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700">
+                </textarea>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button"
+                        class="closeEdit bg-amber-900/30 hover:bg-amber-900/40 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-amber-500">Batal</button>
+                    <button type="submit" id="update"
+                        class="bg-blue-900/30 hover:bg-blue-900/40 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-blue-500">Update</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

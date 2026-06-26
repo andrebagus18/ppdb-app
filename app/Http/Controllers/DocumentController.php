@@ -55,7 +55,7 @@ class DocumentController extends Controller
                 ]);
             }
         }
-        return redirect('/dashboard')->with('success', 'Dokumen berhasil diunggah');
+        return redirect('/siswa/document')->with('success', 'Dokumen berhasil diunggah');
     }
 
     // fungsi reupload dokumen jika ditolak
@@ -86,6 +86,6 @@ class DocumentController extends Controller
             'status_verifikasi' => 'pending',
             'catatan' => null,
         ]);
-        return redirect('/siswa/dashboard')->with('success', 'Dokumen berhasil di upload Ulang.');
+        return redirect('/siswa/document')->with('success', 'Dokumen berhasil di upload Ulang.');
     }
 }

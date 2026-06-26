@@ -56,8 +56,8 @@
 
 {{-- modal add user --}}
 <div id="addUser" class="hidden fixed inset-0 bg-black/50 z-50 items-center justify-center">
-    <div class="bg-white w-150 rounded-xl p-4 m-5 relative">
-        <h2 class="text-xl font-bold mb-2">Tambah Pengumuman</h2>
+    <div class="bg-slate-600/10 backdrop-blur-lg border border-slate-700 w-150 rounded-xl p-4 m-5 relative">
+        <h2 class="text-xl font-bold mb-2 text-white">Tambah Pengumuman</h2>
         <button type="button" class="closeAddUser absolute top-3 right-3 text-red-500 cursor-pointer">
             <i data-lucide="x"></i>
         </button>
@@ -66,29 +66,29 @@
             <input type="hidden" name="role" value="panitia">
             <div class="flex flex-col gap-4">
                 <div>
-                    <label class="mb-1 block text-md font-medium">
+                    <label class="mb-1 block text-md font-medium text-slate-300">
                         Nama Lengkap
                     </label>
                     <input type="text" name="name"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="form-input w-full rounded-lg border border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700 text-slate-300">
                 </div>
                 <div>
-                    <label class="mb-1 block text-md font-medium">
+                    <label class="mb-1 block text-md font-medium text-slate-300">
                         Email
                     </label>
                     <input type="email" name="email" placeholder="Masukkan email" autocomplete="off"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="form-input w-full rounded-lg border border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700 text-slate-300">
                 </div>
                 <div>
-                    <label class="mb-1 block text-md font-medium">
+                    <label class="mb-1 block text-md font-medium text-slate-300">
                         Password
                     </label>
                     <div class="relative">
                         <input id="password" type="password" name="password"
-                            class="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="w-full rounded-xl border border-slate-700 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-slate-700 text-slate-300"
                             placeholder="Minimal 8 karakter">
                         <button type="button"
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 cursor-pointer"
                             onclick="togglePassword('password', this)">
                             🔓
                         </button>
@@ -96,9 +96,9 @@
                 </div>
                 <div class="flex justify-end gap-3">
                     <button type="button"
-                        class="closeAddUser bg-yellow-500 hover:bg-yellow-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Batal</button>
+                        class="closeAddUser bg-amber-900/30 hover:bg-amber-900/40 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-amber-500">Batal</button>
                     <button type="submit" id="simpan"
-                        class="bg-blue-500 hover:bg-blue-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Simpan</button>
+                        class="bg-blue-900/30 hover:bg-blue-900/40 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-blue-500">Simpan</button>
                 </div>
             </div>
         </form>
@@ -107,8 +107,8 @@
 
 {{-- modal edit --}}
 <div id="modalEditUser" class="hidden fixed inset-0 bg-black/50 z-50 items-center justify-center">
-    <div class="bg-white w-150 rounded-xl p-4 m-5 relative">
-        <h2 class="text-xl font-bold mb-4">Edit Pengumuman</h2>
+    <div class="bg-slate-600/10 backdrop-blur-lg border border-slate-700 w-150 rounded-xl p-4 m-5 relative">
+        <h2 class="text-xl font-bold mb-4 text-white">Edit Pengumuman</h2>
         <button type="button" class="closeEditUser absolute top-3 right-3 text-red-500 cursor-pointer">
             <i data-lucide="x"></i>
         </button>
@@ -117,31 +117,31 @@
             @method('PUT')
             <div class="flex flex-col gap-4">
                 <div>
-                    <label class="mb-1 block text-md font-medium text-slate-400">
+                    <label class="mb-1 block text-md font-medium text-slate-300">
                         Nama Lengkap
                     </label>
                     <input type="text" id="editName" name="editName"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="form-input w-full rounded-lg border border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700 text-slate-300">
                 </div>
                 <div>
-                    <label class="mb-1 block text-md font-medium text-slate-400">
+                    <label class="mb-1 block text-md font-medium text-slate-300">
                         Email
                     </label>
                     <input type="text" id="editEmail" name="editEmail"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="form-input w-full rounded-lg border border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700 text-slate-300">
                 </div>
                 <div>
-                    <label class="mb-1 block text-md font-medium text-slate-400">
+                    <label class="mb-1 block text-md font-medium text-slate-300">
                         Password Baru
                     </label>
                     <input type="text" id="password" name="password" placeholder="Kosongkan jika tidak diubah"
-                        class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="form-input w-full rounded-lg border border-slate-700 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-slate-700 text-slate-300">
                 </div>
                 <div class="flex justify-end gap-3">
                     <button type="button"
-                        class="closeEditUser bg-yellow-500 hover:bg-yellow-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Batal</button>
+                        class="closeEditUser bg-amber-900/30 hover:bg-amber-900/40 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-amber-500">Batal</button>
                     <button type="submit" id="update"
-                        class="bg-blue-500 hover:bg-blue-600 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer">Update</button>
+                        class="bg-blue-900/30 hover:bg-blue-900/40 rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer text-blue-500">Update</button>
                 </div>
             </div>
         </form>

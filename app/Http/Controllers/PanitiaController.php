@@ -30,21 +30,10 @@ class PanitiaController extends Controller
         if (!$verified) {
             return;
         }
-        $jalur = $registration->jalur;
-        $jumlahDiterima = Registration::where('jalur_pendaftaran_id', $jalur->id)
-            ->where('hasil_seleksi', 'diterima')
-            ->count();
-        if ($jumlahDiterima < $jalur->kuota) {
-            $registration->update([
-                'status' => 'Terverifikasi',
-                'hasil_seleksi' => 'diterima'
-            ]);
-        } else {
-            $registration->update([
-                'status' => 'Terverifikasi',
-                'hasil_seleksi' => 'tidak_diterima'
-            ]);
-        }
+        $registration->update([
+            'status' => 'terverifikasi',
+            'hasil_seleksi' => 'pending'
+        ]);
     }
 
     public function reject(Request $request, Document $document)
@@ -76,7 +65,7 @@ class PanitiaController extends Controller
             ]);
             $this->updateStatus($document->registration);
         });
-        return redirect('/panitia/dashboard')->with('success', 'Dokumen disetujui');
+        return redirect('/panitia/verifikasi')->with('success', 'Dokumen disetujui');
     }
 
     public function dashboard()
@@ -113,7 +102,6 @@ class PanitiaController extends Controller
     public function registrations(Request $request)
     {
         $documents = $student?->registration?->documents ?? collect();
-
         $query = Registration::query()->with(['student', 'jalur', 'documents']);
 
         if ($request->search) {
@@ -159,7 +147,7 @@ class PanitiaController extends Controller
             'student',
             'jalur',
             'documents'
-        ])->get();
+        ])->latest()->get();
         $documents = Document::with([
             'registration.student'
         ])->latest()->get();

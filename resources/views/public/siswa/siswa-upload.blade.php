@@ -13,6 +13,6 @@
         </div>
     </div>
     <div id="upload-berkas-content" class="content">
-        @include('siswa.content.upload')
+        @include('public.siswa.content.upload-berkas')
     </div>
 @endsection

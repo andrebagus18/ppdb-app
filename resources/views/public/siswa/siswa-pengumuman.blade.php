@@ -13,6 +13,6 @@
         </div>
     </div>
     <div id="pengumuman-content" class="content">
-        @include('siswa.content.pengumuman')
+        @include('public.siswa.content.pengumuman')
     </div>
 @endsection

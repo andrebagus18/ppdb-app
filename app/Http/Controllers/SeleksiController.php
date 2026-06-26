@@ -51,18 +51,20 @@ class SeleksiController extends Controller
         $jalurs = JalurPendaftaran::all();
 
         foreach ($jalurs as $jalur) {
-            $registrations = Registration::join('students', 'registrations.student_id', '=', 'students.id')
+            $registrations = Registration::with('student')
                 ->where('registrations.jalur_pendaftaran_id', $jalur->id)
                 ->where('registrations.status', 'terverifikasi')
-                ->orderByDesc('students.nilai_rata_rata')
-                ->get();
+                ->get()
+                ->sortByDesc(fn($r) => $r->student->nilai_rata_rata)
+                ->values();
 
             foreach ($registrations as $index => $registration) {
-                $registration->hasil_seleksi =
+                $registration->update([
+                    'hasil_seleksi' =>
                     $index < $jalur->kuota
-                    ? 'diterima'
-                    : 'tidak_diterima';
-                $registration->save();
+                        ? 'diterima'
+                        : 'tidak_diterima',
+                ]);
             }
         }
 

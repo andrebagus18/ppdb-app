@@ -91,6 +91,7 @@
                 </label>
                 <select id="jalur_id" name="jalur_id"
                     class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Pilih Jalur</option>
                     @foreach ($jalurs as $jalur)
                         <option value="{{ $jalur->id }}" @selected(old('jalur_id') == $jalur->id)>
                             {{ $jalur->nama }}
