@@ -36,10 +36,6 @@ RUN composer install \
 RUN npm ci
 RUN npm run build
 
-# Laravel cache
-RUN php artisan config:cache
-RUN php artisan route:cache
-RUN php artisan view:cache
 
 # Permission
 RUN mkdir -p storage/framework/{cache,sessions,views} \
@@ -47,4 +43,10 @@ RUN mkdir -p storage/framework/{cache,sessions,views} \
 
 EXPOSE 8000
 
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+CMD sh -c "php artisan config:clear && \
+php artisan route:clear && \
+php artisan view:clear && \
+php artisan config:cache && \
+php artisan route:cache && \
+php artisan view:cache && \
+php -S 0.0.0.0:${PORT} -t public"
