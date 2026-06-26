@@ -102,27 +102,27 @@
             </div>
             <nav class="space-y-1 pt-4">
                 <a href="{{ route('admin.dashboard') }}"
-                    class="{{ request()->routeIs('admin.dashboard') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-black hover:bg-blue-500/20">
+                    class="{{ request()->routeIs('admin.dashboard') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-500/20">
                     <i data-lucide="chart-no-axes-combined"></i>
                     <span>Dashboard</span>
                 </a>
                 <a href="{{ route('admin.seleksi') }}"
-                    class="{{ request()->routeIs('admin.seleksi') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-black hover:bg-blue-500/20">
+                    class="{{ request()->routeIs('admin.seleksi') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-500/20">
                     <i data-lucide="square-mouse-pointer"></i>
                     <span>Proses Seleksi</span>
                 </a>
                 <a href="{{ route('admin.announcement') }}"
-                    class="{{ request()->routeIs('admin.announcement') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-black hover:bg-blue-500/20">
+                    class="{{ request()->routeIs('admin.announcement') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-500/20">
                     <i data-lucide="info"></i>
                     <span>Pengumuman</span>
                 </a>
                 <a href="{{ route('admin.manajemen') }}"
-                    class="{{ request()->routeIs('admin.manajemen') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-black hover:bg-blue-500/20">
+                    class="{{ request()->routeIs('admin.manajemen') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-500/20">
                     <i data-lucide="user-cog"></i>
                     <span>Manajemen Panitia</span>
                 </a>
                 <a href="{{ route('admin.laporan') }}"
-                    class="{{ request()->routeIs('admin.laporan') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-black hover:bg-blue-500/20">
+                    class="{{ request()->routeIs('admin.laporan') ? 'bg-blue-500/20 backdrop-blur-2xl border-r-4 border-blue-500 text-white' : '' }} cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-500/20">
                     <i data-lucide="folder-up"></i>
                     <span>Laporan</span>
                 </a>
@@ -130,14 +130,14 @@
         </div>
         <div class="space-y-1 mb-4">
             <a href="{{ route('siswa.ppdb') }}"
-                class="menu-link cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-black hover:bg-blue-500/20">
+                class="menu-link cursor-pointer flex gap-3 p-2 text-slate-300 text-md rounded hover:text-white hover:bg-blue-500/20">
                 <i data-lucide="home"></i>
                 <span>Halaman Utama</span>
             </a>
             <form method="POST" action="{{ route('auth.logout') }}">
                 @csrf
                 <button type="submit"
-                    class="w-full flex gap-3 text-md p-2 hover:text-black hover:bg-blue-500/20 text-slate-300 rounded cursor-pointer">
+                    class="w-full flex gap-3 text-md p-2 hover:text-white hover:bg-blue-500/20 text-slate-300 rounded cursor-pointer">
                     <i data-lucide="log-out"></i>
                     <span>Logout</span>
                 </button>

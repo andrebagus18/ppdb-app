@@ -1,4 +1,9 @@
 <div class="p-6" data-tab="dashboard">
+    <div class="rounded-xl p-6 flex flex-col shadow-lg mb-2 border border-slate-700/40">
+        <span class="text-xl text-white capitalize font-semibold">Welcome back, {{ Auth::user()->name }} 👋</span>
+        <span class="text-md font-medium text-slate-400">Seleksi dan Tentukan Hasil untuk calon siswa baru SMKN 45
+            Merdeka</span>
+    </div>
     <div class="p-2 pt-0 flex gap-6">
         <div class="flex flex-col gap-2 p-4 pb-2 w-full">
             {{-- CARD  --}}
@@ -27,14 +32,14 @@
                 <div
                     class="bg-green-900/40 backdrop-blur-2xl text-green-500 border-2 border-green-500 p-4 rounded-lg flex flex-col gap-2 text-lg shadow-lg">
                     <div class="flex h-10 items-center font-bold gap-2">
-                        <i data-lucide="badge-check" class="w-7 h-7"></i>Diterima
+                        <i data-lucide="badge-check" class="w-7 h-7"></i>Dokumen Diterima
                     </div>
                     <p class="text-3xl font-bold">{{ $stats['verified'] }}</p>
                 </div>
                 <div
                     class="bg-red-900/40 backdrop-blur-2xl text-red-500 border-2 border-red-500 p-4 rounded-lg flex flex-col gap-2 text-lg shadow-lg">
                     <div class="flex h-10 items-center font-bold gap-2">
-                        <i data-lucide="badge-x" class="w-7 h-7"></i>Ditolak
+                        <i data-lucide="badge-x" class="w-7 h-7"></i>Dokumen Ditolak
                     </div>
                     <p class="text-3xl font-bold">{{ $stats['rejected'] }}</p>
                 </div>
@@ -126,7 +131,7 @@
                         <h2 class="text-lg font-semibold text-white">
                             Terbaru
                         </h2>
-                        <a href="{{ route('admin.seleksi') }}" class="text-sm text-slate-400 hover:text-emerald-700">
+                        <a href="{{ route('admin.seleksi') }}" class="text-sm text-slate-400 hover:text-slate-300">
                             Lihat Semua
                         </a>
                     </div>

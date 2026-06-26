@@ -74,7 +74,7 @@
                             @empty
                                 <tr>
                                     <td colspan="6" class="p-6 text-center text-slate-500">
-                                        Belum ada data pengumuman
+                                        Belum ada data
                                     </td>
                                 </tr>
                             @endforelse
@@ -83,120 +83,6 @@
                     <hr class="h-1 bg-slate-400">
                 </div>
             @endforeach
-
-            {{-- Prestasi --}}
-            {{-- <div class="flex flex-col gap-1 p-4 border border-slate-200 rounded-xl">
-                <div class="flex items-center justify-between p-2">
-                    <span class="text-slate-400 text-lg">Jalur Prestasi</span>
-                    <span class="text-slate-400 text-sm">Kuota {{ $prestasi?->kuota ?? '-' }} | Terverifikasi
-                        {{ $prestasi?->registration->count() ?? '-' }}</span>
-                </div>
-                <table class="w-full text-md">
-                    <thead>
-                        <tr class="text-gray-500 border-b border-slate-700">
-                            <th class="text-left p-2">Rank</th>
-                            <th class="text-left p-2">No. Pendaftaran</th>
-                            <th class="text-left p-2">Nama</th>
-                            <th class="text-left p-2">Nilai Rata Rata</th>
-                            <th class="text-left p-2">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($registrations as $registration)
-                            <tr class="border-b border-slate-200">
-                                <td class="p-2">{{ $loop->iteration }}</td>
-                                <td class="p-2">{{ $registration->no_daftar ?? '-' }}</td>
-                                <td class="p-2">{{ $registration->student->nama_lengkap }}</td>
-                                <td class="p-2">{{ $registration->student->nilai_rata_rata }}</td>
-                                <td class="p-2"><span class="px-2 py-1 rounded-lg text-sm {{ statusSiswa($registration)['bg'] }}">{{ statusSiswa($registration)['title'] }}</span>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="p-6 text-center text-slate-500">
-                                    Belum ada data pengumuman
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div> --}}
-            {{-- Zonasi --}}
-            {{-- <div class="flex flex-col gap-1 p-4 border border-slate-200 rounded-xl">
-                <div class="flex items-center justify-between p-2">
-                    <span class="text-slate-400 text-lg">Jalur Zonasi</span>
-                    <span class="text-slate-400 text-sm">Kuota {{ $zonasi?->kuota ?? '-' }} | Terverifikasi
-                        {{ $zonasi?->registration->count() ?? '-' }}</span>
-                </div>
-                <table class="w-full text-md">
-                    <thead>
-                        <tr class="text-gray-500 border-b border-slate-700">
-                            <th class="text-left p-2">Rank</th>
-                            <th class="text-left p-2">No. Pendaftaran</th>
-                            <th class="text-left p-2">Nama</th>
-                            <th class="text-left p-2">Kecamatan</th>
-                            <th class="text-left p-2">Nilai Rata Rata</th>
-                            <th class="text-left p-2">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($registrations as $registration)
-                            <tr class="border-b border-slate-200">
-                                <td class="p-2">{{ $loop->iteration }}</td>
-                                <td class="p-2">{{ $registration->no_daftar ?? '-' }}</td>
-                                <td class="p-2">{{ $registration->student->nama_lengkap }}</td>
-                                <td class="p-2">{{ $registration->student->alamat }}</td>
-                                <td class="p-2">{{ $registration->student->nilai_rata_rata }}</td>
-                                <td class="p-2"><span class="px-2 py-1 rounded-lg text-sm {{ statusSiswa($registration)['bg'] }}">{{ statusSiswa($registration)['title'] }}</span>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="p-6 text-center text-slate-500">
-                                    Belum ada data pengumuman
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div> --}}
-            {{-- Afirmasi --}}
-            {{-- <div class="flex flex-col gap-1 p-4 border border-slate-200 rounded-xl">
-                <div class="flex items-center justify-between p-2">
-                    <span class="text-slate-400 text-lg">Jalur Afirmasi</span>
-                    <span class="text-slate-400 text-sm">Kuota {{ $afirmasi?->kuota ?? '-' }} | Terverifikasi
-                        {{ $afirmasi?->registration->count() ?? '-' }}</span>
-                </div>
-                <table class="w-full text-md">
-                    <thead>
-                        <tr class="text-gray-500 border-b border-slate-700">
-                            <th class="text-left p-2">Rank</th>
-                            <th class="text-left p-2">No. Pendaftaran</th>
-                            <th class="text-left p-2">Nama</th>
-                            <th class="text-left p-2">Nilai Rata Rata</th>
-                            <th class="text-left p-2">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($registrations as $registration)
-                            <tr class="border-b border-slate-200">
-                                <td class="p-2">{{ $loop->iteration }}</td>
-                                <td class="p-2">{{ $registration->no_daftar ?? '-' }}</td>
-                                <td class="p-2">{{ $registration->student->nama_lengkap }}</td>
-                                <td class="p-2">{{ $registration->student->nilai_rata_rata }}</td>
-                                <td class="p-2"><span class="px-2 py-1 rounded-lg text-sm {{ statusSiswa($registration)['bg'] }}">{{ statusSiswa($registration)['title'] }}</span>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="p-6 text-center text-slate-500">
-                                    Belum ada data pengumuman
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div> --}}
         </div>
     </div>
 </section>

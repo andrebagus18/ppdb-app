@@ -38,18 +38,6 @@
                     </button>
                 </div>
             </div>
-
-            <!-- BODY -->
-            {{-- @if (session('success'))
-                <div class="bg-green-100 text-green-800 p-3 rounded-lg mb-4 text-sm font-medium">
-                    {{ session('success') }}
-                </div>
-            @else
-                <div class="bg-red-100 text-red-800 p-3 rounded-lg mb-4 text-sm font-medium">
-                    {{ session('error') }}
-                </div>
-            @endif --}}
-
             <div id="formContainer" class="overflow-hidden transition-all duration-500">
                 <div id="formWrapper" class="flex w-[200%] items-start transition-all duration-500 ease-in-out">
                     <!-- LOGIN -->

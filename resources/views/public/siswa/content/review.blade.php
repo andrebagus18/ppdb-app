@@ -98,32 +98,6 @@
             </div>
         </div>
 
-        <!-- Persetujuan -->
-        <div class="p-4 bg-orange-300/60">
-            <span class="text-black text-lg font-semibold">⚠️ Pastikan Data Anda sudah Benar dan Sesuai.</span>
-        </div>
-        <div class="border border-amber-200 bg-amber-50 p-2">
-            <label class="flex items-start gap-3">
-                <input type="checkbox" name="agree_terms" required
-                    class="mt-1 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
-                <span class="text-sm text-slate-700">
-                    Saya telah membaca dan menyetujui seluruh
-                    <a class="font-medium text-blue-600 hover:underline">
-                        syarat dan ketentuan
-                    </a>
-                    yang berlaku dalam proses PPDB.
-                </span>
-            </label>
-            <label class="flex items-start gap-3">
-                <input type="checkbox" name="agree_data" required
-                    class="mt-1 h-5 w-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
-                <span class="text-sm text-slate-700">
-                    Saya menyatakan bahwa seluruh data yang saya unggah adalah benar dan dapat dipertanggung jawabkan.
-                    Apabila di kemudian hari ditemukan ketidaksesuaian data, saya bersedia menerima keputusan yang
-                    ditetapkan oleh panitia PPDB.
-                </span>
-            </label>
-        </div>
         <div class="mt-2 flex justify-end">
             <button id="close" type="button"
                 class="rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700 cursor-pointer">

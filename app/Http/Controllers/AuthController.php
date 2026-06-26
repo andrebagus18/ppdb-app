@@ -52,7 +52,7 @@ class AuthController extends Controller
             'role' => 'siswa',
         ]);
 
-        return redirect('/auth/login')->with('success', 'Berhasil, silahkan login!');
+        return redirect()->route('auth.process-login')->with('success', 'Berhasil, silahkan login!');
     }
     public function logout(Request $request)
     {

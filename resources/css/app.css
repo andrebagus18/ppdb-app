@@ -98,28 +98,51 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+/* ================= SUCCESS ================= */
 .swal-success {
-    width: auto;
-    background: rgba(54, 236, 121, 0.4) !important;
-    color: #002913  !important;
-    border: 2px solid rgb(54, 236, 121) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 10px 25px rgba(16, 0, 0, 0.15) !important;
-    backdrop-filter: blur(0.8px);
+    width: 340px;
+    max-width: calc(100vw - 32px);
+    padding: 16px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    background: #fff !important;
+    color: #111827 !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .155) !important;
+}
+
+.swal-success .swal2-title {
+    margin: 0 !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
 }
 .swal-success .swal2-timer-progress-bar {
-    background: #22c55e;
+    height: 3px !important;
+    background: #22c55e !important;
 }
+
+/* ================= ERROR ================= */
 .swal-error {
-    width: auto;
-    background: rgba(235, 48, 48, 0.2) !important;
-    color: #340000 !important;
-    border: 2px solid rgb(236, 54, 54) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 10px 25px rgba(16, 0, 0, 0.2) !important;
-    backdrop-filter: blur(0.8px);
+    width: 340px;
+    max-width: calc(100vw - 32px);
+    padding: 16px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    background: #fff !important;
+    color: #111827 !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.155) !important;
+}
+.swal-error .swal2-title {
+    margin: 0 !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
 }
 .swal-error .swal2-timer-progress-bar {
-    background: #c52222;
+    height: 3px !important;
+    background: #ef4444 !important;
 }
 

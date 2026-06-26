@@ -24,8 +24,29 @@
                 </a>
             @endauth
         </div>
-        <div class="flex justify-center">
-            <img src="{{ asset('images/image 9.png') }}" alt="logo" class="w-[25em] h-[20em]">
+        <div class="flex justify-center rounded-bl-[120px] overflow-hidden w-120 h-70">
+            <img src="{{ asset('images/banner.jpeg') }}" alt="logo" class="w-full object-cover">
+        </div>
+    </section>
+
+    <section class="container mx-auto py-12 mt-6">
+        <div class="flex items-center justify-center">
+            <div class="bg-white w-3xl rounded-xl shadow p-6">
+                <h2 class="text-lg font-semibold mb-2">
+                    Cek Status Pendaftaran
+                </h2>
+                <form id="searchRegistration" action="{{ route('home.search-registration') }}" method="POST">
+                    @csrf
+                    <div class="flex gap-3">
+                        <input type="text" name="no_daftar" placeholder="Masukkan Nomor Pendaftaran"
+                            class="w-full border rounded-lg px-4 py-2">
+                        <button class="bg-teal-500 hover:bg-teal-600 text-white px-8 rounded-lg cursor-pointer">
+                            Cari
+                        </button>
+                    </div>
+                </form>
+                <p id="searchError" class="mt-2 text-sm text-red-500 hidden"></p>
+            </div>
         </div>
     </section>
 
@@ -277,4 +298,33 @@
             </div>
         </div>
     </section>
+
+    <div id="modalRegistration" class="hidden fixed inset-0 bg-black/40 justify-center items-center z-50">
+        <div class="bg-white rounded-xl w-full max-w-xl p-6">
+            <div class="flex justify-between mb-2 relative">
+                <h2 class="text-xl font-semibold">
+                    Status Pendaftaran
+                </h2>
+                <button type="button" class="absolute top-0 right-0 text-red-500 cursor-pointer" onclick="closeModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="flex gap-6 w-full">
+                <div class="flex flex-col text-left gap-3 text-black font-medium">
+                    <p class="text-md p-1">Nama:</p>
+                    <p class="text-md p-1">No. Pendaftaran:</p>
+                    <p class="text-md p-1">Jalur Pendaftaran:</p>
+                    <p class="text-md p-1">Status:</p>
+                    <p class="text-md p-1">Hasil:</p>
+                </div>
+                <div class="flex flex-col text-left gap-3 text-black font-medium">
+                    <span class="text-md p-1" id="nama"></span>
+                    <span class="text-md p-1" id="nomor"></span>
+                    <span class="text-md p-1" id="jalurNama"></span>
+                    <span class="text-md p-1" id="status"></span>
+                    <span class="text-md p-1" id="hasil"></span>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -132,3 +132,25 @@ if (!function_exists('statusDocument')) {
         };
     }
 }
+
+if (!function_exists('hasilSeleksi')) {
+    function hasilSeleksi($registration)
+    {
+        if (!$registration || empty($registration->hasil_seleksi) || $registration->hasil_seleksi === 'pending') {
+            return [
+                'title' => 'Menunggu Hasil Seleksi',
+                'bg' => 'bg-yellow-100 text-yellow-700'
+            ];
+        }
+        if ($registration->hasil_seleksi === 'diterima') {
+            return [
+                'title' => 'Diterima',
+                'bg' => 'bg-green-100 text-green-700'
+            ];
+        }
+        return [
+            'title' => 'Tidak Diterima',
+            'bg' => 'bg-red-100 text-red-700'
+        ];
+    }
+}

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Announcement;
 use App\Models\Document;
-use App\Models\JalurPendaftaran;
 use App\Models\Registration;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -42,11 +40,11 @@ class AdminController extends Controller
 
     private function getGrafikPendaftaran($registrations)
     {
-        // Ambil range tanggal awal Senin dan akhir Minggu pada minggu berjalan ini
+        // Ambil range tanggal awal Senin dan akhir Minggu
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
 
-        // Filter data siswa yang mendaftar KHUSUS minggu ini saja
+        // Filter data siswa yang mendaftar
         $week = $registrations->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
 
         // Urutan nama hari untuk sumbu X grafik
@@ -54,10 +52,9 @@ class AdminController extends Controller
         $AngkaGrafik = [];
 
         foreach ($namaHari as $index => $hari) {
-            // dayOfWeekIso Carbon: Senin = 1, Selasa = 2, ..., Minggu = 7
             $targetDay = $index + 1;
 
-            // Hitung berapa banyak siswa yang mendaftar cocok dengan urutan hari tersebut
+            // Hitung berapa banyak siswa yang mendaftar
             $AngkaGrafik[] = $week->filter(function ($item) use ($targetDay) {
                 return Carbon::parse($item->created_at)->dayOfWeekIso === $targetDay;
             })->count();

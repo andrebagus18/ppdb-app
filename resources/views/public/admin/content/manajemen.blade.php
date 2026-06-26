@@ -1,7 +1,7 @@
 <section id="panitia" class="p-6">
     <div class="p-4 rounded-xl border-2 border-blue-500/40">
         <div class="flex justify-end">
-            <button onclick="openAdd()"
+            <button onclick="modalAdd()"
                 class="flex gap-3 items-center bg-green-900/30 hover:bg-green-900/20 text-green-500 text-md px-4 py-2 rounded-lg cursor-pointer">
                 <i data-lucide="circle-plus" class="w-4 h-4"></i>
                 Tambah Panitia</button>

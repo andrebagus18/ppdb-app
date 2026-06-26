@@ -16,20 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // open modal add pengumuman
 function openAdd() {
-    addUser.classList.remove("hidden");
-    addUser.classList.add("flex");
-    closeAddUser.forEach((close) => {
+    addPublish.classList.remove("hidden");
+    addPublish.classList.add("flex");
+    closePublish.forEach((close) => {
         close.addEventListener("click", () => {
-            addUser.classList.add("hidden");
-            addUser.classList.remove("flex");
+            addPublish.classList.add("hidden");
+            addPublish.classList.remove("flex");
         });
     });
 }
 window.openAdd = openAdd;
-if (addUser) {
-    addUser.addEventListener("click", (e) => {
-        if (e.target === addUser) {
-            addUser.classList.add("hidden");
+if (addPublish) {
+    addPublish.addEventListener("click", (e) => {
+        if (e.target === addPublish) {
+            addPublish.classList.add("hidden");
         }
     });
 }

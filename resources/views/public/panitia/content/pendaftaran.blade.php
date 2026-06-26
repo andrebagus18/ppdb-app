@@ -40,7 +40,6 @@
         </button>
         <div class="flex flex-col gap-4">
             <div>
-                {{-- @foreach ($registrations as $registration) --}}
                 <div class="flex gap-4">
                     <div class="w-full">
                         <h2 class="text-xl font-bold mb-1">Biodata Siswa</h2>
@@ -123,7 +122,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- @endforeach --}}
             </div>
         </div>
     </div>

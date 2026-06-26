@@ -13,60 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    // /**
-    //  * Show the form for creating a new resource.
-    //  */
-    // public function index()
-    // {
-    //     $jalur = JalurPendaftaran::all();
-    //     $student = Student::where('user_id', Auth::id())
-    //         ->with('registration.documents')
-    //         ->first();
-    //     $documents = $student?->registration?->documents ?? collect();
-    //     $catatanReject = $documents->where('status_verifikasi', 'rejected');
-    //     $statusCard = getStatus($documents);
-    //     $registration = $student?->registration;
-    //     $status = statusSiswa($registration);
-    //     $hasilStatus = $registration?->status;
-    //     $jalurs = JalurPendaftaran::withCount('registration')->get();
-    //     $pengumuman = Announcement::where('is_published', true)->latest('published_at')->first();
-
-    //     return view('public.siswa.siswa-info', compact(
-    //         'jalur',
-    //         'student',
-    //         'documents',
-    //         'catatanReject',
-    //         'statusCard',
-    //         'hasilStatus',
-    //         'jalurs',
-    //         'status',
-    //         'pengumuman'
-    //     ));
-    // }
-
-    public function home()
-    {
-        $reguler = $this->kuotaJalur('Reguler');
-        $prestasi = $this->kuotaJalur('Prestasi');
-        $zonasi = $this->kuotaJalur('Zonasi');
-        $afirmasi = $this->kuotaJalur('Afirmasi');
-        $pengumuman = Announcement::where('is_published', true)->latest('published_at')->first();
-        return view('public.home', compact(
-            'reguler',
-            'prestasi',
-            'zonasi',
-            'afirmasi',
-            'pengumuman'
-        ));
-    }
-
-    public function kuotaJalur($namaJalur)
-    {
-        return
-            JalurPendaftaran::where('nama', $namaJalur)
-            ->withCount('registration')->first();
-    }
-
     public function store(Request $request)
     {
         $request->validate([

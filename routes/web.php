@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ManajemenController;
 use App\Http\Controllers\PanitiaController;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return view('welcome');
 });
+Route::post('/cek-pendaftaran', [HomeController::class, 'searchRegistration'])
+    ->name('home.search-registration');
 
 // route login register
 Route::prefix('auth')->middleware(['guest'])->name('auth.')->group(function () {
@@ -66,7 +69,7 @@ Route::prefix('panitia')->middleware(['auth', 'role:panitia'])->name('panitia.')
 // route siswa dan siswa login
 Route::prefix('siswa')->middleware(['auth', 'role:siswa,admin'])->name('siswa.')->group(function () {
     // route ketika siswa login ke homepage ppdb
-    Route::get('/ppdb', [StudentController::class, 'home'])->name('ppdb');
+    Route::get('/ppdb', [HomeController::class, 'home'])->name('ppdb');
     // route dashboard siswa
     Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
     // route form biodata siswa

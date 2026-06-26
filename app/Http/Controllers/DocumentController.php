@@ -12,11 +12,11 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'foto' => 'required|file|mimes:jpg,jpeg,png|max:2048',
-            'akta' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'ijazah' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'surat_jalur' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'foto' => 'required|file|mimes:jpg,jpeg,png|max:1024',
+            'akta' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
+            'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
+            'ijazah' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
+            'surat_jalur' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
         ]);
         $registration = Auth::user()?->student?->registration;
         if (!$registration) {
