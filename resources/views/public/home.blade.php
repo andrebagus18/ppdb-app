@@ -8,7 +8,7 @@
             </h1>
             <span class="text-4xl text-black font-bold">SMKN 45 Merdeka</span>
             <span class="text-black mt-4">
-                SMK Negeri 45 Merdeka merupakan sekolah yang berkomitmen memberikan pendidikan berkualitas, membentuk
+                SMK Negeri 45 Merdeka adalah sekolah yang berkomitmen memberikan pendidikan berkualitas, membentuk
                 karakter yang unggul, serta mengembangkan potensi akademik dan non-akademik peserta didik. Melalui sistem
                 PPDB Online, proses pendaftaran dapat dilakukan dengan mudah, cepat, dan transparan dari mana saja.
             </span>
