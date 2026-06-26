@@ -13,9 +13,10 @@ use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/', [HomeController::class, 'home']);
 Route::post('/cek-pendaftaran', [HomeController::class, 'searchRegistration'])
     ->name('home.search-registration');
 
