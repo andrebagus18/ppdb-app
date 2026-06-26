@@ -47,4 +47,4 @@ RUN mkdir -p storage/framework/{cache,sessions,views} \
 
 EXPOSE 8000
 
-CMD ["php", "artisan", "octane:frankenphp", "--host=0.0.0.0", "--port=8000"]
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
