@@ -8,6 +8,8 @@
     <title>@yield('title', 'Dashboard Admin')</title>
     @vite(['resources/css/app.css', 'resources/js/admin.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+
 </head>
 
 <body class="flex min-h-dvh">

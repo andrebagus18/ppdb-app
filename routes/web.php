@@ -8,7 +8,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ManajemenController;
 use App\Http\Controllers\PanitiaController;
-use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;

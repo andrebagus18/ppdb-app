@@ -1,58 +1,229 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+🎓 PPDB Online
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+«Sistem Penerimaan Peserta Didik Baru (PPDB) berbasis web yang dibangun menggunakan Laravel 13, PostgreSQL, dan Tailwind CSS. Aplikasi ini membantu proses penerimaan siswa baru secara digital mulai dari pendaftaran, verifikasi dokumen, seleksi berdasarkan jalur, hingga pengumuman hasil seleksi.»
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+✨ Fitur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Admin
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Dashboard statistik PPDB
+- Manajemen akun panitia
+- Manajemen jalur pendaftaran dan kuota
+- Monitoring data pendaftar
+- Menjalankan proses seleksi berdasarkan kuota
+- Melihat hasil seleksi per jalur
+- CRUD Pengumuman
+- Publish Pengumuman
+- Export laporan Excel
 
-## Learning Laravel
+Panitia
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Dashboard panitia
+- Verifikasi dokumen pendaftar
+- Menyetujui atau verifikasi dokumen
+- Monitoring proses verifikasi
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Siswa
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- Login
+- Registrasi akun
+- Melengkapi biodata
+- Upload dokumen persyaratan
+- Melihat status verifikasi
+- Melihat hasil seleksi
+- Melihat pengumuman
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+🛠️ Teknologi
 
-```bash
-composer require laravel/boost --dev
+Kategori| Teknologi
+Backend| Laravel 13
+Bahasa| PHP 8.3+
+Frontend| Blade, Tailwind CSS, JavaScript
+Database| PostgreSQL
+Authentication| Laravel Auth & GitHub OAuth
+Library| SweetAlert2, Chart.js, Cloudinary, Maatwebsite/excel
+Deployment| Railway + Aiven PostgreSQL
 
-php artisan boost:install
-```
+---
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+🔄 Alur Sistem
 
-## Contributing
+Siswa Registrasi
+        │
+        ▼
+Lengkapi Biodata
+        │
+        ▼
+Upload Dokumen
+        │
+        ▼
+Verifikasi Panitia
+        │
+        ▼
+Seleksi Berdasarkan Jalur & Kuota
+        │
+        ▼
+Siswa Mendapatkan Hasil Seleksi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+📁 Struktur Folder
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+app
+├── Http
+│   ├── Controllers
+│   │   ├── AdminController.php
+│   │   ├── AnnouncementController.php
+│   │   ├── AuthController.php
+│   │   ├── DocumentController.php
+│   │   ├── DocumentController.php
+│   │   ├── HomeController.php
+│   │   ├── LaporanController.php
+│   │   ├── ManajemenController.php
+│   │   ├── PanitiaController.php
+│   │   ├── SeleksiController.php
+│   │   ├── StudentController.php
+│   ├── Middleware
+│   │   └── RoleMiddleware.php
+└── Models
+    ├── Announcement.php
+    ├── Document.php
+    ├── JalurPendaftaran.php
+    ├── Registration.php
+    ├── Student.php
+    └── User.php
 
-## Security Vulnerabilities
+database
+├── migrations
+├── seeders
+│   ├── DatabaseSeeder.php
+│   ├── JalurPendaftaranSeeder.php
+└── factories
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+resources
+├── views
+│   ├── admin
+│   ├── committee
+│   ├── student
+│   ├── layouts
+│   └── components
+├── css
+├── js
+└── views
+    ├── auth
+    ├── components
+    ├── layout
+    ├── partials
+    └── public
+        ├── admin
+        ├── panitia
+        └── siswa
 
-## License
+routes
+├── console.php
+└── web.php
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+🗄️ Database
+
+Tabel utama yang digunakan:
+
+- users
+- students
+- registrations
+- documents
+- jalur_pendaftarans
+- announcements
+
+## Entity Relationship Diagram
+
+![ERD](image/ppdb_db.png)
+
+GitHub akan langsung menampilkan gambar ERD pada halaman repository.
+
+---
+
+🚀 Instalasi
+
+Clone repository
+
+git clone https://github.com/username/ppdb-online.git
+
+Masuk ke folder project
+
+cd ppdb-online
+
+Install dependency
+
+composer install
+npm install
+
+Salin file environment
+
+cp .env.example .env
+
+Generate application key
+
+php artisan key:generate
+
+Konfigurasikan database PostgreSQL pada file ".env".
+
+Jalankan migrasi dan seeder
+
+php artisan migrate --seed
+
+Compile asset
+
+npm run dev
+
+Jalankan aplikasi
+
+php artisan serve
+
+---
+
+🌱 Seeder
+
+Seeder yang tersedia:
+
+- DatabaseSeeder
+- JalurPendaftaranSeeder
+
+Seeder akan membuat data awal berupa:
+
+- Akun Admin
+- Akun Panitia
+- Akun Siswa
+- Data Jalur Pendaftaran beserta kuota
+
+---
+
+📊 Dashboard
+
+Dashboard menyediakan informasi:
+
+- Statistik jumlah pendaftar
+- Statistik verifikasi dokumen
+- Statistik hasil seleksi
+- Statistik jalur pendaftaran
+- Grafik pendaftaran
+- Grafik verifikasi
+- Grafik hasil seleksi
+- Pengumuman terbaru
+
+---
+
+👨‍💻 Developer
+
+Andre Bs
+
+---
+
+📄 Lisensi
+
+Project ini dibuat sebagai media pembelajaran sekaligus implementasi Sistem Penerimaan Peserta Didik Baru (PPDB) berbasis web menggunakan Laravel dengan menerapkan konsep Role-Based Access Control (RBAC), verifikasi dokumen, seleksi berdasarkan kuota, serta pengelolaan pengumuman secara digital.

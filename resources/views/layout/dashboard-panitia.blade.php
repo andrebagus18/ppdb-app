@@ -8,6 +8,8 @@
     <title>@yield('title', 'Dashboard Panitia')</title>
     @vite(['resources/css/app.css', 'resources/js/panitia.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+
 </head>
 
 <body class="bg-[#eeeded] flex min-h-dvh">
