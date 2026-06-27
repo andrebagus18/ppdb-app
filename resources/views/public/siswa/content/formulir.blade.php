@@ -61,14 +61,17 @@
                 <label class="mb-1 block text-md font-medium">
                     Nomor HP / WhatsApp <span class="text-red-500">*</span>
                 </label>
-                <input type="tel" id="no_hp" name="no_hp" value="{{ old('no_hp') }}"
+                <input type="tel" id="no_hp" name="no_hp" maxlength="13" inputmode="numeric"
+                    oninput="this.value = this.value.replace(/\D/g, '').slice(0,13)" value="{{ old('no_hp') }}"
                     class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
                 <label class="mb-1 block text-md font-medium">
                     Kode Pos <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="pos" name="pos" value="{{ old('pos') }}"
+                <input type="text" id="pos" name="pos" maxlength="5" inputmode="numeric"
+                    pattern="[0-9]{5}" oninput="this.value = this.value.replace(/\D/g, '').slice(0,5)"
+                    value="{{ old('pos') }}"
                     class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
@@ -103,7 +106,8 @@
                 <label class="mb-1 block text-md font-medium">
                     Nilai Rata-Rata <span class="text-red-500">*</span>
                 </label>
-                <input id="nilai_rata_rata" name="nilai_rata_rata" type="number" value="{{ old('nilai_rata_rata') }}"
+                <input id="nilai_rata_rata" name="nilai_rata_rata" type="number"
+                    value="{{ old('nilai_rata_rata') }}"
                     class="form-input w-full rounded-lg border border-slate-300 px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
