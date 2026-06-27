@@ -17,7 +17,7 @@ if php -r "
 require_once '/var/www/html/vendor/autoload.php';
 \$app = require_once '/var/www/html/bootstrap/app.php';
 \$app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
-exit(\App\Models\User::where('email', 'admin@nexerp.id')->exists() ? 0 : 1);
+exit(\App\Models\User::where('email', 'admin@gmail.com')->exists() ? 0 : 1);
 " 2>/dev/null; then
     echo 'Default admin exists, skipping seed.'
 else
