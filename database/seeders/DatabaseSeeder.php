@@ -18,13 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        User::updateOrCreate([
             'name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
             'role' => 'admin',
         ]);
-        User::create([
+        User::updateOrCreate([
             'name' => 'Panitia PPDB',
             'email' => 'panitia@gmail.com',
             'password' => Hash::make('panitia123'),
