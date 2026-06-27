@@ -78,5 +78,6 @@ Route::prefix('siswa')->middleware(['auth', 'role:siswa,admin'])->name('siswa.')
     // route pengumuman
     Route::get('/pengumuman', [StudentController::class, 'pengumuman'])->name('pengumuman');
 });
+Route::redirect('/', '/auth/logi');
 Route::post('/cek-pendaftaran', [HomeController::class, 'searchRegistration'])
     ->name('home.search-registration');
