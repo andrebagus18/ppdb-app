@@ -18,7 +18,7 @@
                             <div>
                                 <label class="mb-2 block text-lg font-medium">
                                     {{ $label }} <span class="text-red-500">*</span>
-                                    <span class="italic text-sm text-slate-400">Upload maksimal 10MB</span>
+                                    <span class="italic text-sm text-slate-400">Upload maksimal 2MB</span>
                                 </label>
                                 <input name="{{ $jenis }}" type="file"
                                     class="form-input w-full rounded-lg border border-slate-300 px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">

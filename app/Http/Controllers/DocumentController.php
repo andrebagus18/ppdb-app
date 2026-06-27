@@ -6,18 +6,33 @@ use App\Models\Document;
 use Cloudinary\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DocumentController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'foto' => 'required|file|mimes:jpg,jpeg,png|max:1024',
-            'akta' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
-            'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
-            'ijazah' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
-            'surat_jalur' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'foto' => 'required|file|mimes:jpg,jpeg,png|max:2024',
+                'akta' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2024',
+                'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2024',
+                'ijazah' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2024',
+                'surat_jalur' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2024',
+            ],
+            [
+                'required' => 'Wajib unggah 5 berkas.',
+                'max' => 'Maksimal 2MB.',
+                'mimes' => 'format berkas tidak didukung.',
+            ]
+        );
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', $validator->errors()->first());
+        }
         $registration = Auth::user()?->student?->registration;
         if (!$registration) {
             return back()
