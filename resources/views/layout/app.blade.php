@@ -3,12 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{{ asset('images/logo.png') }}?v=1" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Home | PPDB Online')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta property="og:title" content="PPDB Online | 2026/2027" />
+    <meta property="og:description" content="Sistem Penerimaan Peserta Didik Baru (PPDB) berbasis online" />
+    <meta property="og:image" content="https://ppdb-app-production.up.railway.app" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="icon" href="{{ asset('images/logo.png') }}?v=1" type="image/png">
 </head>
 
 <body class="bg-[#eeeded]">
