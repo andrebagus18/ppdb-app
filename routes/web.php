@@ -81,3 +81,4 @@ Route::prefix('siswa')->middleware(['auth', 'role:siswa,admin'])->name('siswa.')
 Route::redirect('/', '/auth/login');
 Route::post('/cek-pendaftaran', [HomeController::class, 'searchRegistration'])
     ->name('home.search-registration');
+Route::get('/auth/login', [AuthController::class, 'showLogin'])->name('login');
