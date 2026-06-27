@@ -1,52 +1,40 @@
-FROM dunglas/frankenphp:php8.4
+FROM php:8.4-cli-bookworm
 
-WORKDIR /app
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV VIEW_COMPILED_PATH=/var/www/html/storage/framework/views
 
-# Install system dependencies + Node.js 22
 RUN apt-get update && apt-get install -y \
-    curl \
-    git \
-    unzip \
-    zip \
-    libzip-dev \
-    libpng-dev \
-    libpq-dev \
+    git curl libpng-dev libzip-dev libonig-dev \
+    libxml2-dev libpq-dev zip unzip \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
-    && install-php-extensions \
-        zip \
-        gd \
-        pdo_pgsql \
-        redis \
-        opcache
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+RUN docker-php-ext-install pdo pdo_pgsql mbstring zip gd bcmath opcache
 
-# Copy project
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+COPY composer.json composer.lock ./
+RUN composer install --optimize-autoloader --no-dev --no-scripts --no-interaction
+
+COPY package.json package-lock.json .npmrc ./
+RUN npm ci
+
 COPY . .
 
-# Install PHP dependencies
-RUN composer install \
-    --no-dev \
-    --optimize-autoloader \
-    --no-interaction
+RUN php artisan package:discover --ansi
 
-# Install Node dependencies & build assets
-RUN npm ci
-RUN npm run build
+ENV NODE_ENV=production
+RUN npm run build && npm prune --omit=dev
 
+RUN mkdir -p storage/framework/{sessions,views,cache,testing} storage/logs bootstrap/cache \
+    && chmod -R 777 storage bootstrap/cache
 
-# Permission
-RUN mkdir -p storage/framework/{cache,sessions,views} \
-    && chmod -R 775 storage bootstrap/cache
+COPY docker-start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
 
 EXPOSE 8000
 
-CMD sh -c "php artisan config:clear && \
-php artisan route:clear && \
-php artisan view:clear && \
-php artisan config:cache && \
-php artisan route:cache && \
-php artisan view:cache && \
-php -S 0.0.0.0:${PORT} -t public"
+CMD ["/usr/local/bin/start.sh"]

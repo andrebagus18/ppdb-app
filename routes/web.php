@@ -14,10 +14,6 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [HomeController::class, 'home']);
-Route::post('/cek-pendaftaran', [HomeController::class, 'searchRegistration'])
-    ->name('home.search-registration');
-
 // route login register
 Route::prefix('auth')->middleware(['guest'])->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -82,3 +78,5 @@ Route::prefix('siswa')->middleware(['auth', 'role:siswa,admin'])->name('siswa.')
     // route pengumuman
     Route::get('/pengumuman', [StudentController::class, 'pengumuman'])->name('pengumuman');
 });
+Route::post('/cek-pendaftaran', [HomeController::class, 'searchRegistration'])
+    ->name('home.search-registration');
