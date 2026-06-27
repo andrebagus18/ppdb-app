@@ -10,7 +10,7 @@ php artisan config:cache
 php artisan route:cache
 (php artisan view:cache || true)
 
-php artisan migrate:fresh --seed
+php artisan migrate --force
 
 # Seed hanya jika admin default belum ada
 if php -r "
